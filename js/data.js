@@ -1,44 +1,770 @@
-const DATA = [
-  {day:1,week:1,title:"CIA Triad & Encryption Fundamentals",videos:[{title:"Professor Messer - CIA Triad - CompTIA Security+ SY0-701 - 1.2",url:"https://www.youtube.com/watch?v=bVht6mSuSco",summary:"The three pillars of information security: <strong>Confidentiality</strong> (keeping data private through encryption and access controls), <strong>Integrity</strong> (ensuring data hasn't been tampered with using hashing and checksums), <strong>Availability</strong> (keeping systems up and accessible)."},{title:"Professor Messer - Encryption Overview - CompTIA Security+ SY0-701 - 1.4",url:"https://www.youtube.com/watch?v=O4xNJsjtN6E",summary:"Symmetric vs asymmetric encryption, AES, RSA, how TLS works, why HTTPS matters. <strong>What happens when your browser connects to a server</strong> and how data stays encrypted in transit."},{title:"Fireship - Cryptography Explained in 100 Seconds",url:"https://www.youtube.com/watch?v=jhXCTbFnK8o",summary:"Lightning fast overview of hashing, symmetric encryption, asymmetric encryption, and digital signatures."},{title:"NetworkChuck - Public Key Cryptography (RSA) Explained",url:"https://www.youtube.com/watch?v=_zyKvPvh808",summary:"Visual explanation of how RSA works, key pairs, digital signatures, and certificate authorities. Understanding PKI for <strong>API security, mTLS, and certificate management</strong>."}],practice:[{type:"hands-on",title:"Explore Encryption",steps:["Open your browser, go to any HTTPS site, click the lock icon and explore the certificate details","Note: who issued the certificate, what encryption algorithm is used, when it expires","Try accessing a site with an expired/invalid certificate and read the warning","Go to https://www.ssllabs.com/ssltest/ and test 3 websites you use daily"]},{type:"research",title:"Map Your Security",steps:["List 5 services your company uses (email, cloud, CRM, etc)","For each: Is data encrypted at rest? In transit? What authentication method?","Write a 1 paragraph security assessment"]}],quiz:[{q:"What does the 'I' in CIA Triad stand for?",options:["Intelligence","Integrity","Integration","Infrastructure"],correct:1,explanation:"Integrity means ensuring data hasn't been altered or tampered with. Verified through hashing, checksums, and digital signatures."},{q:"Which encryption type uses the same key to encrypt and decrypt?",options:["Asymmetric","Symmetric","Hashing","Digital signatures"],correct:1,explanation:"Symmetric encryption (like AES) uses one shared key. Faster but requires secure key exchange."},{q:"What is the purpose of a Certificate Authority?",options:["Encrypt all web traffic","Verify identity and issue digital certificates","Store passwords securely","Block malicious traffic"],correct:1,explanation:"CAs verify identities and issue SSL/TLS certificates, enabling trust on the internet."},{q:"TLS stands for?",options:["Total Layer Security","Transport Layer Security","Transmission Level Safety","Transfer Link Security"],correct:1,explanation:"Transport Layer Security encrypts data between client and server. It replaced SSL."},{q:"When would you choose asymmetric over symmetric encryption?",options:["Speed is top priority","Sharing data without a pre-shared key","Encrypting large files","Storing passwords"],correct:1,explanation:"Asymmetric solves key distribution. Share public key openly, only private key can decrypt."}]},
-  {day:2,week:1,title:"Authentication, Authorization & Zero Trust",videos:[{title:"Professor Messer - Authentication Methods - CompTIA Security+ SY0-701 - 2.4",url:"https://www.youtube.com/watch?v=wF5fSMEOGYE",summary:"Multi-factor authentication, biometrics, tokens, certificates. <strong>Why 'password only' is dead</strong> and how enterprise auth works with SAML, OAuth, OpenID Connect."},{title:"IBM Technology - What is Zero Trust Security?",url:"https://www.youtube.com/watch?v=sQ0r0Hmksco",summary:"Zero Trust: <strong>never trust, always verify</strong>. No device, user, or network trusted by default. How Google pioneered BeyondCorp."},{title:"Fireship - Session vs Token Authentication in 100 Seconds",url:"https://www.youtube.com/watch?v=UBUNrFtufWo",summary:"Session-based auth (server stores state) vs token-based (JWT). Most modern systems use JWT with OAuth 2.0."},{title:"ByteByteGo - OAuth 2.0 Explained With Simple Terms",url:"https://www.youtube.com/watch?v=ZV5yTm4pT8g",summary:"Visual walkthrough of OAuth 2.0 flow. <strong>How 'Login with Google/GitHub' works</strong>."}],practice:[{type:"hands-on",title:"Authentication Audit",steps:["List every SaaS tool your company uses","Check which have MFA enabled, enable on all","Check SSO support, research implementation","Set up a password manager (1Password/Bitwarden)"]},{type:"analysis",title:"Zero Trust Assessment",steps:["Draw how users currently access your systems","Can someone on WiFi access tools without re-authenticating?","List 3 changes to move toward Zero Trust"]}],quiz:[{q:"In Zero Trust, which is correct?",options:["Internal traffic is trusted","All traffic must be verified","Only external needs verification","VPN grants full trust"],correct:1,explanation:"Zero Trust treats ALL traffic as untrusted, even inside the corporate network."},{q:"Main advantage of OAuth 2.0?",options:["Encrypts passwords","Grants limited access without sharing credentials","Replaces HTTPS","Speeds up queries"],correct:1,explanation:"OAuth lets users authorize apps without sharing passwords. The app gets a limited token."},{q:"MFA requires two of which categories?",options:["Two passwords","Know, Have, or Are","Email and phone","Username and question"],correct:1,explanation:"Knowledge (password), Possession (phone), Inherence (fingerprint). Two passwords is single-factor."},{q:"Authentication vs Authorization?",options:["Same thing","Auth verifies identity, authz determines access","Auth for users, authz for servers","Authz comes first"],correct:1,explanation:"Authentication = who are you? Authorization = what can you do?"},{q:"Google BeyondCorp implements which model?",options:["Defense in Depth","Zero Trust","Castle and Moat","Perimeter Security"],correct:1,explanation:"BeyondCorp eliminated VPN, verifying every request based on identity and device health."}]},
-  {day:3,week:1,title:"OWASP Top 10 & Web App Security",videos:[{title:"OWASP Foundation - OWASP Top 10 2021 Overview",url:"https://www.youtube.com/watch?v=OBuHSiVq0aw",summary:"The <strong>10 most critical web security risks</strong>. Injection, broken auth, sensitive data exposure, and more."},{title:"Computerphile - SQL Injection Explained",url:"https://www.youtube.com/watch?v=ciNHn38EyRc",summary:"Live demo of SQL injection. Attacker types code into a login form and <strong>gets access to the entire database</strong>."},{title:"Computerphile - Cross Site Scripting (XSS) Explained",url:"https://www.youtube.com/watch?v=L5l9lSnNMxg",summary:"How attackers inject malicious JavaScript to steal cookies, sessions, and user data."},{title:"PwnFunction - CSRF Explained",url:"https://www.youtube.com/watch?v=eWEgUcHPle0",summary:"Cross-Site Request Forgery tricks users into actions they didn't intend. How CSRF tokens prevent this."}],practice:[{type:"hands-on",title:"Try OWASP Juice Shop",steps:["Go to https://juice-shop.herokuapp.com/","Try to find a hidden admin page","Try basic SQL injection on the login","Document findings and business impact"]},{type:"research",title:"Security Review Framework",steps:["Download the OWASP Top 10 from owasp.org","For each risk, write how it could affect your company","Identify which 3 are most relevant to your stack"]}],quiz:[{q:"Which vulnerability involves inserting code into input fields?",options:["Broken Access Control","Injection","Cryptographic Failures","Misconfiguration"],correct:1,explanation:"Injection occurs when untrusted data is sent to an interpreter as part of a command."},{q:"Primary defense against SQL injection?",options:["Strong passwords","Parameterized queries","HTTPS","Rate limiting"],correct:1,explanation:"Parameterized queries separate SQL code from data, preventing execution of user input."},{q:"XSS primarily targets:",options:["Database","Web server","User's browser","Router"],correct:2,explanation:"XSS executes in the victim's browser, stealing cookies and performing actions as the user."},{q:"What should you require from your dev team on OWASP?",options:["Memorize all","Regular training and code reviews checking for Top 10","Only hire specialists","Run antivirus"],correct:1,explanation:"Establish processes: security code reviews, SAST/DAST in CI/CD, regular training."},{q:"#1 risk in OWASP Top 10 2021?",options:["Injection","Broken Access Control","Crypto Failures","XSS"],correct:1,explanation:"Broken Access Control is #1. Users acting outside their intended permissions."}]},
-  {day:4,week:1,title:"Threat Modeling with STRIDE",videos:[{title:"Adam Shostack - Introduction to Threat Modeling",url:"https://www.youtube.com/watch?v=GqmQg-cszw4",summary:"The <strong>4 question framework</strong>: What are we building? What can go wrong? What will we do? Did we do well? How Microsoft and Amazon think about security."},{title:"SANS Institute - STRIDE Threat Modeling",url:"https://www.youtube.com/watch?v=j2_mRiIjRPk",summary:"<strong>STRIDE</strong>: Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, Elevation of Privilege."},{title:"IBM Technology - Data Flow Diagrams for Threat Modeling",url:"https://www.youtube.com/watch?v=fX7SWFoBzSg",summary:"Drawing Data Flow Diagrams (DFDs) to map data movement. Identify trust boundaries where attacks are most likely."}],practice:[{type:"hands-on",title:"Threat Model Your System",steps:["Draw a data flow diagram of your main product","Identify all trust boundaries","Apply STRIDE to each component","Prioritize top 3 threats by likelihood and impact","Write a 1-page threat model document"]},{type:"analysis",title:"Real World Breaches",steps:["Research 3 major breaches from 2024-2025","For each: which STRIDE category was exploited?","What could the CTO have done differently?"]}],quiz:[{q:"In STRIDE, 'S' stands for?",options:["Security","Spoofing","Scanning","Sniffing"],correct:1,explanation:"Spoofing means pretending to be someone else. Spoofing emails, IPs, etc."},{q:"What is a trust boundary?",options:["A firewall","Where data crosses between different trust levels","A permission level","A geographic border"],correct:1,explanation:"Trust boundaries are where trust changes. User input to server, or server to third-party API."},{q:"Which STRIDE category covers denying an action?",options:["Spoofing","Tampering","Repudiation","Info Disclosure"],correct:2,explanation:"Repudiation: user can deny an action because there's no proof. Logging defends against it."},{q:"When should threat modeling happen?",options:["After incidents only","During design, before code","Annual audits only","Only by consultants"],correct:1,explanation:"Most effective during design. Finding flaws early costs 10x less than in production."},{q:"DoS targets which CIA element?",options:["Confidentiality","Integrity","Availability","All three"],correct:2,explanation:"DoS overwhelms systems so legitimate users can't access them. Targets Availability."}]},
-  {day:5,week:1,title:"Cloud Security & AWS IAM",videos:[{title:"Fireship - AWS Security in 100 Seconds",url:"https://www.youtube.com/watch?v=iP0v3GJnFKc",summary:"Rapid overview: IAM, Security Groups, VPCs, encryption."},{title:"AWS - Introduction to IAM",url:"https://www.youtube.com/watch?v=Ul6FW4UANGo",summary:"Official walkthrough of <strong>IAM: users, groups, roles, policies</strong>. Principle of least privilege starts here."},{title:"freeCodeCamp - AWS Security Tutorial",url:"https://www.youtube.com/watch?v=Ia-UEYYR44s",summary:"VPC security, Security Groups, NACLs, encryption, CloudTrail. <strong>Hands-on in the console</strong>, no coding."}],practice:[{type:"hands-on",title:"AWS Console Security",steps:["Create AWS free tier account","Enable MFA on root immediately","Create IAM user (never use root daily)","Create S3 read-only policy, attach to test user","Enable CloudTrail for all API calls"]},{type:"analysis",title:"Cloud Security Checklist",steps:["Review AWS Well-Architected Security Pillar","Score your setup against each item","Identify top 5 security improvements"]}],quiz:[{q:"What is least privilege?",options:["Give all admin access","Grant only minimum permissions needed","Remove all permissions","Only CEO has access"],correct:1,explanation:"Every user/service gets only permissions absolutely needed."},{q:"Why never use AWS root for daily work?",options:["Slower","Can't create resources","Unrestricted access, can't be limited by IAM","Costs more"],correct:2,explanation:"Root bypasses all IAM policies. If compromised, attacker has full control."},{q:"What is a Security Group?",options:["Security team","Virtual firewall for EC2 traffic","IAM group","Certification"],correct:1,explanation:"Security Groups act as virtual firewalls controlling which traffic reaches servers."},{q:"What does CloudTrail do?",options:["Encrypts data","Logs all API calls and activity","Blocks DDoS","Manages SSL"],correct:1,explanation:"Creates audit log of every action. Essential for compliance and incident investigation."},{q:"First action for new AWS account?",options:["Launch EC2","Enable MFA on root, create IAM users","Billing alarm","Choose region"],correct:1,explanation:"Securing root with MFA and creating IAM users is always step one."}]},
-  {day:6,week:1,title:"Penetration Testing & Security Tools",videos:[{title:"NetworkChuck - Ethical Hacking Full Course",url:"https://www.youtube.com/watch?v=3FNYvj2U0HM",summary:"Watch first 2 hours: <strong>reconnaissance, scanning, vulnerability assessment</strong>. Understand how hackers think."},{title:"David Bombal - What is a Penetration Test?",url:"https://www.youtube.com/watch?v=wMuHgp6vSEo",summary:"Types (black/white/gray box) and <strong>why your company needs regular pen tests</strong>."},{title:"IBM Technology - What is SIEM?",url:"https://www.youtube.com/watch?v=9RfsRn7m7OE",summary:"Security Information and Event Management. <strong>Splunk, QRadar, Elastic SIEM</strong>. Real-time event analysis."}],practice:[{type:"hands-on",title:"Security Scanning",steps:["Use shodan.io to search for your public assets","Run free scan at qualys.com/forms/freescan/","Check haveibeenpwned.com for your emails","Document and prioritize findings"]},{type:"research",title:"Pen Testing Companies",steps:["Research: Cobalt, HackerOne, Bugcrowd","Compare: automated vs manual, pricing, reporting","Write recommendation for your company"]}],quiz:[{q:"Black box vs white box pen testing?",options:["Legal vs illegal","No prior knowledge vs full source access","Software vs hardware","No difference"],correct:1,explanation:"Black box simulates real attacker. White box has full code access. Gray box is in between."},{q:"SIEM is used for?",options:["Writing code","Collecting and analyzing security events in real-time","Managing passwords","Encrypting traffic"],correct:1,explanation:"SIEM aggregates logs from all systems and uses analytics to detect incidents."},{q:"How often should pen tests happen?",options:["Once at launch","At least annually and after major changes","After a breach only","Every day"],correct:1,explanation:"Annual plus after significant changes. Many compliance frameworks require it."},{q:"Vulnerability assessment vs pen testing?",options:["Same thing","Identifies weaknesses without exploiting them","A firewall type","A backup strategy"],correct:1,explanation:"Assessment identifies but doesn't exploit. Pen testing actively tries to break in."},{q:"Critical pen test finding: first action?",options:["Ignore if running","Assign team to patch with deadline","Wait for quarterly review","Fire security team"],correct:1,explanation:"Critical findings need immediate action: classify, assign owners, set deadlines, track."}]},
-  {day:7,week:1,title:"Security Architecture & Incident Response",videos:[{title:"IBM Technology - Defense in Depth Explained",url:"https://www.youtube.com/watch?v=dz7Ntp7KQGA",summary:"<strong>Defense in Depth</strong>: multiple security layers. Firewalls, IDS/IPS, WAF, endpoint protection, monitoring."},{title:"SANS Institute - Incident Response Steps",url:"https://www.youtube.com/watch?v=Ete3kGyMRoA",summary:"6 phases: <strong>Preparation, Identification, Containment, Eradication, Recovery, Lessons Learned</strong>. NIST framework."},{title:"Google - How Google Handles Security Incidents",url:"https://www.youtube.com/watch?v=IOH9gCiK9RA",summary:"Behind the scenes: war rooms, escalation procedures, post-mortems at Google scale."}],practice:[{type:"hands-on",title:"Build Incident Response Plan",steps:["Write 1-page IR plan for your company","Define roles: incident commander, communicator, technical responder","Define severity levels (P1-P4) with response times","Create customer notification template","Identify critical assets and recovery priorities"]},{type:"analysis",title:"Weekly Security Review",steps:["Review everything from this week","Create security maturity scorecard (1-5 per area)","Areas: encryption, auth, app sec, cloud, IR, monitoring","Identify weakest area, create 30-day plan"]}],quiz:[{q:"Correct order of IR phases?",options:["Identification, Containment, Preparation, Recovery","Preparation, Identification, Containment, Eradication, Recovery, Lessons Learned","Detection, Response, Recovery, Prevention","Alert, Fix, Report, Forget"],correct:1,explanation:"NIST: Preparation, Identification, Containment, Eradication, Recovery, Lessons Learned."},{q:"What is Defense in Depth?",options:["One strong firewall","Multiple overlapping security layers","Encrypting twice","More staff"],correct:1,explanation:"Multiple controls so no single failure compromises the system."},{q:"Most important step after incident resolved?",options:["Delete logs","Blameless post-mortem","Fire someone","Ignore it"],correct:1,explanation:"Post-mortem examines what happened and how to prevent it. Systemic improvement."},{q:"What is a WAF?",options:["Blocks all traffic","Filters HTTP traffic to web apps","Antivirus","Backup system"],correct:1,explanation:"WAF filters malicious traffic like SQL injection and XSS. Cloudflare, AWS WAF are popular."},{q:"Highest ROI security investment?",options:["Expensive firewall","Security awareness training for all","10 more engineers","Biometrics everywhere"],correct:1,explanation:"Human error causes most breaches. Training the team prevents more incidents than any single tech."}]},
-  {day:8,week:2,title:"Networking: IP, DNS, TCP/UDP",videos:[{title:"NetworkChuck - IP Addresses Explained",url:"https://www.youtube.com/watch?v=5WfiTHiU4x8",summary:"IPv4 vs IPv6, public vs private, subnets, CIDR. <strong>Every device has an IP</strong>. Foundational knowledge."},{title:"Fireship - DNS Explained in 100 Seconds",url:"https://www.youtube.com/watch?v=UVR9lhUGAyU",summary:"Domain names to IP addresses. DNS is the <strong>phone book of the internet</strong>."},{title:"NetworkChuck - TCP vs UDP",url:"https://www.youtube.com/watch?v=uwoD5YsGACg",summary:"TCP guarantees delivery (web). UDP is faster (streaming, gaming). Architecture tradeoffs."},{title:"ByteByteGo - What Happens When You Type a URL?",url:"https://www.youtube.com/watch?v=AlkDbnbv7dk",summary:"Complete journey: DNS, TCP handshake, TLS, HTTP, response. <strong>Most important system design concept</strong>."}],practice:[{type:"hands-on",title:"Network Exploration",steps:["Run ipconfig/ifconfig, identify private IP and gateway","Run nslookup google.com for DNS resolution","Run traceroute google.com to see packet path","Run ping google.com and observe latency"]},{type:"research",title:"Your Network Infrastructure",steps:["Map your DNS setup: registrar, DNS management","Identify CDN provider","Check DNS TTL settings"]}],quiz:[{q:"TCP vs UDP main difference?",options:["TCP faster","TCP guarantees delivery/order, UDP doesn't","TCP internal, UDP internet","No difference"],correct:1,explanation:"TCP ensures packets arrive in order, retransmits lost ones. UDP sacrifices reliability for speed."},{q:"What does DNS do?",options:["Routes packets","Translates domain names to IPs","Encrypts traffic","Manages hardware"],correct:1,explanation:"Translates human-readable domains (google.com) into IP addresses (142.250.80.46)."},{q:"What is a subnet?",options:["Cable type","Logical subdivision of IP network","Backup DNS","Security protocol"],correct:1,explanation:"Subnets divide networks into smaller segments. Improves security and performance."},{q:"Site is slow, check first?",options:["App code","DNS and network latency (ping/traceroute)","Database","User device"],correct:1,explanation:"Start bottom up: DNS resolving? Network latency? Server responding? Then check app/DB."},{q:"Why is CDN important globally?",options:["Faster code","Serves content from closer servers, less latency","Encrypts data","Replaces DNS"],correct:1,explanation:"CDNs cache content on edge servers worldwide. User in Tel Aviv gets content from nearby."}]},
-  {day:9,week:2,title:"Load Balancing, Ports & Protocols",videos:[{title:"ByteByteGo - What Is A Load Balancer?",url:"https://www.youtube.com/watch?v=sCR3SAVdyCc",summary:"<strong>Layer 4 vs Layer 7</strong>, health checks, algorithms (round-robin, least connections). Critical for scaling."},{title:"Professor Messer - Common Network Ports - N10-008",url:"https://www.youtube.com/watch?v=KBbRga2FGbU",summary:"Key ports: <strong>80 HTTP, 443 HTTPS, 22 SSH, 53 DNS, 3306 MySQL, 5432 PostgreSQL, 6379 Redis</strong>."},{title:"IBM Technology - Proxy vs Reverse Proxy",url:"https://www.youtube.com/watch?v=4NB0NDtOwIQ",summary:"Forward proxy for clients, reverse proxy for servers. <strong>Nginx, AWS ALB are reverse proxies</strong>."}],practice:[{type:"hands-on",title:"Network Services",steps:["Run netstat -an to see connections and ports","Identify open ports and their services","Check open ports on your public IP","Research: what if port 22 is open to internet?"]},{type:"analysis",title:"Load Balancing Strategy",steps:["Draw your traffic flow diagram","Find single points of failure","Design load-balanced architecture","What happens when one server goes down?"]}],quiz:[{q:"Default HTTPS port?",options:["80","443","22","8080"],correct:1,explanation:"443 for HTTPS, 80 for HTTP. Ensure all traffic goes through 443."},{q:"Reverse proxy purpose?",options:["Hide client identity","Distribute requests, SSL termination, caching","Speed up DNS","Encrypt DB connections"],correct:1,explanation:"Receives client requests, forwards to backends. Handles SSL, load balancing, caching."},{q:"Round-robin load balancing?",options:["Least connections","Each request to next server in line","IP hash","Random"],correct:1,explanation:"Distributes sequentially. Simple when servers have similar capacity."},{q:"Why keep port 22 closed to internet?",options:["SSH is slow","Prevents brute-force login attacks","SSH local only","Port 22 is for DNS"],correct:1,explanation:"Open SSH port invites automated brute-force. Restrict to specific IPs or use VPN."},{q:"Health checking in load balancing?",options:["Employee health","Verifying servers are responsive before sending traffic","SSL check","Virus scan"],correct:1,explanation:"Load balancers ping servers. Failed check routes traffic to healthy ones automatically."}]},
-  {day:10,week:2,title:"Linux Fundamentals & Servers",videos:[{title:"NetworkChuck - Linux for Hackers Full Course",url:"https://www.youtube.com/watch?v=VbEx7B_PTOE",summary:"First 2 hours: <strong>navigation, permissions, users, processes, packages</strong>. 96% of top servers run Linux."},{title:"Fireship - Linux in 100 Seconds",url:"https://www.youtube.com/watch?v=rrB13utjYV4",summary:"What Linux is, why it dominates servers. Kernel, shell, distributions."},{title:"LearnLinuxTV - File Permissions Explained",url:"https://www.youtube.com/watch?v=D-VqgvBMV7g",summary:"rwx permissions, chmod, chown. Wrong permissions = <strong>major security vulnerability</strong>."}],practice:[{type:"hands-on",title:"Linux Terminal",steps:["Use https://bellard.org/jslinux/ for browser Linux","Navigate: ls, cd, pwd, mkdir, touch, rm","Permissions: ls -la, chmod 755, chmod 644","Processes: ps aux, top, kill","System: df -h, free -m, uname -a"]},{type:"research",title:"Server OS Comparison",steps:["Compare Ubuntu Server vs RHEL vs Amazon Linux","When would you choose each?","What does your cloud provider recommend?"]}],quiz:[{q:"chmod 755 means?",options:["Delete file","Owner rwx, group/others rx","Everyone full access","Lock all access"],correct:1,explanation:"7=rwx for owner, 5=rx for group and others. Standard for directories and scripts."},{q:"Why Linux dominates servers?",options:["Better GUI","Free, stable, secure, customizable, performant","Created by Google","Only networking OS"],correct:1,explanation:"Open-source, stable, configurable, minimal overhead. Powers 96%+ of top servers."},{q:"'ps aux' does what?",options:["Installs software","Shows all running processes","Restarts server","Changes permissions"],correct:1,explanation:"Lists all processes with user, CPU, memory usage. Essential for debugging."},{q:"Root user is?",options:["First user","Superuser with unrestricted access","Regular account","Web server user"],correct:1,explanation:"Root (UID 0) has unlimited permissions. Use sudo instead of logging in as root."},{q:"Why care about Linux as CTO?",options:["Don't need to","Understanding your infrastructure OS helps architecture decisions","DevOps only","Startups only"],correct:1,explanation:"Your infrastructure runs Linux. Basic knowledge enables meaningful architecture discussions."}]},
-  {day:11,week:2,title:"SSH, VPN & Secure Remote Access",videos:[{title:"Fireship - SSH in 100 Seconds",url:"https://www.youtube.com/watch?v=yUz6TSv7i7Q",summary:"SSH protocol: key-based auth vs passwords. <strong>Always use keys, never passwords</strong>."},{title:"NetworkChuck - VPN Explained",url:"https://www.youtube.com/watch?v=R-JUOpCgTZc",summary:"Tunneling, encryption, types. <strong>Tailscale, WireGuard, IPsec</strong>."},{title:"Tailscale - How Tailscale Works",url:"https://www.youtube.com/watch?v=jJFrrLWbo7k",summary:"WireGuard-based mesh VPN. <strong>No exposed ports, peer-to-peer</strong>. Modern secure access."}],practice:[{type:"hands-on",title:"SSH & Secure Access",steps:["Generate key: ssh-keygen -t ed25519","Understand private vs public key","Add public key to server, disable password auth","Install Tailscale on computer and phone"]},{type:"research",title:"VPN Solutions",steps:["Compare: Tailscale vs WireGuard vs OpenVPN vs IPsec","For 50 employees, which and why?","Research bastion hosts / jump servers"]}],quiz:[{q:"Why are SSH keys more secure?",options:["Longer","Cryptographic challenge-response, can't be brute-forced","Stored in cloud","No difference"],correct:1,explanation:"Private key never leaves your machine. Nothing to intercept, guess, or phish."},{q:"WireGuard is?",options:["Firewall","Modern, fast VPN protocol","Password manager","Load balancer"],correct:1,explanation:"4,000 lines of code vs 100,000+ for OpenVPN. Faster, simpler, more auditable."},{q:"Bastion host is?",options:["Backup server","Single hardened SSH entry point to private network","Firewall type","DNS server"],correct:1,explanation:"Only server with SSH open to internet. All internal access goes through it."},{q:"Zero Trust vs VPN for remote access?",options:["No remote access","Every request verified regardless of network","VPN replaced by passwords","Remote blocked"],correct:1,explanation:"VPN grants network access. Zero Trust verifies every request by identity and context."},{q:"Why disable SSH password auth?",options:["Hard to remember","Prevents brute-force, forces key-based auth","SSH doesn't support","Makes server faster"],correct:1,explanation:"Disabling passwords eliminates brute-force attack vector entirely."}]},
-  {day:12,week:2,title:"Docker & Containers",videos:[{title:"Fireship - Docker in 100 Seconds",url:"https://www.youtube.com/watch?v=Gjnup-PuquQ",summary:"What containers are, why they exist. <strong>Packages app with all dependencies</strong> to run anywhere."},{title:"TechWorld with Nana - Docker Tutorial for Beginners",url:"https://www.youtube.com/watch?v=pg19Z8LL06w",summary:"Full tutorial: images, containers, Docker Compose, registries. Watch first 90 min."},{title:"IBM Technology - Containers vs VMs",url:"https://www.youtube.com/watch?v=cjXI-yxqGTI",summary:"VMs virtualize hardware (heavy). Containers share OS kernel (lightweight). <strong>When to use which</strong>."}],practice:[{type:"hands-on",title:"Docker Hands-On",steps:["Install Docker Desktop","Run: docker run hello-world","Run: docker run -p 8080:80 nginx (open localhost:8080)","Explore: docker ps, docker images, docker logs","Try Docker Compose with a multi-service template"]},{type:"research",title:"Container Strategy",steps:["Research: Docker Hub vs private registries","What is a container orchestrator?","When would you choose containers vs serverless?"]}],quiz:[{q:"Main benefit of containers?",options:["Faster code","Consistent environment across dev/staging/prod","Better security","Cheaper servers"],correct:1,explanation:"Containers ensure the same environment everywhere. Eliminates 'works on my machine'."},{q:"Containers vs VMs?",options:["Same thing","Containers share OS kernel (lighter), VMs virtualize hardware (heavier)","VMs are newer","Containers need more resources"],correct:1,explanation:"Containers share the host OS kernel. VMs include full OS copy. Containers start in seconds."},{q:"Docker image vs container?",options:["Same","Image is blueprint, container is running instance","Container is larger","Image runs, container stores"],correct:1,explanation:"Image is the immutable template. Container is a running instance of that image."},{q:"What is Docker Compose?",options:["A text editor","Tool for defining multi-container applications","A container registry","A monitoring tool"],correct:1,explanation:"Docker Compose lets you define and run multi-container apps with one YAML file."},{q:"Why do companies use container registries?",options:["For backups","To store, version, and distribute container images securely","To run containers faster","For logging"],correct:1,explanation:"Registries (ECR, GCR, Docker Hub) store images with version control, scanning, and access control."}]},
-  {day:13,week:2,title:"Kubernetes & Container Orchestration",videos:[{title:"Fireship - Kubernetes Explained in 100 Seconds",url:"https://www.youtube.com/watch?v=PziYflu8cB8",summary:"What K8s does: automates deployment, scaling, and management of containerized apps at scale."},{title:"TechWorld with Nana - Kubernetes Tutorial for Beginners",url:"https://www.youtube.com/watch?v=X48VuDVv0do",summary:"Pods, services, deployments, namespaces. Watch first hour for <strong>core concepts without coding</strong>."},{title:"ByteByteGo - Why Is Kubernetes So Hard?",url:"https://www.youtube.com/watch?v=bPOHRbULhvQ",summary:"The complexity of K8s and <strong>when you actually need it vs simpler alternatives</strong>. Critical CTO decision."}],practice:[{type:"hands-on",title:"K8s Concepts",steps:["Use https://labs.play-with-k8s.com/ for browser K8s","Explore: kubectl get pods, kubectl get services","Understand: pod, node, cluster, namespace","Read: when to use K8s vs ECS vs serverless"]},{type:"analysis",title:"Orchestration Decision",steps:["At what scale does Kubernetes make sense?","Compare: EKS, GKE, AKS managed offerings","When would you avoid K8s? (hint: team size < 10)"]}],quiz:[{q:"Kubernetes solves what problem?",options:["Writing code","Managing containers at scale: deployment, scaling, healing","Database management","Frontend development"],correct:1,explanation:"K8s automates deploying, scaling, and managing containers across multiple machines."},{q:"What is a K8s Pod?",options:["A server","Smallest deployable unit, one or more containers","A network","A database"],correct:1,explanation:"A pod is one or more containers that share storage and network. Usually one container per pod."},{q:"When should a CTO choose NOT to use K8s?",options:["Never","Small team, few services, complexity not justified","Always avoid it","Only for large companies"],correct:1,explanation:"K8s adds significant complexity. For small teams with few services, ECS, serverless, or simple Docker Compose may be better."},{q:"What is a K8s Service?",options:["Customer support","A stable network endpoint to access a group of pods","A container image","A monitoring tool"],correct:1,explanation:"Services provide stable IPs and DNS names for pods, which are ephemeral and can restart anytime."},{q:"Managed K8s (EKS/GKE/AKS) vs self-managed?",options:["Self-managed is always better","Managed handles control plane, reduces ops burden significantly","No difference","Managed is always more expensive"],correct:1,explanation:"Managed services handle upgrades, patching, and control plane HA. Almost always the right choice unless you have specific compliance needs."}]},
-  {day:14,week:2,title:"CI/CD & DevOps Practices",videos:[{title:"Fireship - DevOps CI/CD in 100 Seconds",url:"https://www.youtube.com/watch?v=scEDHsr3APg",summary:"Continuous Integration and Deployment: automate testing and deployment. <strong>Ship code faster with confidence</strong>."},{title:"TechWorld with Nana - CI/CD Pipeline Tutorial",url:"https://www.youtube.com/watch?v=R8_veQiYBjI",summary:"Complete pipeline: code commit, build, test, deploy. <strong>GitHub Actions, Jenkins, GitLab CI</strong>."},{title:"GitHub - GitHub Actions Tutorial",url:"https://www.youtube.com/watch?v=R8_veQiYBjI",summary:"Practical setup of automated workflows. Build, test, and deploy on every push."}],practice:[{type:"hands-on",title:"CI/CD Pipeline",steps:["Create a GitHub repo with a simple project","Set up GitHub Actions workflow (.github/workflows/ci.yml)","Add automated testing step","Add deployment step (even to a free tier)","Observe: push code and watch pipeline run"]},{type:"analysis",title:"DevOps Assessment",steps:["Map your current deployment process (manual steps?)","Calculate: how long from code commit to production?","Identify bottlenecks and automation opportunities","Research DORA metrics: deployment frequency, lead time, MTTR, change failure rate"]}],quiz:[{q:"CI/CD stands for?",options:["Code Integration / Code Delivery","Continuous Integration / Continuous Deployment","Computer Interface / Computer Design","Central Intelligence / Central Dispatch"],correct:1,explanation:"CI: automatically building and testing on every commit. CD: automatically deploying passing builds."},{q:"Main benefit of CI/CD?",options:["More meetings","Faster, safer, more frequent deployments with automated quality gates","Cheaper servers","Better UI"],correct:1,explanation:"Automation catches bugs early, enables multiple daily deployments, and reduces human error."},{q:"What are DORA metrics?",options:["Server metrics","4 key metrics for software delivery: deploy frequency, lead time, MTTR, change failure rate","Financial metrics","HR metrics"],correct:1,explanation:"DORA metrics measure engineering performance. High performers deploy multiple times daily with low failure rates."},{q:"Blue/green deployment is?",options:["A color scheme","Running two identical environments, switching traffic after validation","A testing framework","A database strategy"],correct:1,explanation:"Blue (current) and green (new) environments. Route traffic to green after validation. Instant rollback by switching back."},{q:"Infrastructure as Code (IaC) means?",options:["Writing more code","Managing infrastructure through code files (Terraform, CloudFormation) instead of manual clicks","Coding on servers","Using AI for infrastructure"],correct:1,explanation:"IaC lets you version, review, and reproduce infrastructure. Eliminates configuration drift and manual errors."}]},
-  {day:15,week:3,title:"Cloud Architecture: AWS/Azure/GCP",videos:[{title:"Fireship - AWS vs Azure vs GCP",url:"https://www.youtube.com/watch?v=n24OBVGHufQ",summary:"Comparison of the three major clouds. <strong>When to choose which</strong>. Market share, strengths, pricing."},{title:"ByteByteGo - Cloud Computing Explained",url:"https://www.youtube.com/watch?v=_a6us8kaq0g",summary:"IaaS vs PaaS vs SaaS, regions, availability zones. <strong>Foundational cloud concepts every CTO must know</strong>."},{title:"AWS re:Invent - Serverless Architecture Patterns",url:"https://www.youtube.com/watch?v=9IYpGTS7Jy0",summary:"Lambda, API Gateway, DynamoDB, S3, SQS. <strong>Event-driven serverless</strong> for cost-efficient scaling."}],practice:[{type:"hands-on",title:"Multi-Cloud Exploration",steps:["Create free accounts on AWS, Azure, GCP","Compare: equivalent services across clouds","Deploy a simple static site on each platform","Compare pricing calculators for a standard workload"]},{type:"analysis",title:"Cloud Strategy",steps:["Research multi-cloud vs single-cloud strategies","What are cloud-lock-in risks?","When does multi-cloud make sense?"]}],quiz:[{q:"IaaS vs PaaS vs SaaS?",options:["All the same","IaaS=infrastructure, PaaS=platform, SaaS=software. Decreasing control, increasing abstraction","Marketing terms","Size categories"],correct:1,explanation:"IaaS: you manage OS up (EC2). PaaS: you manage app only (Heroku). SaaS: fully managed (Gmail)."},{q:"Availability Zone is?",options:["A time zone","A physically separate data center within a region","A pricing tier","A network segment"],correct:1,explanation:"AZs are independent data centers with separate power/cooling. Deploying across AZs provides high availability."},{q:"Serverless means?",options:["No servers exist","You don't manage servers, cloud auto-scales and you pay per execution","Free hosting","Only for small apps"],correct:1,explanation:"Servers exist but you don't manage them. Auto-scales to zero, pay only for compute used."},{q:"Biggest risk of single cloud provider?",options:["Price only","Vendor lock-in: migration becomes expensive, provider has pricing power","Nothing","Security"],correct:1,explanation:"Lock-in means your architecture depends on proprietary services. Migration costs grow with time."},{q:"When is serverless NOT appropriate?",options:["Never","Long-running processes, consistent high load, need for GPU, or cold start sensitivity","Small apps","APIs"],correct:1,explanation:"Serverless has cold starts, execution limits, and costs more at consistent high load. Use it for variable, event-driven workloads."}]},
-  {day:16,week:3,title:"Serverless & Managed Services",videos:[{title:"Fireship - Serverless Computing in 100 Seconds",url:"https://www.youtube.com/watch?v=W_VV2Fx32_Y",summary:"What serverless is, Lambda functions, event-driven architecture. Pay per execution."},{title:"AWS - Lambda Deep Dive",url:"https://www.youtube.com/watch?v=52W3Qyg242Y",summary:"AWS Lambda patterns, best practices, pricing model. <strong>Cold starts, memory config, concurrency</strong>."},{title:"ByteByteGo - Managed Services Explained",url:"https://www.youtube.com/watch?v=dH0yz-Osy54",summary:"Build vs buy decisions: managed databases (RDS, DynamoDB), queues (SQS), caching (ElastiCache)."}],practice:[{type:"hands-on",title:"Serverless Deploy",steps:["Create a Lambda function in AWS console (no code, use template)","Trigger it via API Gateway","Check CloudWatch logs","Calculate: cost at 1M requests/month vs always-on EC2"]},{type:"analysis",title:"Build vs Buy",steps:["List 5 things you currently self-manage","For each: is there a managed alternative?","Calculate TCO including engineering time","Decide: which to migrate, which to keep"]}],quiz:[{q:"Lambda pricing model?",options:["Monthly fee","Pay per request + compute duration","Per CPU core","Flat rate"],correct:1,explanation:"You pay for number of invocations plus the GB-seconds of compute used. Zero cost at zero traffic."},{q:"What is a cold start?",options:["Server crash","Delay when Lambda initializes a new execution environment","Slow DNS","Network timeout"],correct:1,explanation:"First invocation after idle period takes longer as Lambda creates the environment. Subsequent calls are fast."},{q:"When to use managed DB vs self-hosted?",options:["Always managed","Managed unless you need specific tuning, extreme cost control, or compliance requires it","Always self-hosted","Depends on language"],correct:1,explanation:"Managed DBs handle patches, backups, failover. Self-host only if you need specific features or cost savings at massive scale."},{q:"Event-driven architecture means?",options:["Calendar events","Components communicate through events/messages, decoupled processing","UI events only","Scheduled tasks"],correct:1,explanation:"Services emit events, other services react. Enables loose coupling, independent scaling, and resilience."},{q:"Main advantage of SQS/message queues?",options:["Faster code","Decouples producers from consumers, handles traffic spikes, ensures delivery","Cheaper","Better UI"],correct:1,explanation:"Queues buffer messages between services. If consumer is slow or down, messages wait safely."}]},
-  {day:17,week:3,title:"System Design: Fundamentals",videos:[{title:"ByteByteGo - System Design Interview Basics",url:"https://www.youtube.com/watch?v=i7twT3x5yv8",summary:"How to approach system design: <strong>requirements, estimation, high-level design, deep dive, bottlenecks</strong>."},{title:"Gaurav Sen - System Design Introduction",url:"https://www.youtube.com/watch?v=FSR1s2b-l_I",summary:"Horizontal vs vertical scaling, caching, database choices, load balancing. Core building blocks."},{title:"ByteByteGo - Design a URL Shortener",url:"https://www.youtube.com/watch?v=fMZMm_0ZhK4",summary:"Classic system design: encoding, database, caching, analytics. <strong>Shows the thinking process of a senior engineer</strong>."}],practice:[{type:"hands-on",title:"System Design Practice",steps:["Design a URL shortener on paper: components, data flow, scale","Design a notification system: push, email, SMS","For each: identify the 3 biggest bottlenecks","Draw architecture diagrams with all components"]},{type:"research",title:"Real System Architectures",steps:["Research: how does Netflix handle streaming to 200M+ users?","How does Uber match riders to drivers in real-time?","What patterns do they use? (event sourcing, CQRS, etc)"]}],quiz:[{q:"Horizontal vs vertical scaling?",options:["Same thing","Horizontal = more machines, Vertical = bigger machine","Horizontal = faster, Vertical = slower","Only horizontal works"],correct:1,explanation:"Vertical: upgrade CPU/RAM (has limits). Horizontal: add more servers (nearly unlimited). Most systems scale horizontally."},{q:"What is caching?",options:["Saving money","Storing frequently accessed data in fast memory to reduce database load","A backup strategy","Encryption"],correct:1,explanation:"Cache (Redis, Memcached) stores hot data in memory. Reduces DB load and response time dramatically."},{q:"When designing a system, first step?",options:["Choose technology","Clarify requirements: functional and non-functional (scale, latency, availability)","Write code","Set up servers"],correct:1,explanation:"Always start with: what does the system do? How many users? What latency is acceptable? Then design."},{q:"What is database sharding?",options:["Backup","Splitting data across multiple databases to handle scale","Encryption","Indexing"],correct:1,explanation:"Sharding distributes data across multiple DB instances. Each shard holds a subset. Enables horizontal DB scaling."},{q:"CAP theorem says?",options:["Everything is possible","Distributed system can only guarantee 2 of 3: Consistency, Availability, Partition tolerance","A design pattern","A testing method"],correct:1,explanation:"In network partitions, choose consistency (reject requests) or availability (serve potentially stale data). Real systems make nuanced tradeoffs."}]},
-  {day:18,week:3,title:"System Design: Advanced Patterns",videos:[{title:"ByteByteGo - Microservices vs Monolith",url:"https://www.youtube.com/watch?v=lTAcCNbJ7KE",summary:"When each is right. <strong>Start monolith, split when needed</strong>. Migration strategies."},{title:"Martin Fowler - Event-Driven Architecture",url:"https://www.youtube.com/watch?v=STKCRSUsyP0",summary:"Event sourcing, CQRS, event streaming. How companies like Netflix handle millions of events/second."},{title:"ByteByteGo - API Design Best Practices",url:"https://www.youtube.com/watch?v=_gQaygjm_hg",summary:"REST vs GraphQL vs gRPC. Versioning, pagination, rate limiting. <strong>API is your product's contract</strong>."}],practice:[{type:"hands-on",title:"Architecture Decisions",steps:["Design: chat system like Slack (real-time, persistence, search)","Design: payment system (reliability, idempotency, security)","For each: justify monolith vs microservices","Document your decisions in ADR format (Architecture Decision Records)"]},{type:"analysis",title:"API Strategy",steps:["Map your product's APIs","Are they consistent? Well-documented? Versioned?","Research: what makes a great API? (Stripe, Twilio as examples)"]}],quiz:[{q:"When to choose microservices over monolith?",options:["Always","Large team, complex domains, need independent deployment/scaling","Small team","New projects"],correct:1,explanation:"Microservices add distributed systems complexity. Worth it when teams are large enough to own services independently."},{q:"REST vs GraphQL?",options:["GraphQL is always better","REST is simple/cacheable, GraphQL is flexible for complex queries with multiple resources","Same thing","REST is newer"],correct:1,explanation:"REST: simple CRUD, cacheable, widely understood. GraphQL: complex nested data, reduces over-fetching. Choose based on use case."},{q:"What is idempotency and why does it matter?",options:["A database type","Making the same request multiple times produces the same result, critical for payments/retries","A security feature","A caching strategy"],correct:1,explanation:"If a payment request is sent twice (network retry), idempotency ensures you only charge once. Critical for financial systems."},{q:"Event sourcing means?",options:["Using events for UI","Storing all state changes as immutable events instead of just current state","Event planning","Monitoring"],correct:1,explanation:"Instead of updating a record, you append events. Can replay history, audit everything, rebuild state. Used by banks and financial systems."},{q:"Strangler fig pattern is for?",options:["Removing old code","Gradually replacing a monolith by routing features to new services one by one","A design pattern","Testing"],correct:1,explanation:"Named after a vine that slowly envelops a tree. Route one feature at a time to new service until monolith is empty."}]},
-  {day:19,week:3,title:"Database Architecture & Scaling",videos:[{title:"ByteByteGo - SQL vs NoSQL",url:"https://www.youtube.com/watch?v=Q_9cFgzZr8Q",summary:"When PostgreSQL, when MongoDB, when Redis. <strong>Choose based on data model and access patterns</strong>."},{title:"Fireship - 7 Database Paradigms",url:"https://www.youtube.com/watch?v=W2Z7fbCLSTw",summary:"Key-value, document, relational, graph, column, search, time-series. Each has its sweet spot."},{title:"ByteByteGo - Database Scaling Strategies",url:"https://www.youtube.com/watch?v=dkhOZOmV7Fo",summary:"Read replicas, sharding, partitioning, connection pooling. <strong>How to scale from 1K to 1M users</strong>."}],practice:[{type:"hands-on",title:"Database Exploration",steps:["Explore: PostgreSQL on Supabase (free tier)","Try: Redis on upstash.com (free tier)","Compare: write a simple data model in SQL vs NoSQL","Think: which would you use for your product and why?"]},{type:"analysis",title:"Data Architecture Decision",steps:["Map your product's data: what types, relationships, access patterns?","Current DB choice: is it optimal?","Design: how would you scale to 10x current traffic?"]}],quiz:[{q:"When to choose SQL over NoSQL?",options:["Always","Complex relationships, transactions, need for consistency (ACID)","Never","For speed only"],correct:1,explanation:"SQL excels at structured data with relationships, complex queries, and strong consistency. Banks, e-commerce, inventory."},{q:"Redis is best for?",options:["Long-term storage","Caching, session storage, real-time features (extremely fast in-memory)","File storage","Analytics"],correct:1,explanation:"Redis stores data in memory. Sub-millisecond reads. Perfect for caching, sessions, leaderboards, rate limiting."},{q:"What is a read replica?",options:["A backup","A copy of the database that handles read queries, reducing load on primary","A cache","A microservice"],correct:1,explanation:"Read replicas handle SELECT queries while the primary handles writes. Instantly scales read capacity."},{q:"ACID in databases means?",options:["A chemical","Atomicity, Consistency, Isolation, Durability: guarantees for reliable transactions","A NoSQL feature","A scaling method"],correct:1,explanation:"ACID ensures transactions are all-or-nothing, data stays valid, concurrent transactions don't interfere, and committed data survives crashes."},{q:"When to use a graph database?",options:["Always","Highly connected data where relationships are the primary query pattern (social networks, recommendations)","Simple CRUD","File storage"],correct:1,explanation:"Graph DBs (Neo4j) excel when queries traverse relationships: friend-of-friend, shortest path, recommendation engines."}]},
-  {day:20,week:3,title:"Reliability Engineering & SRE",videos:[{title:"Google - SRE: Measuring and Managing Reliability",url:"https://www.youtube.com/watch?v=q0VikeNz23c",summary:"SLOs, SLIs, error budgets. <strong>How Google quantifies reliability and balances it with feature velocity</strong>."},{title:"ByteByteGo - Monitoring & Observability",url:"https://www.youtube.com/watch?v=4JR6aFz7UQI",summary:"Three pillars: <strong>logs, metrics, traces</strong>. Prometheus, Grafana, Datadog, OpenTelemetry."},{title:"Netflix - Chaos Engineering",url:"https://www.youtube.com/watch?v=CZ3wIuvmHeM",summary:"Chaos Monkey: intentionally breaking things to find weaknesses. <strong>How Netflix stays up during failures</strong>."}],practice:[{type:"hands-on",title:"Observability Setup",steps:["Set up a free Grafana Cloud account","Create a basic dashboard with key metrics","Define: what are your SLOs? (e.g., 99.9% uptime, <200ms p99 latency)","Calculate: what's your error budget per month?"]},{type:"analysis",title:"Incident Analysis",steps:["Research 3 major outages (AWS, Google, Cloudflare)","What went wrong? Root cause?","What can you learn for your own infrastructure?","Write a post-mortem template for your team"]}],quiz:[{q:"SLO vs SLA?",options:["Same thing","SLO is internal target, SLA is external contract with consequences","SLO is higher","SLA is optional"],correct:1,explanation:"SLO (objective) is what you aim for internally. SLA (agreement) is what you promise customers, with penalties for breach."},{q:"What is an error budget?",options:["Cost of errors","Allowed amount of unreliability before halting feature work","Budget for bug fixes","A financial metric"],correct:1,explanation:"If SLO is 99.9% uptime, error budget is 0.1% downtime (~43 min/month). Spend it on risky deploys. When exhausted, focus on reliability."},{q:"Three pillars of observability?",options:["CPU, RAM, disk","Logs, Metrics, Traces","Alert, Monitor, Report","Test, Deploy, Monitor"],correct:1,explanation:"Logs: events. Metrics: numbers over time. Traces: request flow across services. Together they enable debugging any issue."},{q:"Chaos engineering purpose?",options:["Break things randomly","Proactively find weaknesses by injecting failures in controlled experiments","Stress testing","Penetration testing"],correct:1,explanation:"Controlled experiments that introduce failures (kill servers, network issues) to verify the system handles them gracefully."},{q:"What is p99 latency?",options:["Average response time","99% of requests complete within this time (only 1% are slower)","Maximum latency","Minimum latency"],correct:1,explanation:"p99 shows the experience of your slowest users. Average hides outliers. A p99 of 200ms means 99% of requests are under 200ms."}]},
-  {day:21,week:3,title:"FinOps & Cloud Cost Optimization",videos:[{title:"AWS - Cloud Financial Management",url:"https://www.youtube.com/watch?v=TjvkDMRiEzQ",summary:"FinOps principles: <strong>reserved instances, spot instances, right-sizing, cost allocation tags</strong>."},{title:"ByteByteGo - How Netflix Saves Millions on AWS",url:"https://www.youtube.com/watch?v=8dOXaSqNqvw",summary:"Real strategies: spot instances for encoding, reserved for persistent, serverless for variable. <strong>Millions saved annually</strong>."},{title:"FinOps Foundation - What is FinOps?",url:"https://www.youtube.com/watch?v=VDrcgEne6lU",summary:"The practice of bringing financial accountability to cloud. <strong>Inform, Optimize, Operate cycle</strong>."}],practice:[{type:"hands-on",title:"Cost Analysis",steps:["Open AWS Cost Explorer (or equivalent)","Identify your top 3 cost drivers","Find at least one resource that's over-provisioned","Calculate savings from reserved/spot instances","Set up a billing alert at 80% of budget"]},{type:"analysis",title:"FinOps Strategy",steps:["Create unit economics: cost per user, cost per transaction","Compare: your cost vs industry benchmarks","Build a 12-month cloud cost projection","Identify quick wins (unused resources, oversized instances)"]}],quiz:[{q:"Reserved vs spot instances?",options:["Same price","Reserved: committed discount (1-3yr). Spot: up to 90% off but can be interrupted","Spot is more reliable","Reserved is more expensive"],correct:1,explanation:"Reserved: commit to 1-3 years for 30-72% savings. Spot: huge discount but AWS can reclaim with 2 min notice. Use spot for fault-tolerant workloads."},{q:"Right-sizing means?",options:["Choosing the right cloud","Matching instance size to actual usage to avoid paying for unused capacity","Making things smaller","Auto-scaling"],correct:1,explanation:"Most instances are over-provisioned. Downsizing from m5.xlarge to m5.large when CPU avg is 20% cuts cost 50%."},{q:"What is cost allocation tagging?",options:["Labeling in UI","Adding metadata tags to resources to track costs by team, project, or environment","A discount program","A security feature"],correct:1,explanation:"Tags let you see: Team A costs $5K/month on staging, $50K on production. Essential for accountability."},{q:"Auto-scaling saves money by?",options:["It doesn't","Automatically adding/removing instances based on demand, paying only for what you use","Being cheaper","Using spot"],correct:1,explanation:"Scale out during peak, scale in during low traffic. Don't pay for 100 servers when you only need 10 at night."},{q:"First step in cloud cost optimization?",options:["Shut everything down","Get visibility: understand what you're spending and where","Switch clouds","Use only serverless"],correct:1,explanation:"You can't optimize what you can't see. Start with cost visibility (tags, dashboards, alerts), then optimize."}]},
-  {day:22,week:4,title:"AI Strategy for CTOs",videos:[{title:"Andrej Karpathy - Intro to LLMs",url:"https://www.youtube.com/watch?v=zjkBMFhNj_g",summary:"From OpenAI's founding researcher. How LLMs work, capabilities, limitations. <strong>The technical foundation every CTO needs</strong>."},{title:"Anthropic - Building with Claude",url:"https://www.youtube.com/watch?v=k-Oaad8bfGA",summary:"Claude API, prompt engineering, tool use, agentic patterns. <strong>How to build AI features into products</strong>."},{title:"Fireship - AI Explained in 100 Seconds",url:"https://www.youtube.com/watch?v=PeMlgBn-0sY",summary:"Quick overview: ML, neural networks, transformers, fine-tuning, RAG. The landscape in 100 seconds."}],practice:[{type:"hands-on",title:"AI Implementation",steps:["Get API keys for: Claude, OpenAI, Gemini","Send the same prompt to all three, compare outputs","Measure: latency, quality, cost per token","Design: where could AI add value in your product?","Build a decision framework: which model for which use case"]},{type:"analysis",title:"AI Strategy Document",steps:["Map AI opportunities in your product","For each: RAG vs fine-tuning vs prompt engineering?","Calculate estimated costs at scale","Identify risks: hallucination, compliance, cost growth","Create AI integration roadmap"]}],quiz:[{q:"RAG vs fine-tuning: when to use which?",options:["Always fine-tune","RAG for current/private data, fine-tune for behavior/style changes","Always RAG","Same result"],correct:1,explanation:"RAG retrieves relevant docs at query time (fresher, no training needed). Fine-tuning changes model behavior (expensive, static, good for style/format)."},{q:"Biggest risk of AI in production?",options:["Cost only","Hallucination: AI generating confident but incorrect information","Slowness","Complexity"],correct:1,explanation:"Hallucinations can damage trust and create legal liability. Must have guardrails, validation, and human review for high-stakes outputs."},{q:"Token-based pricing means?",options:["Monthly fee","Pay per input/output text length, measured in tokens (~4 chars each)","Per user","Per API key"],correct:1,explanation:"LLMs charge per token processed. Longer prompts and responses cost more. Caching and shorter prompts reduce costs."},{q:"AI agents are?",options:["Chatbots","LLMs that can use tools, make decisions, and take actions autonomously","Voice assistants","Search engines"],correct:1,explanation:"Agents combine LLM reasoning with tool use: search, code execution, API calls. They can plan multi-step tasks."},{q:"As CTO, most important AI decision?",options:["Which model to use","Where AI adds genuine user value vs where it's just hype","How much to spend","Whether to use AI"],correct:1,explanation:"Not every feature needs AI. The best CTOs identify where AI creates genuine value (not gimmicks) and execute there."}]},
-  {day:23,week:4,title:"AI Architecture & MLOps",videos:[{title:"Stanford - Machine Learning System Design",url:"https://www.youtube.com/watch?v=_i3aqgKVNQI",summary:"Production ML systems: <strong>data pipelines, model serving, monitoring, A/B testing, feedback loops</strong>."},{title:"Fireship - MLOps Explained in 100 Seconds",url:"https://www.youtube.com/watch?v=s8Jta1NmAAo",summary:"Deploying ML to production: versioning, testing, monitoring, retraining. The ops side of AI."},{title:"Weights & Biases - ML Monitoring in Production",url:"https://www.youtube.com/watch?v=vfIBkkU5tss",summary:"Model drift, performance degradation, data quality. <strong>How to know when your AI is failing</strong>."}],practice:[{type:"hands-on",title:"AI Pipeline Design",steps:["Design an AI feature for your product end-to-end","Include: data collection, processing, model selection, serving, monitoring","Define: how would you detect model degradation?","Create: prompt versioning strategy","Design: fallback behavior when AI fails"]},{type:"analysis",title:"AI Cost Modeling",steps:["Calculate: AI costs at 100, 1K, 10K, 100K daily users","Compare: Claude vs GPT vs Gemini for your use cases","Identify: where to cache AI responses","Project: 12-month AI infrastructure costs"]}],quiz:[{q:"Model drift means?",options:["Slow model","Model performance degrades over time as real-world data changes from training data","Model moves servers","Model gets updated"],correct:1,explanation:"The world changes but your model stays frozen. Yesterday's patterns may not apply today. Must monitor and retrain."},{q:"A/B testing AI features?",options:["Not necessary","Essential: compare AI version vs baseline to measure actual user impact","Too expensive","Only for UI"],correct:1,explanation:"AI that seems better might hurt key metrics. A/B test to verify real improvement in user behavior and business KPIs."},{q:"Prompt versioning is important because?",options:["Prompts don't change","Small prompt changes can dramatically affect output quality; need to track and rollback","Legal requirement","Speed"],correct:1,explanation:"A single word change in a prompt can alter output significantly. Version prompts like code: track changes, review, rollback if needed."},{q:"When should AI responses be cached?",options:["Never","For identical/similar inputs where freshness isn't critical, reducing cost and latency","Always","Only for images"],correct:1,explanation:"If many users ask similar questions, cache responses to save API costs and reduce latency. Invalidate when context changes."},{q:"Human-in-the-loop means?",options:["AI replaces humans","Humans review/approve AI outputs before they reach end users, critical for high-stakes decisions","Training data","User feedback"],correct:1,explanation:"For high-stakes outputs (financial advice, medical, legal), humans verify before delivery. Reduces hallucination risk."}]},
-  {day:24,week:4,title:"Data Architecture & Governance",videos:[{title:"ByteByteGo - Data Lake vs Data Warehouse",url:"https://www.youtube.com/watch?v=0pz7_CK_aiE",summary:"Lake stores raw data cheaply, warehouse stores structured for analytics. <strong>Data mesh as modern alternative</strong>."},{title:"Fireship - Apache Kafka in 100 Seconds",url:"https://www.youtube.com/watch?v=uvb00oaa3k8",summary:"Real-time event streaming at scale. How Uber, LinkedIn, and Netflix process <strong>millions of events/second</strong>."},{title:"Snowflake - Modern Data Architecture",url:"https://www.youtube.com/watch?v=gKmgV-rqVkk",summary:"ETL vs ELT, data pipelines, real-time analytics. Building a data platform."}],practice:[{type:"hands-on",title:"Data Architecture",steps:["Map all data sources in your company","Identify: where does data live? How does it flow?","Design: ideal data architecture for analytics","Research: Snowflake vs BigQuery vs Databricks","Prototype: simple ETL pipeline concept"]},{type:"analysis",title:"Data Governance",steps:["Audit: who has access to what data?","Define data classification: public, internal, confidential, restricted","Create data retention policy","Design: how to handle data deletion requests (GDPR 'right to be forgotten')"]}],quiz:[{q:"Data lake vs data warehouse?",options:["Same thing","Lake stores raw diverse data cheaply, warehouse stores structured for fast queries","Lake is newer","Warehouse is cheaper"],correct:1,explanation:"Lake: dump everything raw (S3, cheap). Warehouse: structured, optimized for analytics (expensive, fast). Many companies use both."},{q:"Kafka is used for?",options:["Storage","Real-time event streaming: processing millions of events/second between systems","Database queries","File transfer"],correct:1,explanation:"Kafka provides durable, ordered, distributed event streaming. Services publish events, consumers process them independently."},{q:"Data mesh principle?",options:["One central team owns all data","Domain teams own their data as a product, with federated governance","No governance","Only for big companies"],correct:1,explanation:"Data mesh decentralizes ownership. Each domain (payments, users, orders) owns their data products. Scales better than centralized teams."},{q:"GDPR 'right to be forgotten' means?",options:["Nothing","Users can request complete deletion of their personal data from all systems","Optional for non-EU","Only for marketing"],correct:1,explanation:"Must delete personal data on request. Requires knowing where data lives across all systems, backups included. Architecture must support this."},{q:"ETL vs ELT?",options:["Same thing","ETL transforms before loading (traditional), ELT loads raw then transforms in warehouse (modern)","ETL is newer","ELT is slower"],correct:1,explanation:"ETL: clean data before putting in warehouse. ELT: load raw data into warehouse, transform there using warehouse compute. ELT is more flexible."}]},
-  {day:25,week:4,title:"Technical Hiring & Team Building",videos:[{title:"The Pragmatic Engineer - Building Engineering Teams",url:"https://www.youtube.com/watch?v=zq5iGK4Dyp8",summary:"How top companies structure engineering. <strong>Tech leads vs managers, IC tracks, leveling frameworks</strong>."},{title:"Will Larson - An Elegant Puzzle (Talk)",url:"https://www.youtube.com/watch?v=_VPjx2rgbKk",summary:"Systems thinking for engineering management. Team sizing, tech debt management, organizational design."},{title:"Google - How to Interview Engineers",url:"https://www.youtube.com/watch?v=r8RxkpUvxK0",summary:"Structured interviews, rubrics, reducing bias. <strong>How to identify great engineers consistently</strong>."}],practice:[{type:"hands-on",title:"Hiring Framework",steps:["Define: what makes a great senior engineer for your company?","Create an interview process: stages, questions, rubrics","Design a take-home project (realistic, time-boxed to 4 hours)","Create an engineering ladder (levels, expectations, compensation bands)","Write a compelling job description that attracts top talent"]},{type:"analysis",title:"Team Structure",steps:["Draw your ideal engineering org chart for 20 people","Define: squad structure, reporting lines, responsibilities","How would you handle: 2 teams need the same person?","Research: Spotify model, matrix orgs, traditional hierarchy"]}],quiz:[{q:"Tech lead vs engineering manager?",options:["Same role","TL owns technical decisions and mentoring, EM owns people management and delivery","TL is higher","EM writes code"],correct:1,explanation:"Tech Lead: technical direction, architecture decisions, code reviews, mentoring. EM: career growth, team health, hiring, delivery coordination."},{q:"Best signal of a great senior engineer?",options:["Years of experience","Ability to break down complex problems, mentor others, and make pragmatic technical decisions","Knows many languages","Fast coder"],correct:1,explanation:"Senior engineers multiply team output through clear thinking, mentoring, and pragmatic decisions. Not just individual coding speed."},{q:"What is technical debt?",options:["Server costs","Shortcuts taken for speed that will cost more to fix later","Bugs","Old code"],correct:1,explanation:"Deliberate or accidental shortcuts that make future changes harder. Some is acceptable (strategic), too much slows everything down."},{q:"How often should a CTO talk to individual engineers?",options:["Never","Regularly, to understand ground-level challenges, blockers, and morale","Only during reviews","Only when there's a problem"],correct:1,explanation:"Skip-level conversations reveal what managers filter out. Monthly 1:1s with senior ICs keeps you informed and builds trust."},{q:"Biggest hiring mistake for engineering teams?",options:["Hiring too many","Hiring for skills only, ignoring values alignment and ability to grow","Being too picky","Remote hiring"],correct:1,explanation:"Skills can be learned. Values, communication, and growth mindset are harder to change. Hire for trajectory and culture add, not just current skill."}]},
-  {day:26,week:4,title:"Engineering Culture & Processes",videos:[{title:"Spotify - Engineering Culture (Part 1)",url:"https://www.youtube.com/watch?v=Yvfz4HGtoPc",summary:"Squads, tribes, chapters, guilds. <strong>Autonomous teams with alignment</strong>. Influential model for scaling engineering."},{title:"Accelerate - DORA Metrics Explained",url:"https://www.youtube.com/watch?v=0UyrVqBoCAU",summary:"4 key metrics that predict engineering performance: <strong>deploy frequency, lead time, MTTR, change failure rate</strong>."},{title:"Martin Fowler - Code Review Best Practices",url:"https://www.youtube.com/watch?v=8dnFfKTwT5M",summary:"How to do code review that improves quality without slowing teams. Automation, standards, culture."}],practice:[{type:"hands-on",title:"Engineering Processes",steps:["Define your team's deployment process (or ideal one)","Set up: branch protection, required reviews, CI checks","Create: engineering team handbook (coding standards, PR process, on-call)","Implement DORA metrics tracking (even informally)","Design: post-mortem process for incidents"]},{type:"analysis",title:"Culture Audit",steps:["Survey (or self-assess): team happiness, productivity, growth","Identify: what slows your team down most?","Compare your practices to elite engineering orgs","List 3 process improvements with highest impact"]}],quiz:[{q:"DORA metrics show that elite teams?",options:["Deploy rarely but carefully","Deploy multiple times daily with low failure rate and fast recovery","Never have failures","Have huge teams"],correct:1,explanation:"Elite teams: deploy on-demand (multiple daily), <1 hour lead time, <1 hour MTTR, <15% change failure rate."},{q:"Code review should focus on?",options:["Style only","Correctness, maintainability, architecture alignment, and knowledge sharing","Finding bugs only","Speed"],correct:1,explanation:"Good reviews catch bugs but also ensure maintainability, share knowledge, and maintain architecture consistency."},{q:"Blameless culture means?",options:["Nobody is responsible","Focus on systemic fixes, not individual blame, so people report issues freely","No accountability","Low standards"],correct:1,explanation:"When people fear blame, they hide mistakes. Blameless culture encourages reporting, leading to faster fixes and systemic improvement."},{q:"What are Architecture Decision Records (ADRs)?",options:["Meeting notes","Documents recording technical decisions, their context, and reasoning for future reference","Code comments","Design docs"],correct:1,explanation:"ADRs capture: context, decision, consequences, alternatives considered. Invaluable when team members join or decisions need revisiting."},{q:"How to reduce technical debt without stopping features?",options:["Stop all features","Allocate consistent percentage (15-20%) of sprint capacity to debt reduction","Ignore it","One big rewrite"],correct:1,explanation:"Dedicated debt time each sprint (often 15-20%) steadily improves codebase without stopping business progress. Big rewrites usually fail."}]},
-  {day:27,week:4,title:"Compliance & Security Frameworks",videos:[{title:"Vanta - SOC 2 Explained",url:"https://www.youtube.com/watch?v=75qdCRZUiRE",summary:"SOC 2 Trust Service Criteria: security, availability, processing integrity, confidentiality, privacy. <strong>Required for enterprise sales</strong>."},{title:"ISO - ISO 27001 Overview",url:"https://www.youtube.com/watch?v=F6HVHkdsVwI",summary:"Information Security Management System (ISMS). <strong>International standard accepted globally</strong>."},{title:"AWS - HIPAA Compliance on AWS",url:"https://www.youtube.com/watch?v=fWZFKhO0mAQ",summary:"Health data protection: PHI, BAAs, encryption requirements. <strong>Required if touching any health data</strong>."}],practice:[{type:"hands-on",title:"Compliance Mapping",steps:["Create compliance requirements matrix","Map: SOC 2 vs ISO 27001 vs HIPAA vs GDPR controls","Identify overlapping controls (typically 60-80%)","Research: Vanta, Drata, Secureframe for automation","Calculate: time and cost to achieve SOC 2 Type II"]},{type:"research",title:"Framework Research",steps:["Research: PCI DSS (credit cards), FedRAMP (US gov), CCPA (California)","Research: EU AI Act requirements for AI companies","Research: Israeli Privacy Protection Regulations","Map which frameworks apply to your business"]}],quiz:[{q:"SOC 2 Type I vs Type II?",options:["Same thing","Type I: controls exist at a point in time. Type II: controls operated effectively over 6-12 months","Type II is easier","Type I is better"],correct:1,explanation:"Type I is a snapshot. Type II proves sustained compliance over time. Enterprise buyers strongly prefer Type II."},{q:"HIPAA applies when?",options:["All companies","When handling Protected Health Information (PHI) in the US","Only hospitals","Only insurance"],correct:1,explanation:"Any company that stores, processes, or transmits PHI must comply. This includes health apps, wearables, and health AI features."},{q:"GDPR's biggest requirement?",options:["Cookie banners","Lawful basis for processing, data minimization, purpose limitation, and individual rights","Only for EU companies","Email opt-in"],correct:1,explanation:"GDPR requires: legal basis to process data, collect only what's needed, use only for stated purpose, and honor rights (access, deletion, portability)."},{q:"What is FedRAMP?",options:["A networking protocol","US government security authorization for cloud products","An AI certification","A database standard"],correct:1,explanation:"FedRAMP provides standardized security framework for cloud products used by US government agencies."},{q:"Best approach for multiple compliance frameworks?",options:["One at a time separately","Map overlapping controls, build unified compliance program","Ignore until asked","Cheapest first"],correct:1,explanation:"Most frameworks share 60-80% controls. Unified GRC program addresses multiple frameworks efficiently."}]},
-  {day:28,week:4,title:"Government & Enterprise Contracts",videos:[{title:"GovWin - How to Sell to the Government",url:"https://www.youtube.com/watch?v=Bik5DFu9c38",summary:"Government procurement: <strong>RFPs, RFIs, procurement cycles, GSA schedules, past performance</strong>."},{title:"AWS Public Sector - Building for Government",url:"https://www.youtube.com/watch?v=qpLt-7MpHMA",summary:"GovCloud, FedRAMP, <strong>data residency, air-gapped environments, IL4/IL5</strong>."},{title:"Wiz - Cloud Security Posture Management",url:"https://www.youtube.com/watch?v=RhWCLJIYfPE",summary:"CSPM, CNAPP, agentless scanning. Security tools <strong>enterprises and governments require</strong>."}],practice:[{type:"hands-on",title:"Enterprise Readiness Audit",steps:["Create Enterprise Readiness Checklist","Check: SOC 2, SSO/SAML, audit logging, RBAC, data export, SLA","Check: security questionnaire readiness (SIG, CAIQ)","Create vendor security questionnaire response template","Identify top 5 gaps preventing enterprise/government sales"]},{type:"research",title:"Israeli Government Requirements",steps:["Research: Israeli National Cyber Directorate certification","Security requirements for Israeli government tech vendors","ISO 27001 certification in Israel (which bodies certify?)","How GDPR interacts with Israeli privacy law"]}],quiz:[{q:"What is an RFP?",options:["Request for Payment","Request for Proposal: formal document soliciting vendor bids","Request for Permission","Request for Partnership"],correct:1,explanation:"RFP outlines government requirements, evaluation criteria, timeline. Companies respond with proposals."},{q:"Data residency means?",options:["Where CEO lives","Data must be stored within specific geographic boundaries","Backup strategy","Encryption type"],correct:1,explanation:"Many governments require citizen data stays within borders. Architecture must support regional deployment."},{q:"Enterprise-ready SaaS requires?",options:["Many features","SSO, audit logs, RBAC, compliance certs, SLAs, data export","Being expensive","Large team"],correct:1,explanation:"Enterprise checklist: SSO, audit logs, RBAC, SOC 2/ISO, SLAs, data portability."},{q:"CSPM is?",options:["Programming method","Automated monitoring for cloud misconfigurations and compliance violations","Cloud storage","A certification"],correct:1,explanation:"CSPM tools continuously scan for misconfigurations, overly permissive access, and compliance violations."},{q:"'Past performance' in government contracting?",options:["Not important","Agencies evaluate vendors on track record of delivering similar projects","Determines price","Hardware only"],correct:1,explanation:"Government heavily weights past performance. Start with subcontracts to build track record."}]},
-  {day:29,week:4,title:"International Workforce & Legal",videos:[{title:"Deel - Hiring Internationally",url:"https://www.youtube.com/watch?v=NRvLLG_1Lts",summary:"<strong>EOR, contractor vs employee, tax implications, local labor laws</strong>. Using Deel, Remote, Papaya Global."},{title:"Wise - International Payments",url:"https://www.youtube.com/watch?v=5I7T0UNkjl0",summary:"Cross-border payments: <strong>currency conversion, SWIFT, payment timing, tax withholding</strong>."},{title:"Y Combinator - Legal Basics for Startups",url:"https://www.youtube.com/watch?v=EHzvmyMJEK4",summary:"<strong>NDAs, MSAs, DPAs, SLAs, employment agreements, IP assignment</strong>. Legal docs every tech company needs."}],practice:[{type:"hands-on",title:"International Hiring",steps:["Research dev salary: Israel, Philippines, US, Poland, India","Compare total cost with benefits and taxes","Compare EOR platforms: Deel, Remote, Papaya Global","Create contractor agreement template: IP, NDA, termination","Identify which roles to hire locally vs remotely"]},{type:"analysis",title:"Legal Readiness",steps:["List all legal agreements you have","Gaps: NDAs, MSAs, DPAs, IP assignments?","Employee misclassification risks?","Philippines labor requirements: 13th month, SSS","US at-will employment vs Israeli law"]}],quiz:[{q:"EOR (Employer of Record) is?",options:["A contract type","Company that legally employs workers on your behalf abroad","A government agency","Tax classification"],correct:1,explanation:"EOR handles payroll, benefits, taxes, compliance in countries where you don't have an entity."},{q:"Misclassifying employees as contractors risks?",options:["Fewer hours","Tax penalties, back-pay, legal liability from worker's government","No risk if agreed","US only"],correct:1,explanation:"Penalties: back taxes, fines, retroactive benefits, criminal charges. Working relationship matters, not contract label."},{q:"IP assignment clause should cover?",options:["Only code","All work product, inventions, and IP become company property","Only patents","Nothing needed"],correct:1,explanation:"Without IP assignment, contractors may retain rights. Cover ALL work product: code, designs, documents, inventions."},{q:"MSA (Master Service Agreement) is?",options:["Insurance","Overarching contract governing relationship, with SOWs for specific projects","Software license","Government form"],correct:1,explanation:"MSA sets general terms (payment, IP, liability, NDA). SOWs under it define specific projects."},{q:"Hiring in Philippines: key considerations?",options:["Salary only","Timezone, 13th month pay, mandatory benefits, data security, IP, EOR","Same as local","English only"],correct:1,explanation:"Philippines: mandatory 13th month, SSS/PhilHealth, UTC+8 timezone. Use EOR for compliance."}]},
-  {day:30,week:4,title:"CTO Board Presentation: Final Exercise",videos:[{title:"HBR - Present to a Board of Directors",url:"https://www.youtube.com/watch?v=COq2L2UlkKg",summary:"Executive presentation: <strong>start with conclusion, data-supported decisions, concise, anticipate questions</strong>."},{title:"Gergely Orosz - What Does a CTO Actually Do?",url:"https://www.youtube.com/watch?v=zq5iGK4Dyp8",summary:"The real CTO job: <strong>technical direction, building team, managing risk, bridging business and engineering</strong>."},{title:"a16z - Technical Due Diligence",url:"https://www.youtube.com/watch?v=DBXZWB_dNsw",summary:"What investors evaluate: <strong>architecture, debt, team, scalability, security, data strategy</strong>."}],practice:[{type:"hands-on",title:"CTO Board Presentation",steps:["Create 10-slide technology strategy presentation","Slide 1: Executive summary (3 sentences)","Slides 2-3: Security posture, certifications, incidents","Slides 4-5: Infrastructure, scaling plan, costs","Slide 6: AI strategy and ROI","Slide 7: Team structure and hiring plan","Slide 8: Compliance and government readiness","Slide 9: 12-month roadmap","Slide 10: Budget (infra, team, tools, savings)","Present aloud. Record and review."]},{type:"analysis",title:"30-Day Review",steps:["Rate confidence (1-10) per area: security, networking, cloud, architecture, AI, data, leadership, compliance","Identify 3 areas needing most learning","Create Month 2-3 learning plan","Celebrate: you completed CTO foundations"]}],quiz:[{q:"Board presentation: lead with?",options:["Technical architecture","Business impact of technical decisions","Technology list","Team accomplishments"],correct:1,explanation:"Board cares about outcomes: how tech enables growth, what risks exist, what investment needed."},{q:"Technical due diligence evaluates?",options:["Code review","Architecture, team, debt, scalability, security, data practices comprehensively","Security audit only","Performance test"],correct:1,explanation:"Happens during M&A/funding. Evaluates code quality, scalability, debt, team strength, security."},{q:"Most important CTO metric?",options:["Lines of code","Engineering velocity: delivering value while maintaining quality","Server count","Technologies used"],correct:1,explanation:"DORA metrics (deploy frequency, lead time, MTTR, change failure rate) correlate with business outcomes."},{q:"Major incident during board meeting?",options:["Ignore until done","Excuse yourself, delegate comms, lead incident response","Panic","Blame team"],correct:1,explanation:"CTO's first responsibility is the platform. Excuse professionally, ensure response underway, return when stable."},{q:"After 30 days, most important thing?",options:["Know every technology","Continuous learning, great teams, informed decisions that drive business value","Code daily","Most certifications"],correct:1,explanation:"Technology changes constantly. Best CTOs are lifelong learners who build great teams and connect tech to business outcomes."}]}
-];
-
-const WEEKS = [
-  { n: 1, label: 'Security & Threat Modeling', color: '#ef4444' },
-  { n: 2, label: 'Servers, Network & Infrastructure', color: '#3b82f6' },
-  { n: 3, label: 'Cloud, Architecture & Design', color: '#a855f7' },
-  { n: 4, label: 'AI, Data, Leadership & Compliance', color: '#f97316' },
-];
-
-function getYouTubeId(url) {
-  const m = url.match(/[?&]v=([^&]+)/);
-  return m ? m[1] : '';
-}
+// CTO Mastery - 30 Day Program Data
+const PROGRAM_DATA = {
+  title: "CTO Mastery",
+  subtitle: "30 יום למנהיגות טכנולוגית",
+  weeks: [
+    { name: "ארכיטקטורה ועיצוב מערכות", days: [1,2,3,4,5,6,7] },
+    { name: "צוות ומנהיגות", days: [8,9,10,11,12,13,14] },
+    { name: "אסטרטגיה ומוצר", days: [15,16,17,18,19,20,21] },
+    { name: "תפעול וצמיחה", days: [22,23,24,25,26,27,28] },
+    { name: "פרויקט סיום", days: [29,30] }
+  ],
+  days: [
+    {
+      id: 1,
+      title: "מיקרוסרביסים",
+      week: 1,
+      lesson: {
+        title: "ארכיטקטורת מיקרוסרביסים",
+        content: `<h3>מה זה מיקרוסרביסים?</h3>
+<p>ארכיטקטורת מיקרוסרביסים מפרקת אפליקציה מונוליטית לשירותים קטנים ועצמאיים, כל אחד אחראי על פונקציונליות מוגדרת.</p>
+<h3>עקרונות מפתח</h3>
+<div class="concept-card"><strong>Single Responsibility</strong><br>כל שירות אחראי על דומיין עסקי אחד בלבד</div>
+<div class="concept-card"><strong>Loose Coupling</strong><br>שירותים מתקשרים דרך APIs מוגדרים, ללא תלות ישירה</div>
+<div class="concept-card"><strong>Independent Deployment</strong><br>כל שירות נפרס באופן עצמאי ללא השפעה על אחרים</div>
+<div class="concept-card"><strong>Data Isolation</strong><br>כל שירות מנהל את ה-database שלו באופן עצמאי</div>
+<h3>מתי לבחור מיקרוסרביסים?</h3>
+<p>כאשר הצוות גדל מעבר ל-8 מפתחים, כאשר חלקים שונים של המערכת דורשים scaling שונה, או כאשר יש צורך בטכנולוגיות שונות לחלקים שונים.</p>
+<h3>אתגרים נפוצים</h3>
+<p>ניהול תקשורת בין שירותים, distributed transactions, monitoring מורכב, וקושי ב-debugging. כ-CTO, חשוב להבין מתי המורכבות שווה את היתרונות.</p>`
+      },
+      quiz: [
+        { question: "מהו העיקרון המרכזי של מיקרוסרביסים?", options: ["כל השירותים חולקים database אחד", "כל שירות אחראי על דומיין עסקי אחד", "כל השירותים נפרסים יחד", "שירותים תלויים ישירות זה בזה"], correct: 1 },
+        { question: "מתי כדאי לעבור ממונוליט למיקרוסרביסים?", options: ["תמיד, מההתחלה", "כשהצוות גדל ויש צורך ב-scaling שונה", "רק כשיש באג קריטי", "כשהלקוח מבקש"], correct: 1 },
+        { question: "מהו אחד האתגרים המרכזיים במיקרוסרביסים?", options: ["קוד קצר מדי", "Distributed transactions", "מהירות פיתוח גבוהה מדי", "פשטות יתר"], correct: 1 },
+        { question: "מהו Data Isolation במיקרוסרביסים?", options: ["כל השירותים ניגשים לאותו database", "כל שירות מנהל את ה-DB שלו", "אין שימוש ב-database", "רק שירות אחד ניגש ל-DB"], correct: 1 }
+      ],
+      task: "שרטט דיאגרמה של אפליקציה מונוליטית שאתה מכיר ופרק אותה ל-3 מיקרוסרביסים לוגיים. הגדר את ה-API ביניהם."
+    },
+    {
+      id: 2,
+      title: "ענן ותשתיות",
+      week: 1,
+      lesson: {
+        title: "Cloud Architecture ותשתיות",
+        content: `<h3>אסטרטגיית ענן ל-CTO</h3>
+<p>בחירת ספק ענן ואסטרטגיית תשתיות היא אחת ההחלטות הקריטיות ביותר. ההשפעה היא על עלויות, ביצועים, וגמישות לשנים קדימה.</p>
+<h3>מודלים מרכזיים</h3>
+<div class="concept-card"><strong>IaaS</strong><br>Infrastructure as a Service: שליטה מלאה על VMs, networking, storage</div>
+<div class="concept-card"><strong>PaaS</strong><br>Platform as a Service: פלטפורמה מנוהלת לפריסת קוד</div>
+<div class="concept-card"><strong>Serverless</strong><br>ריצת קוד ללא ניהול שרתים, תשלום לפי שימוש</div>
+<div class="concept-card"><strong>Multi-Cloud</strong><br>שימוש במספר ספקי ענן למניעת vendor lock-in</div>
+<h3>שיקולים בבחירת ענן</h3>
+<p>עלות (לטווח קצר וארוך), compliance ורגולציה, proximity ללקוחות, שירותים מנוהלים זמינים, ו-expertise של הצוות.</p>
+<h3>FinOps</h3>
+<p>כ-CTO, חובה לנהל עלויות ענן באופן אקטיבי. Reserved instances, spot instances, auto-scaling נכון, וניטור שימוש הם כלים קריטיים.</p>`
+      },
+      quiz: [
+        { question: "מהו ההבדל בין IaaS ל-PaaS?", options: ["אין הבדל", "IaaS נותן שליטה מלאה על תשתית, PaaS מנהל את התשתית", "PaaS יקר יותר תמיד", "IaaS רק לחברות גדולות"], correct: 1 },
+        { question: "מהו היתרון המרכזי של Serverless?", options: ["מהירות מקסימלית", "תשלום לפי שימוש וללא ניהול שרתים", "אבטחה מוחלטת", "תמיכה בכל השפות"], correct: 1 },
+        { question: "מהו FinOps?", options: ["ניהול פיננסי של משכורות", "ניהול אקטיבי של עלויות ענן", "שם של כלי DevOps", "ניהול פרויקטים"], correct: 1 }
+      ],
+      task: "בחן את התשתית הנוכחית שלך. זהה 3 שירותים שיכולים לעבור ל-serverless וחשב את החיסכון הפוטנציאלי."
+    },
+    {
+      id: 3,
+      title: "בסיסי נתונים",
+      week: 1,
+      lesson: {
+        title: "בחירת וניהול בסיסי נתונים",
+        content: `<h3>אסטרטגיית Database</h3>
+<p>בחירת database היא החלטה ארכיטקטונית קריטית. אין פתרון אחד לכל בעיה, וכ-CTO עליך להבין את ה-tradeoffs.</p>
+<h3>סוגי בסיסי נתונים</h3>
+<div class="concept-card"><strong>SQL (PostgreSQL, MySQL)</strong><br>ACID compliance, schema מוגדר, queries מורכבים, מתאים לנתונים רלציוניים</div>
+<div class="concept-card"><strong>NoSQL Document (MongoDB)</strong><br>Schema גמיש, horizontal scaling, מתאים לנתונים לא מובנים</div>
+<div class="concept-card"><strong>Key-Value (Redis)</strong><br>מהירות קריאה גבוהה, caching, sessions, queues</div>
+<div class="concept-card"><strong>Graph (Neo4j)</strong><br>קשרים מורכבים, social networks, recommendation engines</div>
+<h3>CAP Theorem</h3>
+<p>בסביבה מבוזרת, אפשר להבטיח רק שניים מתוך שלושה: Consistency, Availability, Partition Tolerance. הבנת ה-tradeoff קריטית.</p>
+<h3>Polyglot Persistence</h3>
+<p>שימוש בסוגי database שונים לצרכים שונים באותה מערכת. למשל: PostgreSQL לנתוני משתמשים, Redis ל-caching, Elasticsearch לחיפוש.</p>`
+      },
+      quiz: [
+        { question: "מהו CAP Theorem?", options: ["שיטת פיתוח", "אפשר להבטיח רק 2 מ-3: Consistency, Availability, Partition Tolerance", "פרוטוקול רשת", "סוג database"], correct: 1 },
+        { question: "מתי כדאי להשתמש ב-Redis?", options: ["כ-database ראשי", "ל-caching ומהירות קריאה גבוהה", "לנתונים רלציוניים מורכבים", "רק ל-development"], correct: 1 },
+        { question: "מהו Polyglot Persistence?", options: ["שימוש בשפה אחת", "שימוש בסוגי DB שונים לצרכים שונים", "העתקת נתונים בין DBs", "גיבוי כפול"], correct: 1 },
+        { question: "מה היתרון של NoSQL Document DB?", options: ["ACID compliance", "Schema גמיש ו-horizontal scaling", "ביצועים תמיד טובים יותר", "אבטחה מעולה"], correct: 1 }
+      ],
+      task: "מפה את כל בסיסי הנתונים בארגון שלך. לכל אחד, הגדר: סוג, גודל, תדירות קריאה/כתיבה, ו-SLA נדרש."
+    },
+    {
+      id: 4,
+      title: "Scaling",
+      week: 1,
+      lesson: {
+        title: "אסטרטגיות Scaling",
+        content: `<h3>הגדלת קיבולת המערכת</h3>
+<p>Scaling הוא היכולת של מערכת לטפל בעומס גדל. כ-CTO, עליך לתכנן scaling מראש ולהבין את העלויות והמורכבות.</p>
+<h3>סוגי Scaling</h3>
+<div class="concept-card"><strong>Vertical Scaling (Scale Up)</strong><br>הגדלת משאבים של שרת בודד (CPU, RAM). פשוט אך מוגבל</div>
+<div class="concept-card"><strong>Horizontal Scaling (Scale Out)</strong><br>הוספת שרתים נוספים. מורכב יותר אך ללא מגבלה תיאורטית</div>
+<div class="concept-card"><strong>Auto-Scaling</strong><br>הוספה/הסרה אוטומטית של משאבים לפי עומס</div>
+<div class="concept-card"><strong>Database Scaling</strong><br>Read replicas, sharding, partitioning</div>
+<h3>Patterns חשובים</h3>
+<p>Load Balancing, Caching Layers, CDN, Message Queues, Database Replication. כל אחד פותר bottleneck שונה.</p>
+<h3>תכנון קיבולת</h3>
+<p>חשב את הצמיחה הצפויה, הגדר thresholds ל-scaling, ותכנן load tests סדירים. תמיד תכנן ל-10x העומס הנוכחי.</p>`
+      },
+      quiz: [
+        { question: "מהו ההבדל בין Vertical ל-Horizontal Scaling?", options: ["אין הבדל", "Vertical מגדיל שרת בודד, Horizontal מוסיף שרתים", "Horizontal יותר זול תמיד", "Vertical עדיף תמיד"], correct: 1 },
+        { question: "מהו Auto-Scaling?", options: ["Scaling ידני מתוזמן", "הוספה/הסרה אוטומטית של משאבים לפי עומס", "Scaling רק כלפי מעלה", "כיבוי שרתים לא פעילים"], correct: 1 },
+        { question: "לכמה עומס כדאי לתכנן?", options: ["עומס נוכחי בדיוק", "כפול מהנוכחי", "10x מהעומס הנוכחי", "100x מהעומס"], correct: 2 }
+      ],
+      task: "זהה את ה-bottleneck העיקרי במערכת שלך. תכנן 3 שלבי scaling שיפתרו אותו בהדרגה."
+    },
+    {
+      id: 5,
+      title: "APIs",
+      week: 1,
+      lesson: {
+        title: "עיצוב APIs ואינטגרציות",
+        content: `<h3>API כמוצר</h3>
+<p>APIs הם החוזה בין שירותים, צוותות, ושותפים. API טוב הוא פשוט, עקבי, ומתועד היטב.</p>
+<h3>סגנונות API</h3>
+<div class="concept-card"><strong>REST</strong><br>Standard HTTP, stateless, resource-based. הנפוץ ביותר, קל להבנה</div>
+<div class="concept-card"><strong>GraphQL</strong><br>שאילתות גמישות, client מגדיר מה הוא צריך. מפחית over-fetching</div>
+<div class="concept-card"><strong>gRPC</strong><br>Protocol Buffers, ביצועים גבוהים, streaming. מתאים לתקשורת פנימית</div>
+<div class="concept-card"><strong>WebSocket</strong><br>תקשורת דו-כיוונית בזמן אמת</div>
+<h3>עקרונות עיצוב</h3>
+<p>Versioning (v1, v2), pagination, rate limiting, authentication (OAuth2, API keys), error handling עקבי, ו-backward compatibility.</p>
+<h3>API Gateway</h3>
+<p>שכבת ניהול מרכזית: authentication, rate limiting, logging, routing, ו-transformation. כלים: Kong, AWS API Gateway, Nginx.</p>`
+      },
+      quiz: [
+        { question: "מה היתרון של GraphQL על REST?", options: ["מהיר יותר תמיד", "Client מגדיר מה הוא צריך ומפחית over-fetching", "פשוט יותר", "אבטחה טובה יותר"], correct: 1 },
+        { question: "מהו API Gateway?", options: ["סוג database", "שכבת ניהול מרכזית ל-APIs", "שפת תכנות", "Framework לפיתוח"], correct: 1 },
+        { question: "למה חשוב API Versioning?", options: ["לא חשוב", "כדי לשמור backward compatibility", "כדי להגדיל מהירות", "רק למראית עין"], correct: 1 }
+      ],
+      task: "תכנן API spec (OpenAPI/Swagger) לשירות חדש. הגדר 5 endpoints עם authentication, pagination, ו-error handling."
+    },
+    {
+      id: 6,
+      title: "אבטחת מידע",
+      week: 1,
+      lesson: {
+        title: "Security Architecture",
+        content: `<h3>אבטחה כאחריות CTO</h3>
+<p>אבטחת מידע היא לא רק של צוות ה-security. כ-CTO, אתה אחראי על התרבות, הארכיטקטורה, והתהליכים שמגנים על הארגון.</p>
+<h3>שכבות אבטחה</h3>
+<div class="concept-card"><strong>Network Security</strong><br>Firewalls, VPN, network segmentation, DDoS protection</div>
+<div class="concept-card"><strong>Application Security</strong><br>Input validation, OWASP Top 10, secure coding practices</div>
+<div class="concept-card"><strong>Data Security</strong><br>Encryption at rest ו-in transit, key management, data classification</div>
+<div class="concept-card"><strong>Identity & Access</strong><br>Zero Trust, MFA, RBAC, principle of least privilege</div>
+<h3>Security by Design</h3>
+<p>אבטחה צריכה להיות חלק מכל שלב: design review, code review, CI/CD pipeline (SAST/DAST), ו-production monitoring.</p>
+<h3>Incident Response</h3>
+<p>תוכנית תגובה מוגדרת: detection, containment, eradication, recovery, lessons learned. תרגול תקופתי.</p>`
+      },
+      quiz: [
+        { question: "מהו עקרון Zero Trust?", options: ["לסמוך על כל מי שברשת הפנימית", "אף אחד לא מהימן כברירת מחדל, תמיד לאמת", "לחסום את כל התעבורה", "לא להשתמש ב-cloud"], correct: 1 },
+        { question: "מהו OWASP Top 10?", options: ["10 שפות תכנות מאובטחות", "רשימת 10 סיכוני אבטחה נפוצים ביישומי web", "10 כלי אבטחה מומלצים", "10 חברות אבטחה"], correct: 1 },
+        { question: "מהו Principle of Least Privilege?", options: ["לתת לכולם admin access", "לתת למשתמש רק את ההרשאות המינימליות הנדרשות", "למנוע גישה לכולם", "להגביל רק משתמשים חיצוניים"], correct: 1 },
+        { question: "מה כולל Incident Response Plan?", options: ["רק detection", "Detection, containment, eradication, recovery, lessons learned", "רק recovery", "רק דיווח להנהלה"], correct: 1 }
+      ],
+      task: "בצע security audit בסיסי: מפה 5 נקודות תורפה פוטנציאליות במערכת שלך והגדר mitigation plan לכל אחת."
+    },
+    {
+      id: 7,
+      title: "CI/CD",
+      week: 1,
+      lesson: {
+        title: "CI/CD ותהליכי פריסה",
+        content: `<h3>Continuous Integration & Delivery</h3>
+<p>CI/CD הוא עמוד השדרה של פיתוח מודרני. הוא מאפשר פריסות מהירות, בטוחות, וחוזרות.</p>
+<h3>שלבי Pipeline</h3>
+<div class="concept-card"><strong>Build</strong><br>קומפילציה, dependency resolution, Docker image build</div>
+<div class="concept-card"><strong>Test</strong><br>Unit tests, integration tests, E2E tests, security scans</div>
+<div class="concept-card"><strong>Deploy to Staging</strong><br>פריסה לסביבת בדיקות, smoke tests</div>
+<div class="concept-card"><strong>Deploy to Production</strong><br>Blue/Green, Canary, Rolling updates</div>
+<h3>אסטרטגיות פריסה</h3>
+<p>Blue/Green: שתי סביבות מקבילות. Canary: פריסה הדרגתית ל-% קטן. Feature Flags: שליטה ב-features ללא פריסה.</p>
+<h3>מדדים חשובים (DORA)</h3>
+<p>Deployment Frequency, Lead Time for Changes, Change Failure Rate, Mean Time to Recovery. אלה מדדים שכל CTO צריך לעקוב אחריהם.</p>`
+      },
+      quiz: [
+        { question: "מהו Canary Deployment?", options: ["פריסה לכל המשתמשים בבת אחת", "פריסה הדרגתית לאחוז קטן של משתמשים", "פריסה רק בלילה", "פריסה ידנית"], correct: 1 },
+        { question: "מהם מדדי DORA?", options: ["שם של כלי CI/CD", "4 מדדים לביצועי delivery: frequency, lead time, failure rate, MTTR", "מדדי אבטחה", "מדדי UX"], correct: 1 },
+        { question: "מהו Feature Flag?", options: ["באג בקוד", "שליטה ב-features ללא פריסה חדשה", "סוג של branch ב-Git", "הרשאת משתמש"], correct: 1 }
+      ],
+      task: "מפה את ה-CI/CD pipeline הנוכחי שלך. זהה 3 שיפורים שיקצרו את ה-lead time ב-50%."
+    },
+    {
+      id: 8,
+      title: "גיוס טכנולוגי",
+      week: 2,
+      lesson: {
+        title: "גיוס והרכבת צוות טכנולוגי",
+        content: `<h3>בניית צוות מנצח</h3>
+<p>גיוס הוא אחת המשימות הקריטיות ביותר של CTO. צוות חזק הוא ההבדל בין הצלחה לכישלון.</p>
+<h3>תהליך גיוס אפקטיבי</h3>
+<div class="concept-card"><strong>הגדרת תפקיד</strong><br>מה באמת נדרש? skills, culture fit, growth potential</div>
+<div class="concept-card"><strong>Sourcing</strong><br>LinkedIn, referrals, communities, meetups, open source</div>
+<div class="concept-card"><strong>Technical Assessment</strong><br>Take-home, pair programming, system design. לא חידות!</div>
+<div class="concept-card"><strong>Culture Fit</strong><br>ערכים, סגנון עבודה, collaboration, growth mindset</div>
+<h3>מה לחפש</h3>
+<p>יכולת למידה מהירה, communication skills, ownership, יכולת לעבוד בצוות, curiosity. Skills טכניים אפשר ללמד.</p>
+<h3>Onboarding</h3>
+<p>90 יום ראשונים קריטיים: buddy system, clear goals, regular check-ins, documentation מוכנה, first win מהיר.</p>`
+      },
+      quiz: [
+        { question: "מהו הדבר החשוב ביותר לחפש במועמד?", options: ["ניסיון של 10 שנים", "יכולת למידה מהירה ו-growth mindset", "ידע ב-framework ספציפי", "תואר מאוניברסיטה מובילה"], correct: 1 },
+        { question: "מהו onboarding אפקטיבי?", options: ["לזרוק למים עמוקים", "Buddy system, clear goals, documentation, first win מהיר", "שבוע של הרצאות", "רק קריאת קוד"], correct: 1 },
+        { question: "מהי הדרך הטובה ביותר להעריך מועמד טכני?", options: ["חידות אלגוריתמיות", "Pair programming או system design", "רק ראיון שיחה", "רק בדיקת קורות חיים"], correct: 1 }
+      ],
+      task: "כתוב job description לתפקיד הבא שאתה צריך לגייס. הגדר: must-have vs nice-to-have, תהליך הגיוס, ו-onboarding plan."
+    },
+    {
+      id: 9,
+      title: "Code Reviews",
+      week: 2,
+      lesson: {
+        title: "תרבות Code Review אפקטיבית",
+        content: `<h3>Code Review כמנוף ללמידה</h3>
+<p>Code review הוא לא רק בדיקת באגים. הוא כלי לשיתוף ידע, העלאת איכות, ויצירת תרבות של שיפור מתמיד.</p>
+<h3>עקרונות Review טוב</h3>
+<div class="concept-card"><strong>Be Kind</strong><br>הערות בונות, לא ביקורת אישית. "What about..." במקום "This is wrong"</div>
+<div class="concept-card"><strong>Be Specific</strong><br>הצע פתרון, לא רק ציין בעיה</div>
+<div class="concept-card"><strong>Be Timely</strong><br>Review תוך 24 שעות. PR ארוך = productivity killer</div>
+<div class="concept-card"><strong>Size Matters</strong><br>PRs קטנים (200-400 שורות). קל לעשות review, קל לעשות merge</div>
+<h3>מה לבדוק</h3>
+<p>Logic correctness, edge cases, security implications, performance, readability, test coverage, documentation.</p>
+<h3>Automation</h3>
+<p>Linters, formatters, static analysis, automated tests חייבים לעבור לפני review אנושי. חוסך זמן לכולם.</p>`
+      },
+      quiz: [
+        { question: "מהו הגודל האידיאלי ל-PR?", options: ["1000+ שורות", "200-400 שורות", "10 שורות", "לא משנה הגודל"], correct: 1 },
+        { question: "מהו העיקרון הכי חשוב ב-code review?", options: ["למצוא כמה שיותר באגים", "הערות בונות והצעת פתרונות", "לדחות כמה שיותר PRs", "לסיים מהר"], correct: 1 },
+        { question: "מה צריך לרוץ אוטומטית לפני review אנושי?", options: ["כלום", "Linters, formatters, static analysis, tests", "רק unit tests", "רק formatting"], correct: 1 }
+      ],
+      task: "הגדר code review guidelines לצוות שלך: SLA, checklist, PR size limit, ו-automation tools."
+    },
+    {
+      id: 10,
+      title: "פגישות 1:1",
+      week: 2,
+      lesson: {
+        title: "ניהול פגישות 1:1 אפקטיביות",
+        content: `<h3>1:1 כמנוף לצמיחה</h3>
+<p>פגישות 1:1 הן הכלי החשוב ביותר שלך כמנהל. זה הזמן של העובד, לא שלך. מטרתן: פיתוח, הקשבה, הסרת חסמים.</p>
+<h3>מבנה פגישה</h3>
+<div class="concept-card"><strong>Check-in (5 דק)</strong><br>מה שלומך? מה מעסיק אותך? איך אתה מרגיש?</div>
+<div class="concept-card"><strong>נושאי העובד (15 דק)</strong><br>מה העובד רוצה לדבר עליו? challenges, ideas, concerns</div>
+<div class="concept-card"><strong>Feedback (10 דק)</strong><br>נתינה וקבלה של feedback. ספציפי, actionable, timely</div>
+<div class="concept-card"><strong>Growth (10 דק)</strong><br>מטרות, התפתחות מקצועית, מה הצעד הבא?</div>
+<h3>טעויות נפוצות</h3>
+<p>לבטל פגישות, להפוך ל-status update, לדבר רק על tasks, להתעלם מרגשות, לא לעקוב אחרי action items.</p>
+<h3>תיעוד</h3>
+<p>רשום notes משותפים, action items עם deadlines, ו-follow up בפגישה הבאה. Consistency builds trust.</p>`
+      },
+      quiz: [
+        { question: "של מי הזמן בפגישת 1:1?", options: ["של המנהל", "של העובד", "של שניהם שווה", "של HR"], correct: 1 },
+        { question: "מהי הטעות הנפוצה ביותר ב-1:1?", options: ["לדבר יותר מדי על growth", "להפוך ל-status update", "לתת יותר מדי feedback", "להקשיב יותר מדי"], correct: 1 },
+        { question: "מה חשוב לעשות בסוף כל 1:1?", options: ["לבטל את הפגישה הבאה", "לרשום action items ולעקוב", "לשלוח סיכום ל-HR", "כלום"], correct: 1 }
+      ],
+      task: "תכנן template ל-1:1 שלך. הגדר תדירות, מבנה, שאלות מנחות, ו-tracking system ל-action items."
+    },
+    {
+      id: 11,
+      title: "Sprint Planning",
+      week: 2,
+      lesson: {
+        title: "תכנון ספרינטים וניהול Agile",
+        content: `<h3>Agile בעולם האמיתי</h3>
+<p>Agile הוא לא טקס, הוא mindset. כ-CTO, תפקידך להבטיח שהתהליך משרת את הצוות ולא להיפך.</p>
+<h3>Sprint Planning אפקטיבי</h3>
+<div class="concept-card"><strong>Backlog Refinement</strong><br>Stories מוכנות לפני planning. Clear acceptance criteria, sized correctly</div>
+<div class="concept-card"><strong>Capacity Planning</strong><br>כמה הצוות באמת יכול לסיים? חופשות, meetings, tech debt</div>
+<div class="concept-card"><strong>Sprint Goal</strong><br>מטרה ברורה אחת לספרינט. לא רשימת קניות</div>
+<div class="concept-card"><strong>Definition of Done</strong><br>Code reviewed, tested, documented, deployed to staging</div>
+<h3>מדדים</h3>
+<p>Velocity (ממוצע, לא יעד), Burndown chart, Cycle time, Blocked items. השתמש במדדים ללמידה, לא לשיפוט.</p>
+<h3>Retro</h3>
+<p>Retrospective אפקטיבית: what went well, what can improve, action items. חובה action item אחד לפחות שמיושם בספרינט הבא.</p>`
+      },
+      quiz: [
+        { question: "מהו Sprint Goal?", options: ["רשימת כל ה-tasks", "מטרה ברורה אחת לספרינט", "מספר ה-story points", "Deadline של הספרינט"], correct: 1 },
+        { question: "מתי צריך לעשות Backlog Refinement?", options: ["באמצע הספרינט, לפני planning הבא", "ביום האחרון של הספרינט", "רק פעם בחודש", "רק כשה-backlog ריק"], correct: 0 },
+        { question: "מה חשוב ב-Retro?", options: ["להאשים מישהו", "Action item שמיושם בספרינט הבא", "לדבר 3 שעות", "רק להגיד מה היה טוב"], correct: 1 }
+      ],
+      task: "הגדר Definition of Done לצוות שלך. כולל: criteria טכניים, documentation, testing, ו-deployment."
+    },
+    {
+      id: 12,
+      title: "Tech Debt",
+      week: 2,
+      lesson: {
+        title: "ניהול חוב טכני",
+        content: `<h3>Tech Debt כמציאות</h3>
+<p>חוב טכני הוא לא תמיד רע. לפעמים זה tradeoff מודע. הבעיה מתחילה כשלא מנהלים אותו באופן אקטיבי.</p>
+<h3>סוגי חוב טכני</h3>
+<div class="concept-card"><strong>Deliberate</strong><br>החלטה מודעת לקצר דרך (ship fast, fix later)</div>
+<div class="concept-card"><strong>Accidental</strong><br>נוצר מחוסר ידע או שינוי requirements</div>
+<div class="concept-card"><strong>Bit Rot</strong><br>הקוד מתיישן: dependencies, patterns, standards</div>
+<div class="concept-card"><strong>Environmental</strong><br>תשתית מיושנת, tools לא מתוחזקים</div>
+<h3>ניהול אקטיבי</h3>
+<p>תקצב 20% מכל ספרינט ל-tech debt. תעדף לפי: impact on velocity, risk, ו-cost to fix later vs now.</p>
+<h3>איך למכור ל-stakeholders</h3>
+<p>דבר בשפה עסקית: "זה יגרום לנו לפתח features 30% יותר מהר", "זה מקטין סיכון של downtime ב-X", "זה חוסך Y שעות בשבוע".</p>`
+      },
+      quiz: [
+        { question: "כמה זמן לתקצב ל-tech debt בכל ספרינט?", options: ["0%", "כ-20%", "50%", "100%"], correct: 1 },
+        { question: "מהו Deliberate Tech Debt?", options: ["באג שלא מצאנו", "החלטה מודעת לקצר דרך", "קוד שנכתב בלילה", "Dependency מיושן"], correct: 1 },
+        { question: "איך למכור tech debt refactoring ל-stakeholders?", options: ["לדבר על קוד נקי", "לדבר בשפה עסקית: מהירות, סיכון, חיסכון", "לאיים בהתפטרות", "לא לספר להם"], correct: 1 }
+      ],
+      task: "צור tech debt registry: רשום 10 פריטי tech debt, דרג כל אחד לפי urgency ו-impact, ותכנן טיפול ל-3 העליונים."
+    },
+    {
+      id: 13,
+      title: "Mentoring",
+      week: 2,
+      lesson: {
+        title: "חניכה ופיתוח אנשים",
+        content: `<h3>מנהיג שמפתח מנהיגים</h3>
+<p>CTO מעולה לא רק בונה מערכות, הוא בונה אנשים. ההשקעה בפיתוח הצוות מחזירה את עצמה פי כמה.</p>
+<h3>סגנונות חניכה</h3>
+<div class="concept-card"><strong>Coaching</strong><br>שאלות מנחות שגורמות לאדם למצוא את התשובה בעצמו</div>
+<div class="concept-card"><strong>Teaching</strong><br>העברת ידע ישירה כשמישהו חדש בתחום</div>
+<div class="concept-card"><strong>Sponsoring</strong><br>לדחוף אנשים להזדמנויות שהם לא היו לוקחים לבד</div>
+<div class="concept-card"><strong>Role Modeling</strong><br>להדגים את ההתנהגות שאתה מצפה לראות</div>
+<h3>Career Ladder</h3>
+<p>הגדר מסלול קידום ברור: Junior, Mid, Senior, Staff, Principal. לכל רמה: expectations, skills, impact.</p>
+<h3>Growth Plans</h3>
+<p>לכל אדם בצוות: מטרות ל-6 חודשים, areas for development, resources, ו-check-in points.</p>`
+      },
+      quiz: [
+        { question: "מהו ההבדל בין Coaching ל-Teaching?", options: ["אין הבדל", "Coaching שואל שאלות, Teaching מעביר ידע ישירות", "Teaching עדיף תמיד", "Coaching רק למנהלים"], correct: 1 },
+        { question: "מהו Sponsoring?", options: ["לתת כסף", "לדחוף אנשים להזדמנויות שהם לא היו לוקחים לבד", "לכתוב המלצה", "לקדם אוטומטית"], correct: 1 },
+        { question: "מה כולל Career Ladder טוב?", options: ["רק שמות תפקידים", "Expectations, skills, impact לכל רמה", "רק טבלת שכר", "רק שנות ניסיון"], correct: 1 }
+      ],
+      task: "בנה growth plan לאחד מאנשי הצוות: מטרות 6 חודשים, areas for development, resources, ו-milestones."
+    },
+    {
+      id: 14,
+      title: "ניהול קונפליקטים",
+      week: 2,
+      lesson: {
+        title: "פתרון קונפליקטים בצוות",
+        content: `<h3>קונפליקט כהזדמנות</h3>
+<p>קונפליקטים הם בלתי נמנעים בצוותים טובים. הם סימן שאנשים אכפתיים. המפתח הוא לנהל אותם בצורה בריאה.</p>
+<h3>סוגי קונפליקטים</h3>
+<div class="concept-card"><strong>Technical Disagreements</strong><br>אי הסכמה על ארכיטקטורה, tools, approaches</div>
+<div class="concept-card"><strong>Process Conflicts</strong><br>חיכוכים על דרך העבודה, priorities</div>
+<div class="concept-card"><strong>Interpersonal</strong><br>חיכוכים אישיים, communication styles שונים</div>
+<div class="concept-card"><strong>Resource Conflicts</strong><br>תחרות על זמן, budget, headcount</div>
+<h3>כלים לפתרון</h3>
+<p>Active listening, finding common ground, data-driven decisions, RFC process ל-technical decisions, clear ownership.</p>
+<h3>מתי להתערב</h3>
+<p>כשהקונפליקט משתק את הצוות, כשהוא הופך אישי, או כשאין פתרון אחרי ניסיון ישיר. לפעמים ההחלטה היא שלך.</p>`
+      },
+      quiz: [
+        { question: "מתי קונפליקט הוא סימן טוב?", options: ["אף פעם", "כשאנשים אכפתיים ומביעים דעות שונות בצורה בריאה", "כשצועקים", "כשמישהו עוזב"], correct: 1 },
+        { question: "מהו RFC Process?", options: ["סוג של bug report", "תהליך מובנה לקבלת החלטות טכניות עם input מכולם", "ראיון עבודה", "Code review"], correct: 1 },
+        { question: "מתי CTO צריך להתערב בקונפליקט?", options: ["מיד בכל מחלוקת", "כשהקונפליקט משתק או הופך אישי", "אף פעם", "רק אם HR מבקש"], correct: 1 }
+      ],
+      task: "זכור קונפליקט אחרון בצוות. נתח: מה הגורם האמיתי? מה עבד בפתרון? מה היית עושה אחרת?"
+    },
+    {
+      id: 15,
+      title: "Roadmap",
+      week: 3,
+      lesson: {
+        title: "תכנון Roadmap טכנולוגי",
+        content: `<h3>Roadmap כמצפן</h3>
+<p>Technical roadmap מחבר בין האסטרטגיה העסקית ליכולות הטכנולוגיות. הוא מדריך החלטות ומתאם ציפיות.</p>
+<h3>רכיבי Roadmap</h3>
+<div class="concept-card"><strong>Vision (12-18 חודשים)</strong><br>לאן אנחנו הולכים? North star טכנולוגי</div>
+<div class="concept-card"><strong>Strategy (6 חודשים)</strong><br>אילו יכולות צריך לבנות? Priorities ו-trade-offs</div>
+<div class="concept-card"><strong>Execution (3 חודשים)</strong><br>מה בונים עכשיו? Clear deliverables, owners, timelines</div>
+<div class="concept-card"><strong>Discovery (Ongoing)</strong><br>Spikes, POCs, research לעתיד</div>
+<h3>טעויות נפוצות</h3>
+<p>Roadmap rigidity (חייב להיות living document), over-commitment, לא לכלול tech debt, לא לשתף stakeholders.</p>
+<h3>Communication</h3>
+<p>Roadmap שונה לקהלים שונים: board (high-level), product (capabilities), engineering (technical details).</p>`
+      },
+      quiz: [
+        { question: "מהו הטווח המומלץ ל-Vision ב-roadmap?", options: ["שבוע", "חודש", "12-18 חודשים", "5 שנים"], correct: 2 },
+        { question: "מהי הטעות הנפוצה ביותר ב-roadmap?", options: ["יותר מדי פירוט", "Rigidity וחוסר עדכון", "יותר מדי discovery", "שיתוף עם הצוות"], correct: 1 },
+        { question: "למה חשוב roadmap שונה לקהלים שונים?", options: ["כדי להסתיר מידע", "כי כל קהל צריך רמת פירוט ושפה שונה", "כדי ליצור בלבול", "לא חשוב"], correct: 1 }
+      ],
+      task: "בנה technical roadmap ל-6 חודשים הבאים: vision, 3 strategic themes, ו-deliverables ל-Q1."
+    },
+    {
+      id: 16,
+      title: "Buy vs Build",
+      week: 3,
+      lesson: {
+        title: "החלטות Buy vs Build",
+        content: `<h3>לבנות או לקנות?</h3>
+<p>אחת ההחלטות הנפוצות ביותר של CTO. התשובה לא תמיד ברורה, וטעות כאן עולה ביוקר.</p>
+<h3>מתי לבנות</h3>
+<div class="concept-card"><strong>Core Differentiator</strong><br>זה מה שמבדיל אתכם מהמתחרים</div>
+<div class="concept-card"><strong>Full Control Needed</strong><br>צריך שליטה מלאה על roadmap ו-customization</div>
+<div class="concept-card"><strong>Long-term Investment</strong><br>ROI ברור לטווח ארוך</div>
+<div class="concept-card"><strong>Existing Expertise</strong><br>יש לצוות את היכולת לבנות ולתחזק</div>
+<h3>מתי לקנות</h3>
+<p>Commodity functionality (auth, payments, email), time to market קריטי, אין expertise פנימי, לא core business.</p>
+<h3>Framework להחלטה</h3>
+<p>שאל: האם זה core differentiator? מה TCO ל-3 שנים? יש expertise? מה הסיכון? מה Time to Market?</p>`
+      },
+      quiz: [
+        { question: "מתי כדאי לבנות בעצמך?", options: ["תמיד", "כשזה core differentiator ויש expertise", "כשזה זול יותר בהתחלה", "כשאין פתרון בשוק"], correct: 1 },
+        { question: "מהו TCO?", options: ["סוג של API", "Total Cost of Ownership - עלות כוללת לאורך זמן", "שם של מתודולוגיה", "כלי monitoring"], correct: 1 },
+        { question: "Authentication הוא בדרך כלל?", options: ["Core differentiator שצריך לבנות", "Commodity שעדיף לקנות", "לא חשוב", "תמיד לבנות"], correct: 1 }
+      ],
+      task: "בחר 3 רכיבים במערכת שלך. לכל אחד, נתח: build vs buy, TCO ל-3 שנים, ו-decision rationale."
+    },
+    {
+      id: 17,
+      title: "Tech Stack",
+      week: 3,
+      lesson: {
+        title: "בחירת Technology Stack",
+        content: `<h3>החלטה שמשפיעה לשנים</h3>
+<p>בחירת tech stack היא החלטה שקשה לשנות. היא משפיעה על גיוס, מהירות פיתוח, ביצועים, ותחזוקה.</p>
+<h3>קריטריונים לבחירה</h3>
+<div class="concept-card"><strong>Team Expertise</strong><br>מה הצוות מכיר? Ramp-up time הוא real cost</div>
+<div class="concept-card"><strong>Ecosystem</strong><br>Libraries, tools, community, documentation</div>
+<div class="concept-card"><strong>Hiring Pool</strong><br>כמה מפתחים בשוק? עלות גיוס?</div>
+<div class="concept-card"><strong>Performance & Scale</strong><br>האם עומד בדרישות הנוכחיות והעתידיות?</div>
+<h3>Boring Technology</h3>
+<p>Innovation tokens: יש לך 2-3 tokens לטכנולוגיות חדשות. השאר צריך להיות "משעמם" ומוכח. PostgreSQL, React, Go/Node.js.</p>
+<h3>Technology Radar</h3>
+<p>נהל radar פנימי: Adopt (השתמש), Trial (נסה ב-POC), Assess (חקור), Hold (אל תתחיל חדש).</p>`
+      },
+      quiz: [
+        { question: "מהם Innovation Tokens?", options: ["Budget לכנסים", "2-3 הזדמנויות לטכנולוגיות חדשות, השאר מוכח", "קופונים ל-SaaS", "שם של framework"], correct: 1 },
+        { question: "מהו הקריטריון הכי חשוב בבחירת stack?", options: ["שזה חדש וטרנדי", "Team expertise ו-ecosystem", "שזה של Google", "Performance בלבד"], correct: 1 },
+        { question: "מהו Technology Radar?", options: ["כלי monitoring", "מיפוי טכנולוגיות: Adopt, Trial, Assess, Hold", "רשת אלחוטית", "סוג של CI/CD"], correct: 1 }
+      ],
+      task: "צור Technology Radar לארגון שלך: 4 קטגוריות (Adopt/Trial/Assess/Hold) עם 3 טכנולוגיות בכל אחת."
+    },
+    {
+      id: 18,
+      title: "MVP",
+      week: 3,
+      lesson: {
+        title: "מתודולוגיית MVP ופיתוח מהיר",
+        content: `<h3>Ship Fast, Learn Fast</h3>
+<p>MVP הוא לא מוצר גרוע. הוא הגרסה הקטנה ביותר שמאפשרת ללמוד מלקוחות אמיתיים.</p>
+<h3>עקרונות MVP</h3>
+<div class="concept-card"><strong>One Core Value</strong><br>מה ה-hypothesis? מה ה-value proposition האחד שנבדוק?</div>
+<div class="concept-card"><strong>Time-box</strong><br>2-4 שבועות maximum. אם לוקח יותר, אתה בונה יותר מדי</div>
+<div class="concept-card"><strong>Measurable</strong><br>הגדר metrics להצלחה לפני שמתחילים</div>
+<div class="concept-card"><strong>Throwaway Mindset</strong><br>אולי נזרוק הכל. וזה בסדר</div>
+<h3>טכניקות</h3>
+<p>Wizard of Oz (ידני מאחורי הקלעים), Concierge MVP, Landing Page Test, Fake Door Test, Paper Prototyping.</p>
+<h3>Technical Shortcuts</h3>
+<p>No-code tools, third-party APIs, hardcoded values, limited scale. הכל legitimate כדי ללמוד מהר.</p>`
+      },
+      quiz: [
+        { question: "מהו הזמן המומלץ ל-MVP?", options: ["6 חודשים", "2-4 שבועות", "יום אחד", "שנה"], correct: 1 },
+        { question: "מהו Wizard of Oz MVP?", options: ["MVP עם UI יפה", "תהליך ידני מאחורי הקלעים שנראה אוטומטי", "MVP ללא קוד", "MVP רק ל-testing"], correct: 1 },
+        { question: "מה חייב להיות מוגדר לפני תחילת MVP?", options: ["כל ה-architecture", "Metrics להצלחה", "Full test coverage", "Design system"], correct: 1 }
+      ],
+      task: "בחר feature שאתה שוקל לבנות. הגדר: hypothesis, MVP scope (2 שבועות), success metrics, ו-kill criteria."
+    },
+    {
+      id: 19,
+      title: "Data-Driven",
+      week: 3,
+      lesson: {
+        title: "קבלת החלטות מבוססות נתונים",
+        content: `<h3>מנתונים להחלטות</h3>
+<p>CTO שמקבל החלטות על בסיס gut feeling בלבד מסתכן. נתונים לא מחליפים אינטואיציה, הם משלימים אותה.</p>
+<h3>סוגי נתונים</h3>
+<div class="concept-card"><strong>Product Metrics</strong><br>DAU, retention, conversion, feature adoption</div>
+<div class="concept-card"><strong>Engineering Metrics</strong><br>DORA metrics, code quality, tech debt ratio</div>
+<div class="concept-card"><strong>Business Metrics</strong><br>Revenue, CAC, LTV, churn</div>
+<div class="concept-card"><strong>Team Metrics</strong><br>Satisfaction, turnover, hiring pipeline</div>
+<h3>Data Infrastructure</h3>
+<p>Event tracking, data warehouse, analytics dashboards, A/B testing framework. השקעה ב-infra מחזירה את עצמה.</p>
+<h3>פיטפולים</h3>
+<p>Vanity metrics, correlation vs causation, survivorship bias, over-optimization, analysis paralysis.</p>`
+      },
+      quiz: [
+        { question: "מהם DORA Metrics?", options: ["מדדי UX", "4 מדדים לביצועי delivery של צוות engineering", "מדדי marketing", "מדדי אבטחה"], correct: 1 },
+        { question: "מהם Vanity Metrics?", options: ["מדדים שנראים טוב אבל לא actionable", "מדדי design", "מדדים יקרים", "מדדים מדויקים מאוד"], correct: 0 },
+        { question: "מה הסכנה של Analysis Paralysis?", options: ["יותר מדי נתונים מונעים מלקבל החלטה", "חוסר נתונים", "נתונים שגויים", "מדדים יקרים"], correct: 0 }
+      ],
+      task: "הגדר dashboard עם 5 מדדים קריטיים לצוות שלך. לכל מדד: מקור, target, ו-action plan אם חורג."
+    },
+    {
+      id: 20,
+      title: "KPIs",
+      week: 3,
+      lesson: {
+        title: "הגדרת KPIs טכנולוגיים",
+        content: `<h3>מדידה שמניעה שינוי</h3>
+<p>KPIs טובים מנחים התנהגות, מדידים, ומתחברים ליעדים עסקיים. KPIs גרועים יוצרים incentives שליליים.</p>
+<h3>KPIs מומלצים ל-CTO</h3>
+<div class="concept-card"><strong>System Reliability</strong><br>Uptime (99.9%+), MTTR, Error rate, P95 latency</div>
+<div class="concept-card"><strong>Delivery Speed</strong><br>Deploy frequency, Lead time, Cycle time</div>
+<div class="concept-card"><strong>Quality</strong><br>Bug escape rate, Test coverage, Production incidents</div>
+<div class="concept-card"><strong>Team Health</strong><br>eNPS, Retention rate, Time to productive</div>
+<h3>OKRs vs KPIs</h3>
+<p>KPIs הם מדדים שוטפים (health metrics). OKRs הם יעדים שאפתניים לרבעון (change metrics). שניהם חשובים.</p>
+<h3>הצגה להנהלה</h3>
+<p>תרגם KPIs טכניים לשפה עסקית: uptime = customer trust, lead time = time to revenue, quality = churn reduction.</p>`
+      },
+      quiz: [
+        { question: "מהו eNPS?", options: ["סוג של API", "Employee Net Promoter Score - מדד שביעות רצון עובדים", "כלי monitoring", "מדד ביצועי database"], correct: 1 },
+        { question: "מה ההבדל בין KPIs ל-OKRs?", options: ["אין הבדל", "KPIs = health metrics שוטפים, OKRs = יעדים שאפתניים לרבעון", "OKRs יותר חשובים", "KPIs רק לצוות"], correct: 1 },
+        { question: "מהו Uptime SLA טיפוסי?", options: ["90%", "95%", "99.9%+", "100%"], correct: 2 }
+      ],
+      task: "הגדר 3 OKRs לרבעון הבא עם KPIs תומכים. לכל OKR: objective, 3 key results מדידים, ו-initiatives."
+    },
+    {
+      id: 21,
+      title: "ניהול ספקים",
+      week: 3,
+      lesson: {
+        title: "Vendor Management",
+        content: `<h3>ניהול יחסי ספקים</h3>
+<p>ארגון ממוצע משתמש ב-50-100 כלי SaaS. ניהול נכון חוסך כסף, מפחית סיכון, ומשפר productivity.</p>
+<h3>תהליך בחירת ספק</h3>
+<div class="concept-card"><strong>Requirements</strong><br>מה באמת צריך? Must-have vs nice-to-have</div>
+<div class="concept-card"><strong>Evaluation</strong><br>POC, reference checks, security review, pricing model</div>
+<div class="concept-card"><strong>Negotiation</strong><br>Multi-year discounts, SLA guarantees, exit clauses</div>
+<div class="concept-card"><strong>Ongoing Management</strong><br>QBRs, usage monitoring, renewal strategy</div>
+<h3>סיכונים</h3>
+<p>Vendor lock-in, price increases, security breaches, sunset of product, single point of failure.</p>
+<h3>Exit Strategy</h3>
+<p>תמיד תכנן exit: data export, API abstraction layer, alternative vendors identified. אל תהיה בן ערובה.</p>`
+      },
+      quiz: [
+        { question: "מהו QBR?", options: ["סוג של database", "Quarterly Business Review עם הספק", "Quality Bug Report", "Queue Based Routing"], correct: 1 },
+        { question: "מהי הדרך הטובה להתגונן מ-vendor lock-in?", options: ["לא להשתמש בספקים", "API abstraction layer ותכנון exit strategy", "לבנות הכל in-house", "לחתום על חוזה ארוך"], correct: 1 },
+        { question: "מה חשוב לבדוק לפני בחירת ספק?", options: ["רק מחיר", "POC, security review, references, pricing model", "רק UI", "רק popularity"], correct: 1 }
+      ],
+      task: "צור vendor matrix: רשום 5 ספקים מרכזיים, לכל אחד: עלות שנתית, risk level, alternative, contract renewal date."
+    },
+    {
+      id: 22,
+      title: "Incident Management",
+      week: 4,
+      lesson: {
+        title: "ניהול תקריות",
+        content: `<h3>כשהמערכת נופלת</h3>
+<p>Incidents יקרו. השאלה היא לא אם, אלא מתי. ההבדל בין ארגון בשל לחובבני הוא בתהליך התגובה.</p>
+<h3>Incident Response</h3>
+<div class="concept-card"><strong>Detection</strong><br>Monitoring, alerts, customer reports. MTTD קריטי</div>
+<div class="concept-card"><strong>Triage</strong><br>Severity classification (P1-P4), incident commander, communication</div>
+<div class="concept-card"><strong>Resolution</strong><br>Troubleshooting, mitigation, fix. Document everything</div>
+<div class="concept-card"><strong>Post-mortem</strong><br>Blameless, root cause, action items, timeline</div>
+<h3>Severity Levels</h3>
+<p>P1: Full outage. P2: Major feature broken. P3: Minor issue, workaround exists. P4: Cosmetic/low impact.</p>
+<h3>On-Call</h3>
+<p>Rotation schedule, escalation paths, runbooks, compensation. אל תשחק את האנשים שלך.</p>`
+      },
+      quiz: [
+        { question: "מהו Blameless Post-mortem?", options: ["לא לעשות post-mortem", "ניתוח ללא האשמת אנשים, focus על מערכת ותהליך", "להאשים את כולם", "רק לדווח לצוות"], correct: 1 },
+        { question: "מהו P1 incident?", options: ["באג קוסמטי", "Full outage שמשפיע על כל המשתמשים", "Feature request", "שיפור ביצועים"], correct: 1 },
+        { question: "מהו MTTD?", options: ["Mean Time To Deploy", "Mean Time To Detect - זמן ממוצע לזיהוי בעיה", "Maximum Transfer Time Data", "Multi-Tenant Test Driver"], correct: 1 }
+      ],
+      task: "כתוב incident response playbook: severity definitions, roles, escalation paths, communication templates, post-mortem template."
+    },
+    {
+      id: 23,
+      title: "SRE",
+      week: 4,
+      lesson: {
+        title: "Site Reliability Engineering",
+        content: `<h3>SRE Practices</h3>
+<p>SRE מגשר בין development ל-operations. המטרה: מערכות אמינות שמתפתחות מהר.</p>
+<h3>עקרונות SRE</h3>
+<div class="concept-card"><strong>SLO/SLI/SLA</strong><br>Service Level Objectives, Indicators, Agreements. הגדר יעדים מדידים</div>
+<div class="concept-card"><strong>Error Budget</strong><br>כמה downtime מותר? אם נגמר, freeze deployments</div>
+<div class="concept-card"><strong>Toil Reduction</strong><br>אוטומציה של עבודה חוזרת. אם עושים ידנית, זה toil</div>
+<div class="concept-card"><strong>Observability</strong><br>Logs, Metrics, Traces. שלושת עמודי התווך</div>
+<h3>Observability Stack</h3>
+<p>Metrics (Prometheus/Datadog), Logs (ELK/Loki), Traces (Jaeger/Honeycomb), Dashboards (Grafana).</p>
+<h3>Chaos Engineering</h3>
+<p>שבור דברים בכוונה כדי למצוא weaknesses. Netflix Chaos Monkey, Game Days, Disaster Recovery drills.</p>`
+      },
+      quiz: [
+        { question: "מהו Error Budget?", options: ["Budget לתיקון באגים", "כמות ה-downtime המותרת לפני freeze", "Budget לכלי monitoring", "שם של כלי"], correct: 1 },
+        { question: "מהם 3 עמודי Observability?", options: ["CPU, RAM, Disk", "Logs, Metrics, Traces", "Dev, Staging, Prod", "Frontend, Backend, DB"], correct: 1 },
+        { question: "מהו Chaos Engineering?", options: ["לשבור דברים בטעות", "לשבור דברים בכוונה כדי למצוא weaknesses", "Programming style מבולגן", "Debugging methodology"], correct: 1 }
+      ],
+      task: "הגדר SLOs ל-3 שירותים קריטיים: availability target, latency P95, error rate. חשב את ה-error budget החודשי."
+    },
+    {
+      id: 24,
+      title: "תקציב טכנולוגי",
+      week: 4,
+      lesson: {
+        title: "ניהול Budget טכנולוגי",
+        content: `<h3>CTO כמנהל תקציב</h3>
+<p>ניהול budget הוא חלק בלתי נפרד מתפקיד ה-CTO. חובה להבין עלויות, לתקצב נכון, ולהצדיק השקעות.</p>
+<h3>קטגוריות הוצאה</h3>
+<div class="concept-card"><strong>People (60-70%)</strong><br>משכורות, benefits, contractors, training</div>
+<div class="concept-card"><strong>Infrastructure (15-25%)</strong><br>Cloud, hosting, tools, licenses</div>
+<div class="concept-card"><strong>Vendors (5-15%)</strong><br>SaaS tools, external services</div>
+<div class="concept-card"><strong>Innovation (5-10%)</strong><br>R&D, POCs, hackathons, conferences</div>
+<h3>תכנון תקציב שנתי</h3>
+<p>Bottom-up: מה כל צוות צריך. Top-down: מה הארגון יכול. הפער ביניהם הוא שיחת priorities.</p>
+<h3>ROI של השקעות טכנולוגיות</h3>
+<p>מדוד: time saved, revenue enabled, risk reduced, hiring impact. תמיד תרגם לדולרים.</p>`
+      },
+      quiz: [
+        { question: "מהו האחוז הטיפוסי של People בתקציב tech?", options: ["20-30%", "40-50%", "60-70%", "90%"], correct: 2 },
+        { question: "איך מצדיקים השקעה טכנולוגית?", options: ["כי זה cool", "ROI: time saved, revenue enabled, risk reduced", "כי המתחרים עושים", "לא צריך להצדיק"], correct: 1 },
+        { question: "מהו הגישה הנכונה לתכנון budget?", options: ["רק top-down", "רק bottom-up", "שילוב bottom-up ו-top-down עם שיחת priorities", "לא לתכנן"], correct: 2 }
+      ],
+      task: "בנה budget breakdown לשנה הבאה: categories, amounts, justification. זהה 3 הזדמנויות לחיסכון."
+    },
+    {
+      id: 25,
+      title: "הצגה לדירקטוריון",
+      week: 4,
+      lesson: {
+        title: "Board Presentations",
+        content: `<h3>לדבר בשפה של ה-Board</h3>
+<p>ה-Board לא מתעניין ב-microservices. הם רוצים לדעת: growth, risk, competitive advantage, ו-ROI.</p>
+<h3>מבנה מצגת Board</h3>
+<div class="concept-card"><strong>Executive Summary (2 דק)</strong><br>3 נקודות מפתח, highlights, alerts</div>
+<div class="concept-card"><strong>KPIs & Trends (3 דק)</strong><br>מדדים עיקריים, השוואה ל-target ול-quarter קודם</div>
+<div class="concept-card"><strong>Strategic Initiatives (5 דק)</strong><br>מה בונים, למה, progress, impact צפוי</div>
+<div class="concept-card"><strong>Risks & Asks (2 דק)</strong><br>מה יכול להשתבש? מה צריך מה-Board?</div>
+<h3>עקרונות</h3>
+<p>Less is more. Data over opinions. No jargon. Anticipate questions. Follow up in writing.</p>
+<h3>טעויות נפוצות</h3>
+<p>יותר מדי technical details, סליידים צפופים, לא להציג risks, לא להגיד מה צריך.</p>`
+      },
+      quiz: [
+        { question: "מה ה-Board רוצה לשמוע?", options: ["Technical architecture details", "Growth, risk, competitive advantage, ROI", "Code quality metrics", "Sprint velocity"], correct: 1 },
+        { question: "כמה זמן צריך להיות executive summary?", options: ["10 דקות", "2 דקות", "30 דקות", "שעה"], correct: 1 },
+        { question: "מהי הטעות הנפוצה ביותר במצגת Board?", options: ["יותר מדי data", "יותר מדי technical details וללא business context", "קצר מדי", "יותר מדי שאלות"], correct: 1 }
+      ],
+      task: "הכן מצגת Board mock: 5 slides, executive summary, KPIs, strategic initiative, risk, ו-ask."
+    },
+    {
+      id: 26,
+      title: "Scaling Teams",
+      week: 4,
+      lesson: {
+        title: "הגדלת צוותים",
+        content: `<h3>מ-5 ל-50 ומעלה</h3>
+<p>מה שעבד עם 5 אנשים לא עובד עם 50. כל הכפלה דורשת שינוי מבנה, תהליכים, ותרבות.</p>
+<h3>שלבי צמיחה</h3>
+<div class="concept-card"><strong>5-10 (Single Team)</strong><br>כולם מדברים עם כולם, minimal process</div>
+<div class="concept-card"><strong>10-25 (Multi-Team)</strong><br>צוותים מוגדרים, tech leads, light process</div>
+<div class="concept-card"><strong>25-50 (Departments)</strong><br>Engineering managers, clear ownership, documented processes</div>
+<div class="concept-card"><strong>50+ (Organization)</strong><br>Directors, VP Eng, platform teams, guilds</div>
+<h3>Team Topologies</h3>
+<p>Stream-aligned teams, Platform teams, Enabling teams, Complicated-subsystem teams. כל אחד עם mission ברור.</p>
+<h3>Communication</h3>
+<p>ככל שגדלים: יותר async, יותר documentation, יותר explicit communication, פחות assumptions.</p>`
+      },
+      quiz: [
+        { question: "מתי צריך Engineering Managers?", options: ["מהיום הראשון", "כשיש 25+ מפתחים ודרושה שכבת management", "רק ב-100+", "אף פעם"], correct: 1 },
+        { question: "מהם Team Topologies?", options: ["מבנה פיזי של המשרד", "4 סוגי צוותים: Stream-aligned, Platform, Enabling, Complicated-subsystem", "שמות לצוותים", "סוג של org chart"], correct: 1 },
+        { question: "מה משתנה כשגדלים?", options: ["כלום", "יותר async, documentation, explicit communication", "פחות תהליכים", "פחות meetings"], correct: 1 }
+      ],
+      task: "שרטט org chart לצוות שלך ב-12 חודשים הבאים: teams, roles, responsibilities, interaction patterns."
+    },
+    {
+      id: 27,
+      title: "Documentation",
+      week: 4,
+      lesson: {
+        title: "תרבות Documentation",
+        content: `<h3>Documentation כמוצר</h3>
+<p>תיעוד טוב מאיץ onboarding, מפחית bus factor, ומאפשר autonomy. תיעוד גרוע גרוע מאי תיעוד.</p>
+<h3>סוגי תיעוד</h3>
+<div class="concept-card"><strong>ADRs</strong><br>Architecture Decision Records: למה בחרנו מה שבחרנו</div>
+<div class="concept-card"><strong>Runbooks</strong><br>How to handle incidents, deploy, rollback</div>
+<div class="concept-card"><strong>API Docs</strong><br>OpenAPI/Swagger, examples, changelog</div>
+<div class="concept-card"><strong>Onboarding Guide</strong><br>Everything a new hire needs in week 1</div>
+<h3>עקרונות</h3>
+<p>Write for the reader (not the writer), keep it updated (or delete it), close to the code, searchable, with examples.</p>
+<h3>כלים</h3>
+<p>Notion/Confluence for knowledge base, README in repos, ADRs in code, Swagger for APIs, Loom for walkthroughs.</p>`
+      },
+      quiz: [
+        { question: "מהו ADR?", options: ["כלי deployment", "Architecture Decision Record - תיעוד החלטות ארכיטקטוניות", "Automated Deploy Report", "API Documentation Resource"], correct: 1 },
+        { question: "מהו Bus Factor?", options: ["מספר אנשים שאם נעלמים הפרויקט נעצר", "מספר buses ב-CI/CD", "Budget factor", "Build Factor"], correct: 0 },
+        { question: "מה עדיף: documentation מיושן או אין documentation?", options: ["Documentation מיושן", "אין documentation (מיושן מטעה)", "שניהם שווים", "לא משנה"], correct: 1 }
+      ],
+      task: "כתוב ADR אחד להחלטה טכנולוגית אחרונה: context, decision, consequences, alternatives considered."
+    },
+    {
+      id: 28,
+      title: "חדשנות",
+      week: 4,
+      lesson: {
+        title: "Innovation Frameworks",
+        content: `<h3>חדשנות כתהליך</h3>
+<p>חדשנות לא קורית במקרה. היא דורשת זמן מוגן, תרבות של ניסוי, ומנגנונים מובנים.</p>
+<h3>Frameworks לחדשנות</h3>
+<div class="concept-card"><strong>20% Time / Innovation Days</strong><br>זמן מוגן לעבודה על רעיונות אישיים</div>
+<div class="concept-card"><strong>Hackathons</strong><br>24-48 שעות של בנייה חופשית, demos, prizes</div>
+<div class="concept-card"><strong>Innovation Lab</strong><br>צוות קטן שעובד על POCs לטכנולוגיות חדשות</div>
+<div class="concept-card"><strong>Tech Talks / Learning</strong><br>שיתוף ידע פנימי, lunch & learn, reading groups</div>
+<h3>From Idea to Product</h3>
+<p>Ideation > Validation > POC > Pilot > Scale. לא כל רעיון שורד, וזה בסדר. Kill fast.</p>
+<h3>מדידת חדשנות</h3>
+<p>Number of experiments, POCs shipped, ideas from team, patents filed, new capabilities launched.</p>`
+      },
+      quiz: [
+        { question: "למה חדשנות צריכה framework?", options: ["בירוקרטיה", "כי היא לא קורית במקרה, צריך זמן ומנגנונים מובנים", "כי ההנהלה דורשת", "לא צריכה"], correct: 1 },
+        { question: "מהו Kill Fast?", options: ["לפטר מהר", "לסגור רעיונות שלא עובדים מהר ולהמשיך", "Framework לאבטחה", "סוג של deployment"], correct: 1 },
+        { question: "מהו Hackathon טיפוסי?", options: ["חודש של עבודה", "24-48 שעות בנייה חופשית עם demos", "ראיון טכני", "Code review marathon"], correct: 1 }
+      ],
+      task: "תכנן hackathon לצוות: theme, timeline, rules, judging criteria, prizes, ו-follow-up plan לרעיונות מנצחים."
+    },
+    {
+      id: 29,
+      title: "פרויקט מסכם א'",
+      week: 5,
+      lesson: {
+        title: "פרויקט סיום: Technical Strategy Document",
+        content: `<h3>המשימה הסופית</h3>
+<p>הגיע הזמן לשלב את כל מה שלמדת למסמך אסטרטגי אחד שלם. זהו התרגיל הקרוב ביותר לעבודה יומיומית של CTO.</p>
+<h3>מבנה המסמך</h3>
+<div class="concept-card"><strong>Executive Summary</strong><br>סיכום של עמוד אחד: vision, current state, proposed changes</div>
+<div class="concept-card"><strong>Current State Analysis</strong><br>Architecture, team, tech debt, performance</div>
+<div class="concept-card"><strong>Target State</strong><br>לאן אנחנו רוצים להגיע ב-12 חודשים?</div>
+<div class="concept-card"><strong>Roadmap & Milestones</strong><br>שלבים, dependencies, timelines</div>
+<h3>נושאים לכלול</h3>
+<p>Architecture evolution, team scaling plan, technology choices, KPIs, budget, risks, innovation initiatives.</p>
+<h3>קריטריונים להצלחה</h3>
+<p>ברור, actionable, data-backed, realistic, aligned with business goals, ו-communicable to all stakeholders.</p>`
+      },
+      quiz: [
+        { question: "מה חייב להיות ב-Executive Summary?", options: ["כל הפרטים הטכניים", "Vision, current state, proposed changes בעמוד אחד", "רק numbers", "רק vision"], correct: 1 },
+        { question: "למה Target State חשוב?", options: ["בשביל הדוחות", "כדי שיהיה north star ברור לכל הצוות", "רק לדירקטוריון", "לא חשוב"], correct: 1 },
+        { question: "מהו הקריטריון החשוב ביותר למסמך אסטרטגי?", options: ["אורך המסמך", "Aligned with business goals ו-actionable", "Design יפה", "כמות הנתונים"], correct: 1 }
+      ],
+      task: "כתוב Technical Strategy Document: executive summary, current state, target state, roadmap 12 חודשים, KPIs, budget, risks."
+    },
+    {
+      id: 30,
+      title: "פרויקט מסכם ב'",
+      week: 5,
+      lesson: {
+        title: "פרויקט סיום: CTO 90-Day Plan",
+        content: `<h3>90 יום ראשונים כ-CTO</h3>
+<p>בין אם אתה CTO חדש או רוצה reset, תוכנית 90 יום מובנית היא המפתח להשפעה מהירה ומשמעותית.</p>
+<h3>חודש 1: Listen & Learn</h3>
+<div class="concept-card"><strong>שבועות 1-2</strong><br>1:1 עם כל הצוות, הבן architecture, מפה pain points</div>
+<div class="concept-card"><strong>שבועות 3-4</strong><br>זהה quick wins, בנה trust, הבן את ה-business context</div>
+<h3>חודש 2: Plan & Quick Wins</h3>
+<div class="concept-card"><strong>שבועות 5-6</strong><br>Deliver 2-3 quick wins, draft strategy, align with CEO/CPO</div>
+<div class="concept-card"><strong>שבועות 7-8</strong><br>Present roadmap, start hiring if needed, address top pain point</div>
+<h3>חודש 3: Execute & Scale</h3>
+<div class="concept-card"><strong>שבועות 9-10</strong><br>Implement processes, build momentum, measure progress</div>
+<div class="concept-card"><strong>שבועות 11-12</strong><br>Strategic initiative launch, team structure changes, present to board</div>
+<h3>סיכום התוכנית</h3>
+<p>30 יום למדת, תרגלת, ובנית foundation של CTO excellence. המסע רק מתחיל. Keep learning, keep building, keep leading.</p>`
+      },
+      quiz: [
+        { question: "מה עושים בחודש הראשון כ-CTO?", options: ["משנים הכל", "Listen & Learn: 1:1s, mapping, understanding", "מפטרים ומגייסים", "בונים architecture חדשה"], correct: 1 },
+        { question: "מתי לעשות Quick Wins?", options: ["ביום הראשון", "בחודש 2, אחרי שהבנת את המצב", "אחרי שנה", "אף פעם"], correct: 1 },
+        { question: "מה חשוב בסוף 90 יום?", options: ["שהכל מושלם", "Momentum, trust, clear strategy, ו-measurable progress", "שכולם אוהבים אותך", "שהקוד נקי"], correct: 1 },
+        { question: "מה הדבר הראשון לעשות ביום 1?", options: ["לשנות את ה-tech stack", "1:1 עם כל הצוות ולהקשיב", "לכתוב קוד", "לבטל כל ה-meetings"], correct: 1 }
+      ],
+      task: "כתוב 90-Day Plan אישי: 12 שבועות מפורטים עם deliverables, milestones, ו-success criteria לכל חודש."
+    }
+  ]
+};
