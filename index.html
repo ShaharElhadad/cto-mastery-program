@@ -1,264 +1,931 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="theme-color" content="#000000">
-  <meta name="description" content="CTO Mastery - 30 יום למנהיגות טכנולוגית">
-  <title>CTO Mastery</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+Hebrew:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/app.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTO Mastery Program | 30 Days</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Heebo', sans-serif;
+  background: #0a0a0f;
+  color: #e0e0e0;
+  min-height: 100vh;
+  line-height: 1.6;
+  -webkit-tap-highlight-color: transparent;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.header {
+  text-align: center;
+  padding: 40px 20px 30px;
+  margin-bottom: 24px;
+  background: linear-gradient(135deg, #0f0f1a 0%, #1a0a2e 50%, #0a0a1f 100%);
+  border-radius: 20px;
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 30% 50%, rgba(139, 92, 246, 0.08) 0%, transparent 50%);
+  animation: pulse 8s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.header h1 {
+  font-size: clamp(1.6rem, 5vw, 2.4rem);
+  font-weight: 900;
+  background: linear-gradient(135deg, #a78bfa, #7c3aed, #c084fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 8px;
+  position: relative;
+}
+
+.header p {
+  color: #9ca3af;
+  font-size: 0.95rem;
+  font-weight: 300;
+  position: relative;
+}
+
+.header .badge {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 6px 20px;
+  background: rgba(139, 92, 246, 0.15);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: 30px;
+  color: #a78bfa;
+  font-size: 0.8em;
+  font-weight: 500;
+  position: relative;
+}
+
+.progress-box {
+  background: linear-gradient(135deg, #111118 0%, #1a1a28 100%);
+  border: 1px solid #2a2a3e;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.progress-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.progress-count {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #a78bfa;
+}
+
+.progress-pct {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #1f1f2e;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #7c3aed, #a78bfa);
+  border-radius: 4px;
+  transition: width 0.4s ease;
+}
+
+.filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.filter-btn {
+  padding: 10px 18px;
+  border-radius: 10px;
+  border: 1px solid #2a2a3e;
+  background: #111118;
+  color: #9ca3af;
+  cursor: pointer;
+  white-space: nowrap;
+  font-size: 0.82rem;
+  font-weight: 500;
+  font-family: 'Heebo', sans-serif;
+  transition: all 0.2s;
+  -webkit-appearance: none;
+  touch-action: manipulation;
+}
+
+.filter-btn:active {
+  transform: scale(0.95);
+}
+
+.filter-btn.active {
+  border-color: #7c3aed;
+  background: rgba(139, 92, 246, 0.15);
+  color: #a78bfa;
+  font-weight: 700;
+}
+
+.week-section {
+  margin-bottom: 32px;
+}
+
+.week-header-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, #111118 0%, #1a1a28 100%);
+  border-radius: 14px;
+  border-right: 4px solid var(--week-color);
+}
+
+.week-header-bar .week-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3em;
+  flex-shrink: 0;
+  background: rgba(var(--week-color-rgb), 0.15);
+}
+
+.week-header-bar h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--week-color);
+}
+
+.week-header-bar .week-desc {
+  font-size: 0.78rem;
+  color: #6b7280;
+  margin-top: 2px;
+}
+
+.days-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 480px) {
+  .days-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+}
+
+.day-card {
+  background: #111118;
+  border: 1px solid #1f1f2e;
+  border-radius: 14px;
+  padding: 16px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s;
+  touch-action: manipulation;
+  min-height: 100px;
+}
+
+.day-card:active {
+  transform: scale(0.97);
+}
+
+.day-card:hover {
+  border-color: #374151;
+  background: #14141e;
+}
+
+.day-card.done {
+  background: rgba(34, 197, 94, 0.08);
+  border-color: rgba(34, 197, 94, 0.3);
+}
+
+.day-card .check {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid #2a2a3e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.day-card.done .check {
+  border-color: #22c55e;
+  background: #22c55e;
+  color: #000;
+}
+
+.day-num {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #4b4b5e;
+  line-height: 1;
+}
+
+.day-card.done .day-num {
+  color: #22c55e;
+}
+
+.day-title {
+  font-size: 0.72rem;
+  color: #e0e0e0;
+  margin-top: 8px;
+  font-weight: 500;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.day-meta {
+  font-size: 0.65rem;
+  color: #6b7280;
+  margin-top: 6px;
+}
+
+/* Panel Overlay */
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 100;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.overlay.open { display: block; }
+
+.panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  max-width: 680px;
+  height: 100%;
+  background: #0a0a0f;
+  z-index: 101;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  visibility: hidden;
+}
+
+.panel.open {
+  transform: translateX(0);
+  visibility: visible;
+}
+
+.panel-header {
+  position: sticky;
+  top: 0;
+  background: #0a0a0f;
+  border-bottom: 1px solid #1f1f2e;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+}
+
+.panel-header h2 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #e0e0e0;
+}
+
+.close-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid #2a2a3e;
+  background: transparent;
+  color: #9ca3af;
+  cursor: pointer;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Heebo', sans-serif;
+  touch-action: manipulation;
+  -webkit-appearance: none;
+}
+
+.close-btn:active {
+  background: rgba(139, 92, 246, 0.1);
+}
+
+.panel-tabs {
+  display: flex;
+  border-bottom: 1px solid #1f1f2e;
+  position: sticky;
+  top: 65px;
+  background: #0a0a0f;
+  z-index: 9;
+}
+
+.panel-tab {
+  flex: 1;
+  padding: 14px 12px;
+  text-align: center;
+  cursor: pointer;
+  color: #6b7280;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border: none;
+  background: transparent;
+  border-bottom: 2px solid transparent;
+  font-family: 'Heebo', sans-serif;
+  transition: all 0.2s;
+  touch-action: manipulation;
+  -webkit-appearance: none;
+}
+
+.panel-tab:active {
+  background: rgba(139, 92, 246, 0.05);
+}
+
+.panel-tab.active {
+  color: #a78bfa;
+  font-weight: 700;
+  border-bottom-color: #7c3aed;
+}
+
+.panel-body {
+  padding: 20px;
+}
+
+.card {
+  background: #111118;
+  border: 1px solid #1f1f2e;
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 14px;
+}
+
+.card h3 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #e0e0e0;
+}
+
+.video-embed {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  border-radius: 10px;
+  margin-bottom: 12px;
+}
+
+.video-embed iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 10px;
+}
+
+.summary {
+  font-size: 0.8rem;
+  color: #9ca3af;
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+
+.yt-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 18px;
+  background: #ff0000;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  touch-action: manipulation;
+}
+
+.yt-btn:active {
+  opacity: 0.8;
+}
+
+.badge-tag {
+  font-size: 0.65rem;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-weight: 600;
+  margin-left: 8px;
+  display: inline-block;
+}
+
+.badge-hands-on { background: rgba(59, 130, 246, 0.12); color: #3b82f6; }
+.badge-research { background: rgba(168, 85, 247, 0.12); color: #a855f7; }
+.badge-analysis { background: rgba(249, 115, 22, 0.12); color: #f97316; }
+
+.steps {
+  padding-right: 20px;
+  margin: 0;
+}
+
+.steps li {
+  font-size: 0.82rem;
+  color: #9ca3af;
+  line-height: 1.7;
+  margin-bottom: 6px;
+}
+
+.quiz-q h4 {
+  font-size: 0.88rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+  color: #e0e0e0;
+}
+
+.quiz-q h4 span {
+  color: #a78bfa;
+  margin-left: 4px;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.option {
+  padding: 13px 16px;
+  border: 1px solid #2a2a3e;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.82rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.15s;
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.option:active {
+  background: rgba(139, 92, 246, 0.08);
+}
+
+.option.correct {
+  background: rgba(34, 197, 94, 0.12);
+  border-color: #22c55e;
+}
+
+.option.wrong {
+  background: rgba(239, 68, 68, 0.12);
+  border-color: #ef4444;
+}
+
+.option.dimmed {
+  opacity: 0.4;
+}
+
+.option .letter {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: #1f1f2e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.75rem;
+  flex-shrink: 0;
+}
+
+.option.correct .letter { background: #22c55e; color: #000; }
+.option.wrong .letter { background: #ef4444; color: #fff; }
+
+.explanation {
+  margin-top: 12px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: rgba(34, 197, 94, 0.08);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  font-size: 0.78rem;
+  color: #9ca3af;
+  line-height: 1.6;
+}
+
+.complete-btn {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #7c3aed, #a78bfa);
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 20px;
+  font-family: 'Heebo', sans-serif;
+  touch-action: manipulation;
+  -webkit-appearance: none;
+}
+
+.complete-btn:active {
+  opacity: 0.85;
+  transform: scale(0.98);
+}
+
+.complete-btn.done {
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+}
+
+.score-box {
+  text-align: center;
+  padding: 28px;
+  background: linear-gradient(135deg, #111118, #1a1a28);
+  border: 1px solid #2a2a3e;
+  border-radius: 14px;
+  margin-top: 16px;
+}
+
+.score-box h3 {
+  font-size: 1.2rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+  color: #e0e0e0;
+}
+
+.score-box .score {
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: #22c55e;
+}
+
+.score-box p {
+  font-size: 0.82rem;
+  color: #9ca3af;
+  margin-top: 8px;
+}
+
+.reset-btn {
+  display: block;
+  margin: 24px auto 0;
+  padding: 10px 24px;
+  border-radius: 10px;
+  border: 1px solid #2a2a3e;
+  background: transparent;
+  color: #6b7280;
+  font-size: 0.75rem;
+  cursor: pointer;
+  font-family: 'Heebo', sans-serif;
+  touch-action: manipulation;
+  -webkit-appearance: none;
+}
+
+.reset-btn:active {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: #ef4444;
+  color: #ef4444;
+}
+
+@media (max-width: 680px) {
+  .panel {
+    max-width: 100%;
+  }
+}
+</style>
 </head>
 <body>
-  <!-- Splash Screen -->
-  <div id="splash" class="splash">
-    <div class="splash-content">
-      <div class="splash-icon">
-        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
-          <rect width="80" height="80" rx="20" fill="#141414"/>
-          <path d="M20 55V25L40 15L60 25V55L40 65L20 55Z" stroke="#e8453c" stroke-width="2" fill="none"/>
-          <path d="M40 15V65" stroke="#e8453c" stroke-width="1.5" opacity="0.5"/>
-          <path d="M20 25L60 55" stroke="#e8453c" stroke-width="1.5" opacity="0.3"/>
-          <path d="M60 25L20 55" stroke="#e8453c" stroke-width="1.5" opacity="0.3"/>
-          <circle cx="40" cy="40" r="8" stroke="#e8453c" stroke-width="2" fill="none"/>
-          <circle cx="40" cy="40" r="3" fill="#e8453c"/>
-        </svg>
-      </div>
-      <h1 class="splash-title">CTO Mastery</h1>
-      <p class="splash-subtitle">30 יום למנהיגות טכנולוגית</p>
-      <div class="splash-loader">
-        <div class="splash-loader-bar"></div>
-      </div>
-    </div>
+<div class="container">
+  <div class="header">
+    <h1>CTO Mastery Program</h1>
+    <p>30 Days | Security First | No Code</p>
+    <span class="badge">Month 1 Training</span>
   </div>
 
-  <!-- Side Menu -->
-  <div id="side-menu-overlay" class="side-menu-overlay"></div>
-  <nav id="side-menu" class="side-menu">
-    <div class="side-menu-header">
-      <div class="side-menu-avatar">
-        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-          <circle cx="20" cy="20" r="20" fill="#1a1a1a"/>
-          <circle cx="20" cy="16" r="7" stroke="#e8453c" stroke-width="1.5" fill="none"/>
-          <path d="M8 36c0-8 5-12 12-12s12 4 12 12" stroke="#e8453c" stroke-width="1.5" fill="none"/>
-        </svg>
-      </div>
-      <div class="side-menu-user">
-        <span class="side-menu-name">CTO Student</span>
-        <span class="side-menu-level">רמה 1</span>
-      </div>
+  <div class="progress-box">
+    <div class="progress-top">
+      <span class="progress-count" id="pCount">0 / 30</span>
+      <span class="progress-pct" id="pPct">0%</span>
     </div>
-    <div class="side-menu-items">
-      <button class="side-menu-item" data-page="home">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 10L10 3L17 10V17H12V13H8V17H3V10Z" stroke="currentColor" stroke-width="1.5"/></svg>
-        <span>בית</span>
-      </button>
-      <button class="side-menu-item" data-page="program">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="11" y="3" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="3" y="11" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="11" y="11" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.5"/></svg>
-        <span>תוכנית</span>
-      </button>
-      <button class="side-menu-item" data-page="profile">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M3 18c0-4 3-7 7-7s7 3 7 7" stroke="currentColor" stroke-width="1.5"/></svg>
-        <span>פרופיל</span>
-      </button>
-      <div class="side-menu-divider"></div>
-      <button class="side-menu-item" id="btn-reset">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10a6 6 0 1 1 1.5 4" stroke="currentColor" stroke-width="1.5"/><path d="M4 14V10H8" stroke="currentColor" stroke-width="1.5"/></svg>
-        <span>איפוס התקדמות</span>
-      </button>
-    </div>
-  </nav>
-
-  <!-- Main App -->
-  <div id="app" class="app">
-    <!-- Header -->
-    <header class="header">
-      <button id="btn-hamburger" class="header-btn" aria-label="Menu">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 7H20M4 12H20M4 17H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-      </button>
-      <h1 class="header-title">CTO Mastery</h1>
-      <div class="header-xp" id="header-xp">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><polygon points="8,1 10,6 16,6 11,9.5 13,15 8,11.5 3,15 5,9.5 0,6 6,6" fill="#e8453c"/></svg>
-        <span id="header-xp-value">0</span>
-      </div>
-    </header>
-
-    <!-- Pages -->
-    <main class="pages">
-      <!-- Home Page -->
-      <section id="page-home" class="page active">
-        <div class="page-content">
-          <div class="home-greeting">
-            <h2 class="gradient-text">שלום, CTO</h2>
-            <p class="home-subtitle">המשך ללמוד ולהתפתח</p>
-          </div>
-
-          <div class="streak-card">
-            <div class="streak-icon">
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M16 4C16 4 8 12 8 20a8 8 0 1 0 16 0C24 12 16 4 16 4Z" fill="#e8453c" opacity="0.2" stroke="#e8453c" stroke-width="1.5"/><path d="M16 14c0 0-3 3-3 6a3 3 0 1 0 6 0c0-3-3-6-3-6Z" fill="#e8453c"/></svg>
-            </div>
-            <div class="streak-info">
-              <span class="streak-count" id="streak-count">0</span>
-              <span class="streak-label">ימים ברצף</span>
-            </div>
-          </div>
-
-          <div class="current-day-card" id="current-day-card">
-            <div class="current-day-header">
-              <span class="current-day-badge" id="current-day-badge">יום 1</span>
-              <span class="current-day-week" id="current-day-week">שבוע 1</span>
-            </div>
-            <h3 class="current-day-title" id="current-day-title">מיקרוסרביסים</h3>
-            <p class="current-day-desc">ארכיטקטורת מיקרוסרביסים</p>
-            <button class="btn-primary" id="btn-start-lesson">התחל שיעור</button>
-          </div>
-
-          <div class="progress-section">
-            <div class="progress-header">
-              <span>התקדמות כללית</span>
-              <span id="progress-percent">0%</span>
-            </div>
-            <div class="progress-bar">
-              <div class="progress-fill" id="progress-fill"></div>
-            </div>
-          </div>
-
-          <div class="stats-grid">
-            <div class="stat-card">
-              <div class="stat-value" id="stat-completed">0</div>
-              <div class="stat-label">ימים הושלמו</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-value" id="stat-xp">0</div>
-              <div class="stat-label">XP</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-value" id="stat-quizzes">0</div>
-              <div class="stat-label">חידונים עברו</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Program Page -->
-      <section id="page-program" class="page">
-        <div class="page-content">
-          <h2 class="gradient-text page-title">תוכנית 30 יום</h2>
-          <div id="program-grid" class="program-grid"></div>
-        </div>
-      </section>
-
-      <!-- Lesson Page -->
-      <section id="page-lesson" class="page">
-        <div class="page-content">
-          <div class="lesson-header">
-            <span class="lesson-badge" id="lesson-badge">יום 1</span>
-            <h2 class="gradient-text" id="lesson-title">שיעור</h2>
-          </div>
-          <div class="lesson-content" id="lesson-content"></div>
-          <div class="lesson-task" id="lesson-task">
-            <div class="task-header">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="14" height="14" rx="2" stroke="#e8453c" stroke-width="1.5"/><path d="M7 10l2 2 4-4" stroke="#e8453c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <span>משימה מעשית</span>
-            </div>
-            <p id="lesson-task-text"></p>
-          </div>
-          <button class="btn-primary" id="btn-to-quiz">עבור לחידון</button>
-        </div>
-      </section>
-
-      <!-- Quiz Page -->
-      <section id="page-quiz" class="page">
-        <div class="page-content">
-          <div class="quiz-header">
-            <span class="quiz-badge" id="quiz-badge">חידון</span>
-            <h2 class="gradient-text" id="quiz-title">חידון יום 1</h2>
-            <div class="quiz-progress-bar">
-              <div class="quiz-progress-fill" id="quiz-progress-fill"></div>
-            </div>
-            <span class="quiz-progress-text" id="quiz-progress-text">1 / 3</span>
-          </div>
-          <div class="quiz-body" id="quiz-body">
-            <p class="quiz-question" id="quiz-question"></p>
-            <div class="quiz-options" id="quiz-options"></div>
-          </div>
-          <div class="quiz-result hidden" id="quiz-result">
-            <div class="quiz-result-icon" id="quiz-result-icon"></div>
-            <h3 id="quiz-result-title"></h3>
-            <p id="quiz-result-text"></p>
-            <button class="btn-primary" id="btn-quiz-action"></button>
-          </div>
-        </div>
-      </section>
-
-      <!-- Profile Page -->
-      <section id="page-profile" class="page">
-        <div class="page-content">
-          <h2 class="gradient-text page-title">פרופיל</h2>
-          <div class="profile-avatar">
-            <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
-              <circle cx="40" cy="40" r="38" stroke="#e8453c" stroke-width="2" fill="#141414"/>
-              <circle cx="40" cy="32" r="12" stroke="#e8453c" stroke-width="1.5" fill="none"/>
-              <path d="M16 72c0-14 10-22 24-22s24 8 24 22" stroke="#e8453c" stroke-width="1.5" fill="none"/>
-            </svg>
-          </div>
-          <div class="profile-level">
-            <span class="profile-level-label">רמה</span>
-            <span class="profile-level-value" id="profile-level">1</span>
-          </div>
-          <div class="profile-stats">
-            <div class="profile-stat-card">
-              <div class="profile-stat-value" id="profile-xp">0</div>
-              <div class="profile-stat-label">XP כולל</div>
-            </div>
-            <div class="profile-stat-card">
-              <div class="profile-stat-value" id="profile-streak">0</div>
-              <div class="profile-stat-label">ימים ברצף</div>
-            </div>
-            <div class="profile-stat-card">
-              <div class="profile-stat-value" id="profile-days">0/30</div>
-              <div class="profile-stat-label">ימים הושלמו</div>
-            </div>
-          </div>
-          <div class="achievements-section">
-            <h3>הישגים</h3>
-            <div class="achievements-grid" id="achievements-grid"></div>
-          </div>
-          <button class="btn-danger" id="btn-profile-reset">איפוס כל ההתקדמות</button>
-        </div>
-      </section>
-    </main>
-
-    <!-- Bottom Navigation -->
-    <nav class="bottom-nav">
-      <button class="nav-tab active" data-page="home">
-        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 11L11 3L19 11V19H14V14H8V19H3V11Z" stroke="currentColor" stroke-width="1.5"/></svg>
-        <span>בית</span>
-      </button>
-      <button class="nav-tab" data-page="program">
-        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.5"/><rect x="12" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.5"/><rect x="3" y="12" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.5"/><rect x="12" y="12" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.5"/></svg>
-        <span>תוכנית</span>
-      </button>
-      <button class="nav-tab" data-page="lesson">
-        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 4h14v14H4z" stroke="currentColor" stroke-width="1.5" rx="2"/><path d="M7 8h8M7 11h8M7 14h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-        <span>שיעור</span>
-      </button>
-      <button class="nav-tab" data-page="quiz">
-        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="1.5"/><path d="M9 9a2 2 0 1 1 2 2v1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="11" cy="15" r="0.75" fill="currentColor"/></svg>
-        <span>חידון</span>
-      </button>
-      <button class="nav-tab" data-page="profile">
-        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="8" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M4 20c0-4 3-7 7-7s7 3 7 7" stroke="currentColor" stroke-width="1.5"/></svg>
-        <span>פרופיל</span>
-      </button>
-    </nav>
+    <div class="progress-bar"><div class="progress-fill" id="pFill"></div></div>
   </div>
 
-  <script src="js/data.js"></script>
-  <script src="js/app.js"></script>
+  <div class="filters" id="filters"></div>
+  <div id="content"></div>
+
+  <button class="reset-btn" id="resetBtn">Reset Progress</button>
+</div>
+
+<div class="overlay" id="overlay"></div>
+<div class="panel" id="panel">
+  <div class="panel-header">
+    <h2 id="panelTitle"></h2>
+    <button class="close-btn" id="closeBtn">&times;</button>
+  </div>
+  <div class="panel-tabs" id="panelTabs"></div>
+  <div class="panel-body" id="panelBody"></div>
+</div>
+
+<script>
+var DATA = [
+  {day:1,week:1,title:"CIA Triad & Encryption Fundamentals",videos:[{title:"Professor Messer - CIA Triad - CompTIA Security+ SY0-701 - 1.2",url:"https://www.youtube.com/watch?v=bVht6mSuSco",summary:"The three pillars of information security: <strong>Confidentiality</strong> (keeping data private through encryption and access controls), <strong>Integrity</strong> (ensuring data hasn't been tampered with using hashing and checksums), <strong>Availability</strong> (keeping systems up and accessible)."},{title:"Professor Messer - Encryption Overview - CompTIA Security+ SY0-701 - 1.4",url:"https://www.youtube.com/watch?v=O4xNJsjtN6E",summary:"Symmetric vs asymmetric encryption, AES, RSA, how TLS works, why HTTPS matters. <strong>What happens when your browser connects to a server</strong> and how data stays encrypted in transit."},{title:"Fireship - Cryptography Explained in 100 Seconds",url:"https://www.youtube.com/watch?v=jhXCTbFnK8o",summary:"Lightning fast overview of hashing, symmetric encryption, asymmetric encryption, and digital signatures."},{title:"NetworkChuck - Public Key Cryptography (RSA) Explained",url:"https://www.youtube.com/watch?v=_zyKvPvh808",summary:"Visual explanation of how RSA works, key pairs, digital signatures, and certificate authorities. Understanding PKI for <strong>API security, mTLS, and certificate management</strong>."}],practice:[{type:"hands-on",title:"Explore Encryption",steps:["Open your browser, go to any HTTPS site, click the lock icon and explore the certificate details","Note: who issued the certificate, what encryption algorithm is used, when it expires","Try accessing a site with an expired/invalid certificate and read the warning","Go to https://www.ssllabs.com/ssltest/ and test 3 websites you use daily"]},{type:"research",title:"Map Your Security",steps:["List 5 services your company uses (email, cloud, CRM, etc)","For each: Is data encrypted at rest? In transit? What authentication method?","Write a 1 paragraph security assessment"]}],quiz:[{q:"What does the 'I' in CIA Triad stand for?",options:["Intelligence","Integrity","Integration","Infrastructure"],correct:1,explanation:"Integrity means ensuring data hasn't been altered or tampered with. Verified through hashing, checksums, and digital signatures."},{q:"Which encryption type uses the same key to encrypt and decrypt?",options:["Asymmetric","Symmetric","Hashing","Digital signatures"],correct:1,explanation:"Symmetric encryption (like AES) uses one shared key. Faster but requires secure key exchange."},{q:"What is the purpose of a Certificate Authority?",options:["Encrypt all web traffic","Verify identity and issue digital certificates","Store passwords securely","Block malicious traffic"],correct:1,explanation:"CAs verify identities and issue SSL/TLS certificates, enabling trust on the internet."},{q:"TLS stands for?",options:["Total Layer Security","Transport Layer Security","Transmission Level Safety","Transfer Link Security"],correct:1,explanation:"Transport Layer Security encrypts data between client and server. It replaced SSL."},{q:"When would you choose asymmetric over symmetric encryption?",options:["Speed is top priority","Sharing data without a pre-shared key","Encrypting large files","Storing passwords"],correct:1,explanation:"Asymmetric solves key distribution. Share public key openly, only private key can decrypt."}]},
+  {day:2,week:1,title:"Authentication, Authorization & Zero Trust",videos:[{title:"Professor Messer - Authentication Methods - CompTIA Security+ SY0-701 - 2.4",url:"https://www.youtube.com/watch?v=wF5fSMEOGYE",summary:"Multi-factor authentication, biometrics, tokens, certificates. <strong>Why 'password only' is dead</strong> and how enterprise auth works with SAML, OAuth, OpenID Connect."},{title:"IBM Technology - What is Zero Trust Security?",url:"https://www.youtube.com/watch?v=sQ0r0Hmksco",summary:"Zero Trust: <strong>never trust, always verify</strong>. No device, user, or network trusted by default. How Google pioneered BeyondCorp."},{title:"Fireship - Session vs Token Authentication in 100 Seconds",url:"https://www.youtube.com/watch?v=UBUNrFtufWo",summary:"Session-based auth (server stores state) vs token-based (JWT). Most modern systems use JWT with OAuth 2.0."},{title:"ByteByteGo - OAuth 2.0 Explained With Simple Terms",url:"https://www.youtube.com/watch?v=ZV5yTm4pT8g",summary:"Visual walkthrough of OAuth 2.0 flow. <strong>How 'Login with Google/GitHub' works</strong>."}],practice:[{type:"hands-on",title:"Authentication Audit",steps:["List every SaaS tool your company uses","Check which have MFA enabled, enable on all","Check SSO support, research implementation","Set up a password manager (1Password/Bitwarden)"]},{type:"analysis",title:"Zero Trust Assessment",steps:["Draw how users currently access your systems","Can someone on WiFi access tools without re-authenticating?","List 3 changes to move toward Zero Trust"]}],quiz:[{q:"In Zero Trust, which is correct?",options:["Internal traffic is trusted","All traffic must be verified","Only external needs verification","VPN grants full trust"],correct:1,explanation:"Zero Trust treats ALL traffic as untrusted, even inside the corporate network."},{q:"Main advantage of OAuth 2.0?",options:["Encrypts passwords","Grants limited access without sharing credentials","Replaces HTTPS","Speeds up queries"],correct:1,explanation:"OAuth lets users authorize apps without sharing passwords. The app gets a limited token."},{q:"MFA requires two of which categories?",options:["Two passwords","Know, Have, or Are","Email and phone","Username and question"],correct:1,explanation:"Knowledge (password), Possession (phone), Inherence (fingerprint). Two passwords is single-factor."},{q:"Authentication vs Authorization?",options:["Same thing","Auth verifies identity, authz determines access","Auth for users, authz for servers","Authz comes first"],correct:1,explanation:"Authentication = who are you? Authorization = what can you do?"},{q:"Google BeyondCorp implements which model?",options:["Defense in Depth","Zero Trust","Castle and Moat","Perimeter Security"],correct:1,explanation:"BeyondCorp eliminated VPN, verifying every request based on identity and device health."}]},
+  {day:3,week:1,title:"OWASP Top 10 & Web App Security",videos:[{title:"OWASP Foundation - OWASP Top 10 2021 Overview",url:"https://www.youtube.com/watch?v=OBuHSiVq0aw",summary:"The <strong>10 most critical web security risks</strong>. Injection, broken auth, sensitive data exposure, and more."},{title:"Computerphile - SQL Injection Explained",url:"https://www.youtube.com/watch?v=ciNHn38EyRc",summary:"Live demo of SQL injection. Attacker types code into a login form and <strong>gets access to the entire database</strong>."},{title:"Computerphile - Cross Site Scripting (XSS) Explained",url:"https://www.youtube.com/watch?v=L5l9lSnNMxg",summary:"How attackers inject malicious JavaScript to steal cookies, sessions, and user data."},{title:"PwnFunction - CSRF Explained",url:"https://www.youtube.com/watch?v=eWEgUcHPle0",summary:"Cross-Site Request Forgery tricks users into actions they didn't intend. How CSRF tokens prevent this."}],practice:[{type:"hands-on",title:"Try OWASP Juice Shop",steps:["Go to https://juice-shop.herokuapp.com/","Try to find a hidden admin page","Try basic SQL injection on the login","Document findings and business impact"]},{type:"research",title:"Security Review Framework",steps:["Download the OWASP Top 10 from owasp.org","For each risk, write how it could affect your company","Identify which 3 are most relevant to your stack"]}],quiz:[{q:"Which vulnerability involves inserting code into input fields?",options:["Broken Access Control","Injection","Cryptographic Failures","Misconfiguration"],correct:1,explanation:"Injection occurs when untrusted data is sent to an interpreter as part of a command."},{q:"Primary defense against SQL injection?",options:["Strong passwords","Parameterized queries","HTTPS","Rate limiting"],correct:1,explanation:"Parameterized queries separate SQL code from data, preventing execution of user input."},{q:"XSS primarily targets:",options:["Database","Web server","User's browser","Router"],correct:2,explanation:"XSS executes in the victim's browser, stealing cookies and performing actions as the user."},{q:"What should you require from your dev team on OWASP?",options:["Memorize all","Regular training and code reviews checking for Top 10","Only hire specialists","Run antivirus"],correct:1,explanation:"Establish processes: security code reviews, SAST/DAST in CI/CD, regular training."},{q:"#1 risk in OWASP Top 10 2021?",options:["Injection","Broken Access Control","Crypto Failures","XSS"],correct:1,explanation:"Broken Access Control is #1. Users acting outside their intended permissions."}]},
+  {day:4,week:1,title:"Threat Modeling with STRIDE",videos:[{title:"Adam Shostack - Introduction to Threat Modeling",url:"https://www.youtube.com/watch?v=GqmQg-cszw4",summary:"The <strong>4 question framework</strong>: What are we building? What can go wrong? What will we do? Did we do well?"},{title:"SANS Institute - STRIDE Threat Modeling",url:"https://www.youtube.com/watch?v=j2_mRiIjRPk",summary:"<strong>STRIDE</strong>: Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, Elevation of Privilege."},{title:"IBM Technology - Data Flow Diagrams for Threat Modeling",url:"https://www.youtube.com/watch?v=fX7SWFoBzSg",summary:"Drawing Data Flow Diagrams (DFDs) to map data movement. Identify trust boundaries."}],practice:[{type:"hands-on",title:"Threat Model Your System",steps:["Draw a data flow diagram of your main product","Identify all trust boundaries","Apply STRIDE to each component","Prioritize top 3 threats by likelihood and impact","Write a 1-page threat model document"]},{type:"analysis",title:"Real World Breaches",steps:["Research 3 major breaches from 2024-2025","For each: which STRIDE category was exploited?","What could the CTO have done differently?"]}],quiz:[{q:"In STRIDE, 'S' stands for?",options:["Security","Spoofing","Scanning","Sniffing"],correct:1,explanation:"Spoofing means pretending to be someone else."},{q:"What is a trust boundary?",options:["A firewall","Where data crosses between different trust levels","A permission level","A geographic border"],correct:1,explanation:"Trust boundaries are where trust changes. User input to server, or server to third-party API."},{q:"Which STRIDE category covers denying an action?",options:["Spoofing","Tampering","Repudiation","Info Disclosure"],correct:2,explanation:"Repudiation: user can deny an action because there's no proof. Logging defends against it."},{q:"When should threat modeling happen?",options:["After incidents only","During design, before code","Annual audits only","Only by consultants"],correct:1,explanation:"Most effective during design. Finding flaws early costs 10x less than in production."},{q:"DoS targets which CIA element?",options:["Confidentiality","Integrity","Availability","All three"],correct:2,explanation:"DoS overwhelms systems so legitimate users can't access them. Targets Availability."}]},
+  {day:5,week:1,title:"Cloud Security & AWS IAM",videos:[{title:"Fireship - AWS Security in 100 Seconds",url:"https://www.youtube.com/watch?v=iP0v3GJnFKc",summary:"Rapid overview: IAM, Security Groups, VPCs, encryption."},{title:"AWS - Introduction to IAM",url:"https://www.youtube.com/watch?v=Ul6FW4UANGo",summary:"Official walkthrough of <strong>IAM: users, groups, roles, policies</strong>. Principle of least privilege."},{title:"freeCodeCamp - AWS Security Tutorial",url:"https://www.youtube.com/watch?v=Ia-UEYYR44s",summary:"VPC security, Security Groups, NACLs, encryption, CloudTrail. <strong>Hands-on in the console</strong>."}],practice:[{type:"hands-on",title:"AWS Console Security",steps:["Create AWS free tier account","Enable MFA on root immediately","Create IAM user (never use root daily)","Create S3 read-only policy, attach to test user","Enable CloudTrail for all API calls"]},{type:"analysis",title:"Cloud Security Checklist",steps:["Review AWS Well-Architected Security Pillar","Score your setup against each item","Identify top 5 security improvements"]}],quiz:[{q:"What is least privilege?",options:["Give all admin access","Grant only minimum permissions needed","Remove all permissions","Only CEO has access"],correct:1,explanation:"Every user/service gets only permissions absolutely needed."},{q:"Why never use AWS root for daily work?",options:["Slower","Can't create resources","Unrestricted access, can't be limited by IAM","Costs more"],correct:2,explanation:"Root bypasses all IAM policies. If compromised, attacker has full control."},{q:"What is a Security Group?",options:["Security team","Virtual firewall for EC2 traffic","IAM group","Certification"],correct:1,explanation:"Security Groups act as virtual firewalls controlling which traffic reaches servers."},{q:"What does CloudTrail do?",options:["Encrypts data","Logs all API calls and activity","Blocks DDoS","Manages SSL"],correct:1,explanation:"Creates audit log of every action. Essential for compliance and incident investigation."},{q:"First action for new AWS account?",options:["Launch EC2","Enable MFA on root, create IAM users","Billing alarm","Choose region"],correct:1,explanation:"Securing root with MFA and creating IAM users is always step one."}]},
+  {day:6,week:1,title:"Penetration Testing & Security Tools",videos:[{title:"NetworkChuck - Ethical Hacking Full Course",url:"https://www.youtube.com/watch?v=3FNYvj2U0HM",summary:"First 2 hours: <strong>reconnaissance, scanning, vulnerability assessment</strong>. How hackers think."},{title:"David Bombal - What is a Penetration Test?",url:"https://www.youtube.com/watch?v=wMuHgp6vSEo",summary:"Types (black/white/gray box) and <strong>why your company needs regular pen tests</strong>."},{title:"IBM Technology - What is SIEM?",url:"https://www.youtube.com/watch?v=9RfsRn7m7OE",summary:"Security Information and Event Management. <strong>Splunk, QRadar, Elastic SIEM</strong>."}],practice:[{type:"hands-on",title:"Security Scanning",steps:["Use shodan.io to search for your public assets","Run free scan at qualys.com/forms/freescan/","Check haveibeenpwned.com for your emails","Document and prioritize findings"]},{type:"research",title:"Pen Testing Companies",steps:["Research: Cobalt, HackerOne, Bugcrowd","Compare: automated vs manual, pricing, reporting","Write recommendation for your company"]}],quiz:[{q:"Black box vs white box pen testing?",options:["Legal vs illegal","No prior knowledge vs full source access","Software vs hardware","No difference"],correct:1,explanation:"Black box simulates real attacker. White box has full code access. Gray box is in between."},{q:"SIEM is used for?",options:["Writing code","Collecting and analyzing security events in real-time","Managing passwords","Encrypting traffic"],correct:1,explanation:"SIEM aggregates logs from all systems and uses analytics to detect incidents."},{q:"How often should pen tests happen?",options:["Once at launch","At least annually and after major changes","After a breach only","Every day"],correct:1,explanation:"Annual plus after significant changes. Many compliance frameworks require it."},{q:"Vulnerability assessment vs pen testing?",options:["Same thing","Identifies weaknesses without exploiting them","A firewall type","A backup strategy"],correct:1,explanation:"Assessment identifies but doesn't exploit. Pen testing actively tries to break in."},{q:"Critical pen test finding: first action?",options:["Ignore if running","Assign team to patch with deadline","Wait for quarterly review","Fire security team"],correct:1,explanation:"Critical findings need immediate action: classify, assign owners, set deadlines, track."}]},
+  {day:7,week:1,title:"Security Architecture & Incident Response",videos:[{title:"IBM Technology - Defense in Depth Explained",url:"https://www.youtube.com/watch?v=dz7Ntp7KQGA",summary:"<strong>Defense in Depth</strong>: multiple security layers. Firewalls, IDS/IPS, WAF, endpoint protection."},{title:"SANS Institute - Incident Response Steps",url:"https://www.youtube.com/watch?v=Ete3kGyMRoA",summary:"6 phases: <strong>Preparation, Identification, Containment, Eradication, Recovery, Lessons Learned</strong>."},{title:"Google - How Google Handles Security Incidents",url:"https://www.youtube.com/watch?v=IOH9gCiK9RA",summary:"Behind the scenes: war rooms, escalation procedures, post-mortems at Google scale."}],practice:[{type:"hands-on",title:"Build Incident Response Plan",steps:["Write 1-page IR plan for your company","Define roles: incident commander, communicator, technical responder","Define severity levels (P1-P4) with response times","Create customer notification template","Identify critical assets and recovery priorities"]},{type:"analysis",title:"Weekly Security Review",steps:["Review everything from this week","Create security maturity scorecard (1-5 per area)","Areas: encryption, auth, app sec, cloud, IR, monitoring","Identify weakest area, create 30-day plan"]}],quiz:[{q:"Correct order of IR phases?",options:["Identification, Containment, Preparation, Recovery","Preparation, Identification, Containment, Eradication, Recovery, Lessons Learned","Detection, Response, Recovery, Prevention","Alert, Fix, Report, Forget"],correct:1,explanation:"NIST: Preparation, Identification, Containment, Eradication, Recovery, Lessons Learned."},{q:"What is Defense in Depth?",options:["One strong firewall","Multiple overlapping security layers","Encrypting twice","More staff"],correct:1,explanation:"Multiple controls so no single failure compromises the system."},{q:"Most important step after incident resolved?",options:["Delete logs","Blameless post-mortem","Fire someone","Ignore it"],correct:1,explanation:"Post-mortem examines what happened and how to prevent it."},{q:"What is a WAF?",options:["Blocks all traffic","Filters HTTP traffic to web apps","Antivirus","Backup system"],correct:1,explanation:"WAF filters malicious traffic like SQL injection and XSS."},{q:"Highest ROI security investment?",options:["Expensive firewall","Security awareness training for all","10 more engineers","Biometrics everywhere"],correct:1,explanation:"Human error causes most breaches. Training prevents more incidents than any single tech."}]},
+  {day:8,week:2,title:"Networking: IP, DNS, TCP/UDP",videos:[{title:"NetworkChuck - IP Addresses Explained",url:"https://www.youtube.com/watch?v=5WfiTHiU4x8",summary:"IPv4 vs IPv6, public vs private, subnets, CIDR. Foundational knowledge."},{title:"Fireship - DNS Explained in 100 Seconds",url:"https://www.youtube.com/watch?v=UVR9lhUGAyU",summary:"Domain names to IP addresses. DNS is the <strong>phone book of the internet</strong>."},{title:"NetworkChuck - TCP vs UDP",url:"https://www.youtube.com/watch?v=uwoD5YsGACg",summary:"TCP guarantees delivery (web). UDP is faster (streaming, gaming)."},{title:"ByteByteGo - What Happens When You Type a URL?",url:"https://www.youtube.com/watch?v=AlkDbnbv7dk",summary:"Complete journey: DNS, TCP handshake, TLS, HTTP, response."}],practice:[{type:"hands-on",title:"Network Exploration",steps:["Run ipconfig/ifconfig, identify private IP and gateway","Run nslookup google.com for DNS resolution","Run traceroute google.com to see packet path","Run ping google.com and observe latency"]},{type:"research",title:"Your Network Infrastructure",steps:["Map your DNS setup: registrar, DNS management","Identify CDN provider","Check DNS TTL settings"]}],quiz:[{q:"TCP vs UDP main difference?",options:["TCP faster","TCP guarantees delivery/order, UDP doesn't","TCP internal, UDP internet","No difference"],correct:1,explanation:"TCP ensures packets arrive in order, retransmits lost ones. UDP sacrifices reliability for speed."},{q:"What does DNS do?",options:["Routes packets","Translates domain names to IPs","Encrypts traffic","Manages hardware"],correct:1,explanation:"Translates human-readable domains into IP addresses."},{q:"What is a subnet?",options:["Cable type","Logical subdivision of IP network","Backup DNS","Security protocol"],correct:1,explanation:"Subnets divide networks into smaller segments."},{q:"Site is slow, check first?",options:["App code","DNS and network latency (ping/traceroute)","Database","User device"],correct:1,explanation:"Start bottom up: DNS resolving? Network latency? Server responding?"},{q:"Why is CDN important globally?",options:["Faster code","Serves content from closer servers, less latency","Encrypts data","Replaces DNS"],correct:1,explanation:"CDNs cache content on edge servers worldwide."}]},
+  {day:9,week:2,title:"Load Balancing, Ports & Protocols",videos:[{title:"ByteByteGo - What Is A Load Balancer?",url:"https://www.youtube.com/watch?v=sCR3SAVdyCc",summary:"<strong>Layer 4 vs Layer 7</strong>, health checks, algorithms."},{title:"Professor Messer - Common Network Ports - N10-008",url:"https://www.youtube.com/watch?v=KBbRga2FGbU",summary:"Key ports: <strong>80 HTTP, 443 HTTPS, 22 SSH, 53 DNS, 3306 MySQL</strong>."},{title:"IBM Technology - Proxy vs Reverse Proxy",url:"https://www.youtube.com/watch?v=4NB0NDtOwIQ",summary:"Forward proxy for clients, reverse proxy for servers. <strong>Nginx, AWS ALB</strong>."}],practice:[{type:"hands-on",title:"Network Services",steps:["Run netstat -an to see connections and ports","Identify open ports and their services","Check open ports on your public IP","Research: what if port 22 is open to internet?"]},{type:"analysis",title:"Load Balancing Strategy",steps:["Draw your traffic flow diagram","Find single points of failure","Design load-balanced architecture","What happens when one server goes down?"]}],quiz:[{q:"Default HTTPS port?",options:["80","443","22","8080"],correct:1,explanation:"443 for HTTPS, 80 for HTTP."},{q:"Reverse proxy purpose?",options:["Hide client identity","Distribute requests, SSL termination, caching","Speed up DNS","Encrypt DB connections"],correct:1,explanation:"Receives client requests, forwards to backends."},{q:"Round-robin load balancing?",options:["Least connections","Each request to next server in line","IP hash","Random"],correct:1,explanation:"Distributes sequentially."},{q:"Why keep port 22 closed to internet?",options:["SSH is slow","Prevents brute-force login attacks","SSH local only","Port 22 is for DNS"],correct:1,explanation:"Open SSH port invites automated brute-force."},{q:"Health checking in load balancing?",options:["Employee health","Verifying servers are responsive before sending traffic","SSL check","Virus scan"],correct:1,explanation:"Load balancers ping servers. Failed check routes traffic to healthy ones."}]},
+  {day:10,week:2,title:"Linux Fundamentals & Servers",videos:[{title:"NetworkChuck - Linux for Hackers Full Course",url:"https://www.youtube.com/watch?v=VbEx7B_PTOE",summary:"Navigation, permissions, users, processes, packages. 96% of top servers run Linux."},{title:"Fireship - Linux in 100 Seconds",url:"https://www.youtube.com/watch?v=rrB13utjYV4",summary:"What Linux is, why it dominates servers."},{title:"LearnLinuxTV - File Permissions Explained",url:"https://www.youtube.com/watch?v=D-VqgvBMV7g",summary:"rwx permissions, chmod, chown. Wrong permissions = <strong>major security vulnerability</strong>."}],practice:[{type:"hands-on",title:"Linux Terminal",steps:["Use https://bellard.org/jslinux/ for browser Linux","Navigate: ls, cd, pwd, mkdir, touch, rm","Permissions: ls -la, chmod 755, chmod 644","Processes: ps aux, top, kill","System: df -h, free -m, uname -a"]},{type:"research",title:"Server OS Comparison",steps:["Compare Ubuntu Server vs RHEL vs Amazon Linux","When would you choose each?","What does your cloud provider recommend?"]}],quiz:[{q:"chmod 755 means?",options:["Delete file","Owner rwx, group/others rx","Everyone full access","Lock all access"],correct:1,explanation:"7=rwx for owner, 5=rx for group and others."},{q:"Why Linux dominates servers?",options:["Better GUI","Free, stable, secure, customizable, performant","Created by Google","Only networking OS"],correct:1,explanation:"Open-source, stable, configurable, minimal overhead."},{q:"'ps aux' does what?",options:["Installs software","Shows all running processes","Restarts server","Changes permissions"],correct:1,explanation:"Lists all processes with user, CPU, memory usage."},{q:"Root user is?",options:["First user","Superuser with unrestricted access","Regular account","Web server user"],correct:1,explanation:"Root (UID 0) has unlimited permissions."},{q:"Why care about Linux as CTO?",options:["Don't need to","Understanding your infrastructure OS helps architecture decisions","DevOps only","Startups only"],correct:1,explanation:"Your infrastructure runs Linux. Basic knowledge enables meaningful discussions."}]},
+  {day:11,week:2,title:"SSH, VPN & Secure Remote Access",videos:[{title:"Fireship - SSH in 100 Seconds",url:"https://www.youtube.com/watch?v=yUz6TSv7i7Q",summary:"SSH protocol: key-based auth vs passwords. <strong>Always use keys</strong>."},{title:"NetworkChuck - VPN Explained",url:"https://www.youtube.com/watch?v=R-JUOpCgTZc",summary:"Tunneling, encryption, types. <strong>Tailscale, WireGuard, IPsec</strong>."},{title:"Tailscale - How Tailscale Works",url:"https://www.youtube.com/watch?v=jJFrrLWbo7k",summary:"WireGuard-based mesh VPN. <strong>No exposed ports, peer-to-peer</strong>."}],practice:[{type:"hands-on",title:"SSH & Secure Access",steps:["Generate key: ssh-keygen -t ed25519","Understand private vs public key","Add public key to server, disable password auth","Install Tailscale on computer and phone"]},{type:"research",title:"VPN Solutions",steps:["Compare: Tailscale vs WireGuard vs OpenVPN vs IPsec","For 50 employees, which and why?","Research bastion hosts / jump servers"]}],quiz:[{q:"Why are SSH keys more secure?",options:["Longer","Cryptographic challenge-response, can't be brute-forced","Stored in cloud","No difference"],correct:1,explanation:"Private key never leaves your machine."},{q:"WireGuard is?",options:["Firewall","Modern, fast VPN protocol","Password manager","Load balancer"],correct:1,explanation:"4,000 lines of code vs 100,000+ for OpenVPN."},{q:"Bastion host is?",options:["Backup server","Single hardened SSH entry point to private network","Firewall type","DNS server"],correct:1,explanation:"Only server with SSH open to internet."},{q:"Zero Trust vs VPN for remote access?",options:["No remote access","Every request verified regardless of network","VPN replaced by passwords","Remote blocked"],correct:1,explanation:"VPN grants network access. Zero Trust verifies every request."},{q:"Why disable SSH password auth?",options:["Hard to remember","Prevents brute-force, forces key-based auth","SSH doesn't support","Makes server faster"],correct:1,explanation:"Disabling passwords eliminates brute-force attack vector."}]},
+  {day:12,week:2,title:"Docker & Containers",videos:[{title:"Fireship - Docker in 100 Seconds",url:"https://www.youtube.com/watch?v=Gjnup-PuquQ",summary:"What containers are, why they exist. <strong>Packages app with all dependencies</strong>."},{title:"TechWorld with Nana - Docker Tutorial for Beginners",url:"https://www.youtube.com/watch?v=pg19Z8LL06w",summary:"Images, containers, Docker Compose, registries."},{title:"IBM Technology - Containers vs VMs",url:"https://www.youtube.com/watch?v=cjXI-yxqGTI",summary:"VMs virtualize hardware (heavy). Containers share OS kernel (lightweight)."}],practice:[{type:"hands-on",title:"Docker Hands-On",steps:["Install Docker Desktop","Run: docker run hello-world","Run: docker run -p 8080:80 nginx","Explore: docker ps, docker images, docker logs","Try Docker Compose with a multi-service template"]},{type:"research",title:"Container Strategy",steps:["Research: Docker Hub vs private registries","What is a container orchestrator?","When would you choose containers vs serverless?"]}],quiz:[{q:"Main benefit of containers?",options:["Faster code","Consistent environment across dev/staging/prod","Better security","Cheaper servers"],correct:1,explanation:"Eliminates 'works on my machine'."},{q:"Containers vs VMs?",options:["Same thing","Containers share OS kernel (lighter), VMs virtualize hardware (heavier)","VMs are newer","Containers need more resources"],correct:1,explanation:"Containers share host OS kernel. Start in seconds."},{q:"Docker image vs container?",options:["Same","Image is blueprint, container is running instance","Container is larger","Image runs, container stores"],correct:1,explanation:"Image is immutable template. Container is running instance."},{q:"What is Docker Compose?",options:["A text editor","Tool for defining multi-container applications","A container registry","A monitoring tool"],correct:1,explanation:"Define and run multi-container apps with one YAML file."},{q:"Why do companies use container registries?",options:["For backups","To store, version, and distribute container images securely","To run containers faster","For logging"],correct:1,explanation:"Registries store images with version control, scanning, and access control."}]},
+  {day:13,week:2,title:"Kubernetes & Container Orchestration",videos:[{title:"Fireship - Kubernetes Explained in 100 Seconds",url:"https://www.youtube.com/watch?v=PziYflu8cB8",summary:"What K8s does: automates deployment, scaling, and management."},{title:"TechWorld with Nana - Kubernetes Tutorial for Beginners",url:"https://www.youtube.com/watch?v=X48VuDVv0do",summary:"Pods, services, deployments, namespaces."},{title:"ByteByteGo - Why Is Kubernetes So Hard?",url:"https://www.youtube.com/watch?v=bPOHRbULhvQ",summary:"The complexity of K8s and <strong>when you actually need it</strong>."}],practice:[{type:"hands-on",title:"K8s Concepts",steps:["Use https://labs.play-with-k8s.com/ for browser K8s","Explore: kubectl get pods, kubectl get services","Understand: pod, node, cluster, namespace","Read: when to use K8s vs ECS vs serverless"]},{type:"analysis",title:"Orchestration Decision",steps:["At what scale does Kubernetes make sense?","Compare: EKS, GKE, AKS managed offerings","When would you avoid K8s?"]}],quiz:[{q:"Kubernetes solves what problem?",options:["Writing code","Managing containers at scale","Database management","Frontend development"],correct:1,explanation:"K8s automates deploying, scaling, and managing containers."},{q:"What is a K8s Pod?",options:["A server","Smallest deployable unit, one or more containers","A network","A database"],correct:1,explanation:"A pod is one or more containers that share storage and network."},{q:"When should a CTO choose NOT to use K8s?",options:["Never","Small team, few services, complexity not justified","Always avoid it","Only for large companies"],correct:1,explanation:"K8s adds complexity. For small teams, simpler tools may be better."},{q:"What is a K8s Service?",options:["Customer support","A stable network endpoint to access pods","A container image","A monitoring tool"],correct:1,explanation:"Services provide stable IPs and DNS names for ephemeral pods."},{q:"Managed K8s vs self-managed?",options:["Self-managed is always better","Managed handles control plane, reduces ops burden","No difference","Managed is always more expensive"],correct:1,explanation:"Managed services handle upgrades, patching, and HA."}]},
+  {day:14,week:2,title:"CI/CD & DevOps Practices",videos:[{title:"Fireship - DevOps CI/CD in 100 Seconds",url:"https://www.youtube.com/watch?v=scEDHsr3APg",summary:"Continuous Integration and Deployment: automate testing and deployment."},{title:"TechWorld with Nana - CI/CD Pipeline Tutorial",url:"https://www.youtube.com/watch?v=R8_veQiYBjI",summary:"Code commit, build, test, deploy. <strong>GitHub Actions, Jenkins, GitLab CI</strong>."},{title:"GitHub - GitHub Actions Tutorial",url:"https://www.youtube.com/watch?v=R8_veQiYBjI",summary:"Practical setup of automated workflows."}],practice:[{type:"hands-on",title:"CI/CD Pipeline",steps:["Create a GitHub repo with a simple project","Set up GitHub Actions workflow","Add automated testing step","Add deployment step","Observe: push code and watch pipeline run"]},{type:"analysis",title:"DevOps Assessment",steps:["Map your current deployment process","Calculate: how long from commit to production?","Identify bottlenecks and automation opportunities","Research DORA metrics"]}],quiz:[{q:"CI/CD stands for?",options:["Code Integration / Code Delivery","Continuous Integration / Continuous Deployment","Computer Interface / Computer Design","Central Intelligence / Central Dispatch"],correct:1,explanation:"CI: building and testing on every commit. CD: deploying passing builds."},{q:"Main benefit of CI/CD?",options:["More meetings","Faster, safer, more frequent deployments","Cheaper servers","Better UI"],correct:1,explanation:"Automation catches bugs early, enables frequent deployments."},{q:"What are DORA metrics?",options:["Server metrics","4 key metrics for software delivery performance","Financial metrics","HR metrics"],correct:1,explanation:"Deploy frequency, lead time, MTTR, change failure rate."},{q:"Blue/green deployment is?",options:["A color scheme","Running two identical environments, switching traffic","A testing framework","A database strategy"],correct:1,explanation:"Blue (current) and green (new). Route traffic after validation."},{q:"Infrastructure as Code means?",options:["Writing more code","Managing infrastructure through code files (Terraform)","Coding on servers","Using AI"],correct:1,explanation:"IaC: version, review, and reproduce infrastructure."}]},
+  {day:15,week:3,title:"Cloud Architecture: AWS/Azure/GCP",videos:[{title:"Fireship - AWS vs Azure vs GCP",url:"https://www.youtube.com/watch?v=n24OBVGHufQ",summary:"Comparison of the three major clouds. <strong>When to choose which</strong>."},{title:"ByteByteGo - Cloud Computing Explained",url:"https://www.youtube.com/watch?v=_a6us8kaq0g",summary:"IaaS vs PaaS vs SaaS, regions, availability zones."},{title:"AWS re:Invent - Serverless Architecture Patterns",url:"https://www.youtube.com/watch?v=9IYpGTS7Jy0",summary:"Lambda, API Gateway, DynamoDB, S3, SQS."}],practice:[{type:"hands-on",title:"Multi-Cloud Exploration",steps:["Create free accounts on AWS, Azure, GCP","Compare equivalent services across clouds","Deploy a simple static site on each","Compare pricing calculators"]},{type:"analysis",title:"Cloud Strategy",steps:["Research multi-cloud vs single-cloud strategies","What are cloud lock-in risks?","When does multi-cloud make sense?"]}],quiz:[{q:"IaaS vs PaaS vs SaaS?",options:["All the same","IaaS=infrastructure, PaaS=platform, SaaS=software","Marketing terms","Size categories"],correct:1,explanation:"IaaS: you manage OS up. PaaS: you manage app only. SaaS: fully managed."},{q:"Availability Zone is?",options:["A time zone","A physically separate data center within a region","A pricing tier","A network segment"],correct:1,explanation:"AZs are independent data centers with separate power/cooling."},{q:"Serverless means?",options:["No servers exist","You don't manage servers, cloud auto-scales","Free hosting","Only for small apps"],correct:1,explanation:"Auto-scales to zero, pay only for compute used."},{q:"Biggest risk of single cloud provider?",options:["Price only","Vendor lock-in","Nothing","Security"],correct:1,explanation:"Lock-in means migration becomes expensive."},{q:"When is serverless NOT appropriate?",options:["Never","Long-running processes, consistent high load","Small apps","APIs"],correct:1,explanation:"Serverless has cold starts and execution limits."}]},
+  {day:16,week:3,title:"Serverless & Managed Services",videos:[{title:"Fireship - Serverless Computing in 100 Seconds",url:"https://www.youtube.com/watch?v=W_VV2Fx32_Y",summary:"What serverless is, Lambda functions, event-driven architecture."},{title:"AWS - Lambda Deep Dive",url:"https://www.youtube.com/watch?v=52W3Qyg242Y",summary:"Lambda patterns, best practices, pricing model."},{title:"ByteByteGo - Managed Services Explained",url:"https://www.youtube.com/watch?v=dH0yz-Osy54",summary:"Build vs buy decisions: managed databases, queues, caching."}],practice:[{type:"hands-on",title:"Serverless Deploy",steps:["Create a Lambda function in AWS console","Trigger it via API Gateway","Check CloudWatch logs","Calculate: cost at 1M requests/month vs EC2"]},{type:"analysis",title:"Build vs Buy",steps:["List 5 things you currently self-manage","For each: is there a managed alternative?","Calculate TCO including engineering time","Decide: which to migrate, which to keep"]}],quiz:[{q:"Lambda pricing model?",options:["Monthly fee","Pay per request + compute duration","Per CPU core","Flat rate"],correct:1,explanation:"Pay for invocations plus GB-seconds of compute."},{q:"What is a cold start?",options:["Server crash","Delay when Lambda initializes a new environment","Slow DNS","Network timeout"],correct:1,explanation:"First invocation after idle takes longer."},{q:"When to use managed DB vs self-hosted?",options:["Always managed","Managed unless you need specific tuning or cost control","Always self-hosted","Depends on language"],correct:1,explanation:"Managed handles patches, backups, failover."},{q:"Event-driven architecture means?",options:["Calendar events","Components communicate through events, decoupled","UI events only","Scheduled tasks"],correct:1,explanation:"Services emit events, others react. Loose coupling."},{q:"Main advantage of message queues?",options:["Faster code","Decouples producers from consumers, handles spikes","Cheaper","Better UI"],correct:1,explanation:"Queues buffer messages between services."}]},
+  {day:17,week:3,title:"System Design: Fundamentals",videos:[{title:"ByteByteGo - System Design Interview Basics",url:"https://www.youtube.com/watch?v=i7twT3x5yv8",summary:"Requirements, estimation, high-level design, deep dive, bottlenecks."},{title:"Gaurav Sen - System Design Introduction",url:"https://www.youtube.com/watch?v=FSR1s2b-l_I",summary:"Horizontal vs vertical scaling, caching, database choices."},{title:"ByteByteGo - Design a URL Shortener",url:"https://www.youtube.com/watch?v=fMZMm_0ZhK4",summary:"Classic system design showing the thinking process."}],practice:[{type:"hands-on",title:"System Design Practice",steps:["Design a URL shortener: components, data flow, scale","Design a notification system: push, email, SMS","For each: identify the 3 biggest bottlenecks","Draw architecture diagrams"]},{type:"research",title:"Real System Architectures",steps:["How does Netflix handle 200M+ users?","How does Uber match riders to drivers?","What patterns do they use?"]}],quiz:[{q:"Horizontal vs vertical scaling?",options:["Same thing","Horizontal = more machines, Vertical = bigger machine","Horizontal = faster","Only horizontal works"],correct:1,explanation:"Vertical: upgrade CPU/RAM. Horizontal: add more servers."},{q:"What is caching?",options:["Saving money","Storing frequently accessed data in fast memory","A backup strategy","Encryption"],correct:1,explanation:"Cache stores hot data in memory. Reduces DB load."},{q:"When designing a system, first step?",options:["Choose technology","Clarify requirements: functional and non-functional","Write code","Set up servers"],correct:1,explanation:"Start with: what does it do? How many users? What latency?"},{q:"What is database sharding?",options:["Backup","Splitting data across multiple databases","Encryption","Indexing"],correct:1,explanation:"Each shard holds a subset. Enables horizontal DB scaling."},{q:"CAP theorem says?",options:["Everything is possible","Can only guarantee 2 of 3: Consistency, Availability, Partition tolerance","A design pattern","A testing method"],correct:1,explanation:"In partitions, choose consistency or availability."}]},
+  {day:18,week:3,title:"System Design: Advanced Patterns",videos:[{title:"ByteByteGo - Microservices vs Monolith",url:"https://www.youtube.com/watch?v=lTAcCNbJ7KE",summary:"When each is right. <strong>Start monolith, split when needed</strong>."},{title:"Martin Fowler - Event-Driven Architecture",url:"https://www.youtube.com/watch?v=STKCRSUsyP0",summary:"Event sourcing, CQRS, event streaming."},{title:"ByteByteGo - API Design Best Practices",url:"https://www.youtube.com/watch?v=_gQaygjm_hg",summary:"REST vs GraphQL vs gRPC. <strong>API is your product's contract</strong>."}],practice:[{type:"hands-on",title:"Architecture Decisions",steps:["Design: chat system like Slack","Design: payment system","Justify monolith vs microservices","Document in ADR format"]},{type:"analysis",title:"API Strategy",steps:["Map your product's APIs","Are they consistent? Well-documented?","Research great APIs (Stripe, Twilio)"]}],quiz:[{q:"When to choose microservices?",options:["Always","Large team, complex domains, need independent deployment","Small team","New projects"],correct:1,explanation:"Microservices add complexity. Worth it for large teams."},{q:"REST vs GraphQL?",options:["GraphQL always better","REST is simple/cacheable, GraphQL is flexible for complex queries","Same thing","REST is newer"],correct:1,explanation:"Choose based on use case."},{q:"What is idempotency?",options:["A database type","Same request multiple times = same result","A security feature","A caching strategy"],correct:1,explanation:"Critical for payments: prevent double-charging on retries."},{q:"Event sourcing means?",options:["Using events for UI","Storing all state changes as immutable events","Event planning","Monitoring"],correct:1,explanation:"Append events. Replay history, audit everything."},{q:"Strangler fig pattern?",options:["Removing old code","Gradually replacing monolith by routing to new services","A design pattern","Testing"],correct:1,explanation:"Route one feature at a time until monolith is empty."}]},
+  {day:19,week:3,title:"Database Architecture & Scaling",videos:[{title:"ByteByteGo - SQL vs NoSQL",url:"https://www.youtube.com/watch?v=Q_9cFgzZr8Q",summary:"When PostgreSQL, when MongoDB, when Redis."},{title:"Fireship - 7 Database Paradigms",url:"https://www.youtube.com/watch?v=W2Z7fbCLSTw",summary:"Key-value, document, relational, graph, column, search, time-series."},{title:"ByteByteGo - Database Scaling Strategies",url:"https://www.youtube.com/watch?v=dkhOZOmV7Fo",summary:"Read replicas, sharding, partitioning, connection pooling."}],practice:[{type:"hands-on",title:"Database Exploration",steps:["Explore PostgreSQL on Supabase","Try Redis on upstash.com","Compare SQL vs NoSQL data model","Which would you use for your product?"]},{type:"analysis",title:"Data Architecture Decision",steps:["Map your product's data types and relationships","Is current DB choice optimal?","How to scale to 10x traffic?"]}],quiz:[{q:"When to choose SQL over NoSQL?",options:["Always","Complex relationships, transactions, need ACID","Never","For speed only"],correct:1,explanation:"SQL excels at structured data with relationships."},{q:"Redis is best for?",options:["Long-term storage","Caching, session storage, real-time features","File storage","Analytics"],correct:1,explanation:"In-memory. Sub-millisecond reads."},{q:"What is a read replica?",options:["A backup","A copy handling read queries, reducing primary load","A cache","A microservice"],correct:1,explanation:"Read replicas handle SELECT queries."},{q:"ACID means?",options:["A chemical","Atomicity, Consistency, Isolation, Durability","A NoSQL feature","A scaling method"],correct:1,explanation:"Guarantees for reliable transactions."},{q:"When to use graph database?",options:["Always","Highly connected data where relationships are primary","Simple CRUD","File storage"],correct:1,explanation:"Excels at friend-of-friend, recommendations."}]},
+  {day:20,week:3,title:"Reliability Engineering & SRE",videos:[{title:"Google - SRE: Measuring and Managing Reliability",url:"https://www.youtube.com/watch?v=q0VikeNz23c",summary:"SLOs, SLIs, error budgets."},{title:"ByteByteGo - Monitoring & Observability",url:"https://www.youtube.com/watch?v=4JR6aFz7UQI",summary:"Three pillars: <strong>logs, metrics, traces</strong>."},{title:"Netflix - Chaos Engineering",url:"https://www.youtube.com/watch?v=CZ3wIuvmHeM",summary:"Chaos Monkey: intentionally breaking things to find weaknesses."}],practice:[{type:"hands-on",title:"Observability Setup",steps:["Set up free Grafana Cloud account","Create a basic dashboard","Define your SLOs","Calculate your error budget per month"]},{type:"analysis",title:"Incident Analysis",steps:["Research 3 major outages","What went wrong? Root cause?","Write a post-mortem template"]}],quiz:[{q:"SLO vs SLA?",options:["Same thing","SLO is internal target, SLA is external contract","SLO is higher","SLA is optional"],correct:1,explanation:"SLO is what you aim for. SLA has penalties for breach."},{q:"What is an error budget?",options:["Cost of errors","Allowed unreliability before halting features","Budget for bug fixes","Financial metric"],correct:1,explanation:"0.1% downtime = ~43 min/month to spend on risky deploys."},{q:"Three pillars of observability?",options:["CPU, RAM, disk","Logs, Metrics, Traces","Alert, Monitor, Report","Test, Deploy, Monitor"],correct:1,explanation:"Together they enable debugging any issue."},{q:"Chaos engineering purpose?",options:["Break things randomly","Proactively find weaknesses via controlled failures","Stress testing","Penetration testing"],correct:1,explanation:"Verify the system handles failures gracefully."},{q:"What is p99 latency?",options:["Average response time","99% of requests complete within this time","Maximum latency","Minimum latency"],correct:1,explanation:"Shows experience of your slowest users."}]},
+  {day:21,week:3,title:"FinOps & Cloud Cost Optimization",videos:[{title:"AWS - Cloud Financial Management",url:"https://www.youtube.com/watch?v=TjvkDMRiEzQ",summary:"Reserved instances, spot instances, right-sizing, cost allocation."},{title:"ByteByteGo - How Netflix Saves Millions on AWS",url:"https://www.youtube.com/watch?v=8dOXaSqNqvw",summary:"Spot for encoding, reserved for persistent, serverless for variable."},{title:"FinOps Foundation - What is FinOps?",url:"https://www.youtube.com/watch?v=VDrcgEne6lU",summary:"Financial accountability to cloud. Inform, Optimize, Operate."}],practice:[{type:"hands-on",title:"Cost Analysis",steps:["Open AWS Cost Explorer","Identify top 3 cost drivers","Find over-provisioned resources","Calculate reserved/spot savings","Set billing alert at 80%"]},{type:"analysis",title:"FinOps Strategy",steps:["Create unit economics: cost per user/transaction","Compare vs industry benchmarks","Build 12-month projection","Identify quick wins"]}],quiz:[{q:"Reserved vs spot instances?",options:["Same price","Reserved: committed discount. Spot: up to 90% off but interruptible","Spot more reliable","Reserved more expensive"],correct:1,explanation:"Reserved: 1-3yr commit for savings. Spot: huge discount but can be reclaimed."},{q:"Right-sizing means?",options:["Choosing right cloud","Matching instance size to actual usage","Making smaller","Auto-scaling"],correct:1,explanation:"Downsizing from xlarge to large when CPU is 20% saves 50%."},{q:"What is cost allocation tagging?",options:["Labeling in UI","Metadata tags to track costs by team/project","Discount program","Security feature"],correct:1,explanation:"See cost by team, project, environment."},{q:"Auto-scaling saves money by?",options:["It doesn't","Adding/removing instances based on demand","Being cheaper","Using spot"],correct:1,explanation:"Don't pay for 100 servers when you need 10 at night."},{q:"First step in cost optimization?",options:["Shut everything down","Get visibility: understand spending","Switch clouds","Use only serverless"],correct:1,explanation:"Can't optimize what you can't see."}]},
+  {day:22,week:4,title:"AI Strategy for CTOs",videos:[{title:"Andrej Karpathy - Intro to LLMs",url:"https://www.youtube.com/watch?v=zjkBMFhNj_g",summary:"How LLMs work, capabilities, limitations."},{title:"Anthropic - Building with Claude",url:"https://www.youtube.com/watch?v=k-Oaad8bfGA",summary:"Claude API, prompt engineering, tool use, agentic patterns."},{title:"Fireship - AI Explained in 100 Seconds",url:"https://www.youtube.com/watch?v=PeMlgBn-0sY",summary:"ML, neural networks, transformers, fine-tuning, RAG."}],practice:[{type:"hands-on",title:"AI Implementation",steps:["Get API keys for Claude, OpenAI, Gemini","Compare outputs from same prompt","Measure latency, quality, cost","Design: where AI adds value in your product","Build decision framework: which model for which use case"]},{type:"analysis",title:"AI Strategy Document",steps:["Map AI opportunities in your product","RAG vs fine-tuning vs prompt engineering?","Calculate estimated costs at scale","Identify risks: hallucination, compliance, cost","Create AI integration roadmap"]}],quiz:[{q:"RAG vs fine-tuning?",options:["Always fine-tune","RAG for current/private data, fine-tune for behavior changes","Always RAG","Same result"],correct:1,explanation:"RAG retrieves docs at query time. Fine-tuning changes behavior."},{q:"Biggest risk of AI in production?",options:["Cost only","Hallucination: confident but incorrect information","Slowness","Complexity"],correct:1,explanation:"Must have guardrails and validation."},{q:"Token-based pricing means?",options:["Monthly fee","Pay per input/output text length","Per user","Per API key"],correct:1,explanation:"Longer prompts and responses cost more."},{q:"AI agents are?",options:["Chatbots","LLMs that use tools, make decisions, take actions","Voice assistants","Search engines"],correct:1,explanation:"Combine reasoning with tool use."},{q:"Most important AI decision as CTO?",options:["Which model","Where AI adds genuine value vs hype","How much to spend","Whether to use AI"],correct:1,explanation:"Identify where AI creates real value, not gimmicks."}]},
+  {day:23,week:4,title:"AI Architecture & MLOps",videos:[{title:"Stanford - Machine Learning System Design",url:"https://www.youtube.com/watch?v=_i3aqgKVNQI",summary:"Data pipelines, model serving, monitoring, A/B testing."},{title:"Fireship - MLOps Explained in 100 Seconds",url:"https://www.youtube.com/watch?v=s8Jta1NmAAo",summary:"Deploying ML to production: versioning, testing, monitoring."},{title:"Weights & Biases - ML Monitoring in Production",url:"https://www.youtube.com/watch?v=vfIBkkU5tss",summary:"Model drift, performance degradation, data quality."}],practice:[{type:"hands-on",title:"AI Pipeline Design",steps:["Design an AI feature end-to-end","Include: data, processing, model, serving, monitoring","Define: how to detect degradation?","Create prompt versioning strategy","Design fallback when AI fails"]},{type:"analysis",title:"AI Cost Modeling",steps:["Calculate AI costs at 100, 1K, 10K, 100K users","Compare Claude vs GPT vs Gemini","Where to cache AI responses?","Project 12-month costs"]}],quiz:[{q:"Model drift means?",options:["Slow model","Performance degrades as data changes","Model moves servers","Model gets updated"],correct:1,explanation:"World changes but model stays frozen."},{q:"A/B testing AI features?",options:["Not necessary","Essential: compare AI vs baseline","Too expensive","Only for UI"],correct:1,explanation:"Verify real improvement in user behavior."},{q:"Prompt versioning is important because?",options:["Prompts don't change","Small changes dramatically affect output","Legal requirement","Speed"],correct:1,explanation:"Version prompts like code: track, review, rollback."},{q:"When to cache AI responses?",options:["Never","For identical inputs where freshness isn't critical","Always","Only images"],correct:1,explanation:"Save costs and reduce latency for similar queries."},{q:"Human-in-the-loop means?",options:["AI replaces humans","Humans review AI outputs before reaching users","Training data","User feedback"],correct:1,explanation:"For high-stakes outputs, humans verify before delivery."}]},
+  {day:24,week:4,title:"Data Architecture & Governance",videos:[{title:"ByteByteGo - Data Lake vs Data Warehouse",url:"https://www.youtube.com/watch?v=0pz7_CK_aiE",summary:"Lake stores raw data, warehouse stores structured for analytics."},{title:"Fireship - Apache Kafka in 100 Seconds",url:"https://www.youtube.com/watch?v=uvb00oaa3k8",summary:"Real-time event streaming at scale."},{title:"Snowflake - Modern Data Architecture",url:"https://www.youtube.com/watch?v=gKmgV-rqVkk",summary:"ETL vs ELT, data pipelines, real-time analytics."}],practice:[{type:"hands-on",title:"Data Architecture",steps:["Map all data sources","Identify: where does data live? How does it flow?","Design ideal data architecture","Research: Snowflake vs BigQuery vs Databricks","Prototype simple ETL concept"]},{type:"analysis",title:"Data Governance",steps:["Audit: who has access to what data?","Define classification: public, internal, confidential, restricted","Create data retention policy","Design GDPR deletion handling"]}],quiz:[{q:"Data lake vs data warehouse?",options:["Same thing","Lake stores raw diverse data, warehouse stores structured for fast queries","Lake is newer","Warehouse is cheaper"],correct:1,explanation:"Lake: dump raw. Warehouse: structured, fast analytics."},{q:"Kafka is used for?",options:["Storage","Real-time event streaming between systems","Database queries","File transfer"],correct:1,explanation:"Durable, ordered, distributed event streaming."},{q:"Data mesh principle?",options:["One central team owns all data","Domain teams own their data as a product","No governance","Only for big companies"],correct:1,explanation:"Decentralized ownership. Scales better."},{q:"GDPR right to be forgotten means?",options:["Nothing","Users can request deletion of their personal data","Optional","Only marketing"],correct:1,explanation:"Must delete data on request across all systems."},{q:"ETL vs ELT?",options:["Same thing","ETL transforms before loading, ELT loads then transforms","ETL is newer","ELT is slower"],correct:1,explanation:"ELT loads raw, transforms in warehouse. More flexible."}]},
+  {day:25,week:4,title:"Technical Hiring & Team Building",videos:[{title:"The Pragmatic Engineer - Building Engineering Teams",url:"https://www.youtube.com/watch?v=zq5iGK4Dyp8",summary:"Tech leads vs managers, IC tracks, leveling frameworks."},{title:"Will Larson - An Elegant Puzzle (Talk)",url:"https://www.youtube.com/watch?v=_VPjx2rgbKk",summary:"Systems thinking for engineering management."},{title:"Google - How to Interview Engineers",url:"https://www.youtube.com/watch?v=r8RxkpUvxK0",summary:"Structured interviews, rubrics, reducing bias."}],practice:[{type:"hands-on",title:"Hiring Framework",steps:["Define great senior engineer for your company","Create interview process with rubrics","Design take-home project (4 hours)","Create engineering ladder","Write compelling job description"]},{type:"analysis",title:"Team Structure",steps:["Draw ideal org chart for 20 people","Define squad structure and reporting","Handle: 2 teams need same person?","Research: Spotify model, matrix, traditional"]}],quiz:[{q:"Tech lead vs engineering manager?",options:["Same role","TL owns technical, EM owns people and delivery","TL is higher","EM writes code"],correct:1,explanation:"TL: architecture, reviews, mentoring. EM: careers, hiring, delivery."},{q:"Best signal of great senior engineer?",options:["Years of experience","Breaks down complex problems, mentors, pragmatic decisions","Knows many languages","Fast coder"],correct:1,explanation:"Multiplies team output through clear thinking."},{q:"What is technical debt?",options:["Server costs","Shortcuts that cost more to fix later","Bugs","Old code"],correct:1,explanation:"Some is acceptable. Too much slows everything."},{q:"How often should CTO talk to engineers?",options:["Never","Regularly, to understand ground-level challenges","Only reviews","Only problems"],correct:1,explanation:"Skip-levels reveal what managers filter out."},{q:"Biggest hiring mistake?",options:["Too many","Hiring for skills only, ignoring values and growth","Too picky","Remote hiring"],correct:1,explanation:"Hire for trajectory and culture add."}]},
+  {day:26,week:4,title:"Engineering Culture & Processes",videos:[{title:"Spotify - Engineering Culture (Part 1)",url:"https://www.youtube.com/watch?v=Yvfz4HGtoPc",summary:"Squads, tribes, chapters, guilds. Autonomous teams."},{title:"Accelerate - DORA Metrics Explained",url:"https://www.youtube.com/watch?v=0UyrVqBoCAU",summary:"4 metrics that predict engineering performance."},{title:"Martin Fowler - Code Review Best Practices",url:"https://www.youtube.com/watch?v=8dnFfKTwT5M",summary:"Code review that improves quality without slowing teams."}],practice:[{type:"hands-on",title:"Engineering Processes",steps:["Define deployment process","Set up branch protection and CI","Create engineering handbook","Implement DORA metrics tracking","Design post-mortem process"]},{type:"analysis",title:"Culture Audit",steps:["Assess team happiness and productivity","What slows team down most?","Compare to elite engineering orgs","List 3 highest-impact improvements"]}],quiz:[{q:"Elite teams according to DORA?",options:["Deploy rarely","Deploy multiple times daily with low failure rate","Never have failures","Have huge teams"],correct:1,explanation:"Multiple daily deploys, <1hr lead time, <1hr MTTR."},{q:"Code review should focus on?",options:["Style only","Correctness, maintainability, architecture, knowledge sharing","Finding bugs only","Speed"],correct:1,explanation:"Catch bugs AND ensure maintainability."},{q:"Blameless culture means?",options:["Nobody responsible","Focus on systemic fixes so people report freely","No accountability","Low standards"],correct:1,explanation:"Fear of blame hides mistakes."},{q:"What are ADRs?",options:["Meeting notes","Documents recording technical decisions and reasoning","Code comments","Design docs"],correct:1,explanation:"Capture context, decision, consequences."},{q:"How to reduce tech debt?",options:["Stop features","Allocate 15-20% of sprint capacity consistently","Ignore it","Big rewrite"],correct:1,explanation:"Steady improvement without stopping business progress."}]},
+  {day:27,week:4,title:"Compliance & Security Frameworks",videos:[{title:"Vanta - SOC 2 Explained",url:"https://www.youtube.com/watch?v=75qdCRZUiRE",summary:"Trust Service Criteria. <strong>Required for enterprise sales</strong>."},{title:"ISO - ISO 27001 Overview",url:"https://www.youtube.com/watch?v=F6HVHkdsVwI",summary:"ISMS. International standard accepted globally."},{title:"AWS - HIPAA Compliance on AWS",url:"https://www.youtube.com/watch?v=fWZFKhO0mAQ",summary:"Health data protection. <strong>Required if touching health data</strong>."}],practice:[{type:"hands-on",title:"Compliance Mapping",steps:["Create compliance requirements matrix","Map SOC 2 vs ISO 27001 vs HIPAA vs GDPR","Identify overlapping controls (60-80%)","Research Vanta, Drata, Secureframe","Calculate time and cost for SOC 2 Type II"]},{type:"research",title:"Framework Research",steps:["Research PCI DSS, FedRAMP, CCPA","Research EU AI Act requirements","Research Israeli Privacy Regulations","Map which frameworks apply to your business"]}],quiz:[{q:"SOC 2 Type I vs Type II?",options:["Same thing","Type I: controls exist. Type II: controls operated over 6-12 months","Type II easier","Type I better"],correct:1,explanation:"Type II proves sustained compliance."},{q:"HIPAA applies when?",options:["All companies","When handling Protected Health Information","Only hospitals","Only insurance"],correct:1,explanation:"Any company that stores/processes PHI must comply."},{q:"GDPR's biggest requirement?",options:["Cookie banners","Lawful basis, data minimization, individual rights","Only EU companies","Email opt-in"],correct:1,explanation:"Legal basis, collect only needed, honor rights."},{q:"What is FedRAMP?",options:["Networking protocol","US government security authorization for cloud","AI certification","Database standard"],correct:1,explanation:"Standardized security for US government cloud."},{q:"Best approach for multiple frameworks?",options:["One at a time","Map overlapping controls, build unified program","Ignore until asked","Cheapest first"],correct:1,explanation:"Unified GRC addresses multiple frameworks efficiently."}]},
+  {day:28,week:4,title:"Government & Enterprise Contracts",videos:[{title:"GovWin - How to Sell to the Government",url:"https://www.youtube.com/watch?v=Bik5DFu9c38",summary:"RFPs, RFIs, procurement cycles, past performance."},{title:"AWS Public Sector - Building for Government",url:"https://www.youtube.com/watch?v=qpLt-7MpHMA",summary:"GovCloud, FedRAMP, data residency, air-gapped environments."},{title:"Wiz - Cloud Security Posture Management",url:"https://www.youtube.com/watch?v=RhWCLJIYfPE",summary:"CSPM, CNAPP, agentless scanning."}],practice:[{type:"hands-on",title:"Enterprise Readiness Audit",steps:["Create Enterprise Readiness Checklist","Check: SOC 2, SSO, audit logging, RBAC, SLA","Create security questionnaire template","Identify top 5 gaps preventing enterprise sales"]},{type:"research",title:"Israeli Government Requirements",steps:["Research Israeli National Cyber Directorate","Security requirements for government vendors","ISO 27001 certification in Israel","GDPR and Israeli privacy law interaction"]}],quiz:[{q:"What is an RFP?",options:["Request for Payment","Request for Proposal: formal vendor bid document","Request for Permission","Request for Partnership"],correct:1,explanation:"Outlines requirements, evaluation criteria, timeline."},{q:"Data residency means?",options:["Where CEO lives","Data must be stored within specific boundaries","Backup strategy","Encryption type"],correct:1,explanation:"Architecture must support regional deployment."},{q:"Enterprise-ready SaaS requires?",options:["Many features","SSO, audit logs, RBAC, compliance certs, SLAs","Being expensive","Large team"],correct:1,explanation:"The enterprise checklist."},{q:"CSPM is?",options:["Programming method","Automated monitoring for cloud misconfigurations","Cloud storage","Certification"],correct:1,explanation:"Continuously scan for misconfigurations and violations."},{q:"Past performance in government?",options:["Not important","Agencies evaluate track record of similar projects","Determines price","Hardware only"],correct:1,explanation:"Start with subcontracts to build track record."}]},
+  {day:29,week:4,title:"International Workforce & Legal",videos:[{title:"Deel - Hiring Internationally",url:"https://www.youtube.com/watch?v=NRvLLG_1Lts",summary:"EOR, contractor vs employee, tax implications."},{title:"Wise - International Payments",url:"https://www.youtube.com/watch?v=5I7T0UNkjl0",summary:"Cross-border payments, currency, SWIFT, tax."},{title:"Y Combinator - Legal Basics for Startups",url:"https://www.youtube.com/watch?v=EHzvmyMJEK4",summary:"NDAs, MSAs, DPAs, SLAs, IP assignment."}],practice:[{type:"hands-on",title:"International Hiring",steps:["Research dev salary: Israel, Philippines, US, Poland, India","Compare total cost with benefits","Compare EOR: Deel, Remote, Papaya Global","Create contractor agreement template","Identify local vs remote roles"]},{type:"analysis",title:"Legal Readiness",steps:["List all legal agreements","Gaps: NDAs, MSAs, DPAs, IP?","Misclassification risks?","Philippines requirements: 13th month, SSS","US vs Israeli employment law"]}],quiz:[{q:"EOR is?",options:["Contract type","Company that employs workers on your behalf abroad","Government agency","Tax classification"],correct:1,explanation:"Handles payroll, benefits, taxes, compliance abroad."},{q:"Misclassifying employees as contractors risks?",options:["Fewer hours","Tax penalties, back-pay, legal liability","No risk","US only"],correct:1,explanation:"Penalties: back taxes, fines, criminal charges."},{q:"IP assignment should cover?",options:["Only code","All work product, inventions, and IP","Only patents","Nothing needed"],correct:1,explanation:"Without it, contractors may retain rights."},{q:"MSA is?",options:["Insurance","Overarching contract with SOWs for projects","Software license","Government form"],correct:1,explanation:"Sets general terms. SOWs define specific projects."},{q:"Hiring in Philippines: key?",options:["Salary only","Timezone, 13th month, mandatory benefits, EOR","Same as local","English only"],correct:1,explanation:"Use EOR for compliance."}]},
+  {day:30,week:4,title:"CTO Board Presentation: Final Exercise",videos:[{title:"HBR - Present to a Board of Directors",url:"https://www.youtube.com/watch?v=COq2L2UlkKg",summary:"Start with conclusion, data-supported, concise."},{title:"Gergely Orosz - What Does a CTO Actually Do?",url:"https://www.youtube.com/watch?v=zq5iGK4Dyp8",summary:"Technical direction, team building, managing risk."},{title:"a16z - Technical Due Diligence",url:"https://www.youtube.com/watch?v=DBXZWB_dNsw",summary:"Architecture, debt, team, scalability, security, data."}],practice:[{type:"hands-on",title:"CTO Board Presentation",steps:["Create 10-slide technology strategy","Slide 1: Executive summary (3 sentences)","Slides 2-3: Security posture, certifications","Slides 4-5: Infrastructure, costs","Slide 6: AI strategy and ROI","Slide 7: Team structure and hiring","Slide 8: Compliance readiness","Slide 9: 12-month roadmap","Slide 10: Budget","Present aloud and review"]},{type:"analysis",title:"30-Day Review",steps:["Rate confidence (1-10) per area","Identify 3 areas needing most learning","Create Month 2-3 plan","Celebrate: CTO foundations complete"]}],quiz:[{q:"Board presentation: lead with?",options:["Architecture","Business impact of technical decisions","Technology list","Team accomplishments"],correct:1,explanation:"Board cares about outcomes, risks, investment."},{q:"Technical due diligence evaluates?",options:["Code review","Architecture, team, debt, scalability, security comprehensively","Security only","Performance test"],correct:1,explanation:"Comprehensive evaluation during M&A/funding."},{q:"Most important CTO metric?",options:["Lines of code","Engineering velocity: value delivery + quality","Server count","Technologies used"],correct:1,explanation:"DORA metrics correlate with business outcomes."},{q:"Major incident during board meeting?",options:["Ignore","Excuse yourself, delegate, lead response","Panic","Blame team"],correct:1,explanation:"Platform is first responsibility."},{q:"After 30 days, most important thing?",options:["Know every technology","Continuous learning, great teams, informed decisions","Code daily","Most certifications"],correct:1,explanation:"Best CTOs are lifelong learners who build great teams."}]}
+];
+
+var WEEKS = [
+  {n:1, label:'Security & Threat Modeling', color:'#ef4444', icon:'\uD83D\uDD12'},
+  {n:2, label:'Servers, Network & Infrastructure', color:'#3b82f6', icon:'\uD83D\uDDA5\uFE0F'},
+  {n:3, label:'Cloud, Architecture & Design', color:'#a855f7', icon:'\u2601\uFE0F'},
+  {n:4, label:'AI, Data, Leadership & Compliance', color:'#f97316', icon:'\uD83D\uDE80'}
+];
+
+var completed = JSON.parse(localStorage.getItem('cto30') || '[]');
+var currentDay = null;
+var activeTab = 'videos';
+var quizState = {};
+var currentFilter = 'all';
+
+function save() { localStorage.setItem('cto30', JSON.stringify(completed)); }
+
+function updateProgress() {
+  var pct = Math.round((completed.length / 30) * 100);
+  document.getElementById('pCount').textContent = completed.length + ' / 30';
+  document.getElementById('pPct').textContent = pct + '%';
+  document.getElementById('pFill').style.width = pct + '%';
+}
+
+function getYTId(url) {
+  var m = url.match(/[?&]v=([^&]+)/);
+  return m ? m[1] : '';
+}
+
+function renderFilters() {
+  var tabs = [{key:'all',label:'All'},{key:'1',label:'Week 1'},{key:'2',label:'Week 2'},{key:'3',label:'Week 3'},{key:'4',label:'Week 4'}];
+  document.getElementById('filters').innerHTML = tabs.map(function(t) {
+    return '<button class="filter-btn' + (currentFilter === t.key ? ' active' : '') + '" data-f="' + t.key + '">' + t.label + '</button>';
+  }).join('');
+  document.querySelectorAll('.filter-btn').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      currentFilter = this.dataset.f;
+      renderFilters();
+      renderContent();
+    });
+  });
+}
+
+function renderContent() {
+  var weeks = currentFilter === 'all' ? WEEKS : WEEKS.filter(function(w) { return String(w.n) === currentFilter; });
+  var html = '';
+  weeks.forEach(function(week) {
+    var days = DATA.filter(function(d) { return d.week === week.n; });
+    html += '<div class="week-section">';
+    html += '<div class="week-header-bar" style="--week-color:' + week.color + ';--week-color-rgb:' + hexToRgb(week.color) + '">';
+    html += '<div class="week-icon">' + week.icon + '</div>';
+    html += '<div><h2>Week ' + week.n + ': ' + week.label + '</h2></div>';
+    html += '</div>';
+    html += '<div class="days-grid">';
+    days.forEach(function(d) {
+      var done = completed.indexOf(d.day) !== -1;
+      html += '<div class="day-card' + (done ? ' done' : '') + '" data-day="' + d.day + '">';
+      html += '<div class="check">' + (done ? '\u2713' : '') + '</div>';
+      html += '<div class="day-num">' + d.day + '</div>';
+      html += '<div class="day-title">' + d.title + '</div>';
+      html += '<div class="day-meta">' + d.videos.length + ' videos \u2022 ' + d.quiz.length + ' questions</div>';
+      html += '</div>';
+    });
+    html += '</div></div>';
+  });
+  document.getElementById('content').innerHTML = html;
+  document.querySelectorAll('.day-card').forEach(function(card) {
+    card.addEventListener('click', function(e) {
+      e.preventDefault();
+      openDay(parseInt(this.dataset.day));
+    });
+  });
+}
+
+function hexToRgb(hex) {
+  var r = parseInt(hex.slice(1,3), 16);
+  var g = parseInt(hex.slice(3,5), 16);
+  var b = parseInt(hex.slice(5,7), 16);
+  return r + ',' + g + ',' + b;
+}
+
+function openDay(dayNum) {
+  currentDay = DATA.find(function(d) { return d.day === dayNum; });
+  activeTab = 'videos';
+  quizState = {};
+  document.getElementById('panelTitle').textContent = 'Day ' + currentDay.day + ': ' + currentDay.title;
+  renderPanelTabs();
+  renderPanelBody();
+  document.getElementById('overlay').classList.add('open');
+  document.getElementById('panel').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePanel() {
+  document.getElementById('overlay').classList.remove('open');
+  document.getElementById('panel').classList.remove('open');
+  document.body.style.overflow = '';
+  currentDay = null;
+}
+
+function renderPanelTabs() {
+  var tabs = ['videos', 'practice', 'quiz'];
+  var labels = {videos:'\uD83C\uDFAC Videos', practice:'\uD83D\uDCDD Practice', quiz:'\u2753 Quiz'};
+  document.getElementById('panelTabs').innerHTML = tabs.map(function(t) {
+    return '<button class="panel-tab' + (activeTab === t ? ' active' : '') + '" data-tab="' + t + '">' + labels[t] + '</button>';
+  }).join('');
+  document.querySelectorAll('.panel-tab').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      activeTab = this.dataset.tab;
+      renderPanelTabs();
+      renderPanelBody();
+    });
+  });
+}
+
+function renderPanelBody() {
+  if (!currentDay) return;
+  var html = '';
+  if (activeTab === 'videos') {
+    currentDay.videos.forEach(function(v) {
+      var ytId = getYTId(v.url);
+      html += '<div class="card"><h3>' + v.title + '</h3>';
+      if (ytId) {
+        html += '<div class="video-embed"><iframe src="https://www.youtube.com/embed/' + ytId + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>';
+      }
+      html += '<div class="summary">' + v.summary + '</div>';
+      html += '<a class="yt-btn" href="' + v.url + '" target="_blank" rel="noopener"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg> Watch on YouTube</a></div>';
+    });
+  } else if (activeTab === 'practice') {
+    currentDay.practice.forEach(function(p) {
+      var badgeClass = p.type === 'hands-on' ? 'badge-hands-on' : p.type === 'research' ? 'badge-research' : 'badge-analysis';
+      html += '<div class="card"><h3>' + p.title + ' <span class="badge-tag ' + badgeClass + '">' + p.type + '</span></h3>';
+      html += '<ol class="steps">';
+      p.steps.forEach(function(s) { html += '<li>' + s + '</li>'; });
+      html += '</ol></div>';
+    });
+  } else if (activeTab === 'quiz') {
+    currentDay.quiz.forEach(function(q, qi) {
+      var answered = quizState[qi] !== undefined;
+      html += '<div class="card quiz-q"><h4><span>' + (qi+1) + '.</span> ' + q.q + '</h4>';
+      html += '<div class="options">';
+      q.options.forEach(function(opt, oi) {
+        var cls = 'option';
+        if (answered) {
+          if (oi === q.correct) cls += ' correct';
+          else if (oi === quizState[qi] && oi !== q.correct) cls += ' wrong';
+          else cls += ' dimmed';
+        }
+        html += '<div class="' + cls + '" data-qi="' + qi + '" data-oi="' + oi + '"><span class="letter">' + String.fromCharCode(65+oi) + '</span><span>' + opt + '</span></div>';
+      });
+      html += '</div>';
+      if (answered) {
+        html += '<div class="explanation">' + q.explanation + '</div>';
+      }
+      html += '</div>';
+    });
+    var totalAnswered = Object.keys(quizState).length;
+    if (totalAnswered === currentDay.quiz.length) {
+      var correct = 0;
+      currentDay.quiz.forEach(function(q, i) { if (quizState[i] === q.correct) correct++; });
+      var scorePct = Math.round((correct / currentDay.quiz.length) * 100);
+      var msg = scorePct >= 80 ? 'Excellent! Ready for next day.' : scorePct >= 60 ? 'Good. Review missed questions.' : 'Review material and retry.';
+      html += '<div class="score-box"><h3>Quiz Complete</h3><div class="score">' + correct + '/' + currentDay.quiz.length + '</div><p>' + msg + '</p></div>';
+    }
+  }
+  var isDone = completed.indexOf(currentDay.day) !== -1;
+  html += '<button class="complete-btn' + (isDone ? ' done' : '') + '" id="completeBtn">' + (isDone ? '\u2713 Completed' : 'Mark as Complete') + '</button>';
+
+  document.getElementById('panelBody').innerHTML = html;
+
+  document.querySelectorAll('.option').forEach(function(opt) {
+    opt.addEventListener('click', function(e) {
+      e.preventDefault();
+      var qi = parseInt(this.dataset.qi);
+      var oi = parseInt(this.dataset.oi);
+      if (quizState[qi] !== undefined) return;
+      quizState[qi] = oi;
+      renderPanelBody();
+    });
+  });
+
+  var btn = document.getElementById('completeBtn');
+  if (btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      var idx = completed.indexOf(currentDay.day);
+      if (idx === -1) completed.push(currentDay.day);
+      else completed.splice(idx, 1);
+      save();
+      updateProgress();
+      renderContent();
+      renderPanelBody();
+    });
+  }
+}
+
+// Init
+document.getElementById('overlay').addEventListener('click', closePanel);
+document.getElementById('closeBtn').addEventListener('click', closePanel);
+document.getElementById('resetBtn').addEventListener('click', function() {
+  if (confirm('Reset all progress?')) {
+    completed = [];
+    save();
+    updateProgress();
+    renderContent();
+  }
+});
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closePanel();
+});
+
+renderFilters();
+renderContent();
+updateProgress();
+</script>
 </body>
 </html>
