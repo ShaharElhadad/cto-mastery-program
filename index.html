@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#000000">
+  <title>CTO Mastery Program</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+
+  <!-- Splash Screen -->
+  <div class="splash-screen" id="splash">
+    <div class="splash-content">
+      <div class="splash-icon">
+        <svg width="72" height="72" viewBox="0 0 72 72" fill="none">
+          <rect x="4" y="4" width="64" height="64" rx="16" stroke="url(#splashGrad)" stroke-width="3" fill="none"/>
+          <path d="M22 36L32 46L50 26" stroke="url(#splashGrad)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          <defs><linearGradient id="splashGrad" x1="0" y1="0" x2="72" y2="72"><stop stop-color="#e8453c"/><stop offset="1" stop-color="#f97316"/></linearGradient></defs>
+        </svg>
+      </div>
+      <div class="splash-title">CTO Mastery</div>
+      <div class="splash-subtitle">30 Days Program</div>
+      <div class="splash-loading">
+        <div class="splash-bar"><div class="splash-bar-fill"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- App Shell -->
+  <div class="app hidden" id="app">
+
+    <!-- Header -->
+    <header class="app-header">
+      <button class="header-btn" id="menuBtn" aria-label="Menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <span class="header-title">CTO Mastery Program</span>
+      <div class="header-progress" id="headerProgress">
+        <svg width="28" height="28" viewBox="0 0 28 28">
+          <circle cx="14" cy="14" r="11" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="3"/>
+          <circle cx="14" cy="14" r="11" fill="none" stroke="#e8453c" stroke-width="3" stroke-linecap="round" stroke-dasharray="69.1" stroke-dashoffset="69.1" id="headerRing" transform="rotate(-90 14 14)"/>
+        </svg>
+        <span class="header-progress-text" id="headerPercent">0%</span>
+      </div>
+    </header>
+
+    <!-- Side Menu -->
+    <div class="side-menu-overlay" id="menuOverlay"></div>
+    <nav class="side-menu" id="sideMenu">
+      <div class="side-menu-header">
+        <div class="user-avatar">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div>
+          <div class="user-name">CTO Program</div>
+          <div class="user-level" id="menuLevel">30 Days Mastery</div>
+        </div>
+      </div>
+      <div class="side-menu-stats">
+        <div class="stat-item"><div class="stat-value" id="menuCompleted">0</div><div class="stat-label">הושלמו</div></div>
+        <div class="stat-item"><div class="stat-value" id="menuRemaining">30</div><div class="stat-label">נותרו</div></div>
+        <div class="stat-item"><div class="stat-value" id="menuQuizAvg">--</div><div class="stat-label">ציון ממוצע</div></div>
+      </div>
+      <ul class="side-menu-items">
+        <li data-page="home" class="active">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          דף הבית
+        </li>
+        <li data-page="program">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+          תוכנית
+        </li>
+        <li data-page="stats">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          סטטיסטיקות
+        </li>
+      </ul>
+      <div class="side-menu-footer">
+        <button class="settings-btn" id="resetBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+          איפוס התקדמות
+        </button>
+      </div>
+    </nav>
+
+    <!-- Pages Container -->
+    <main class="pages-container" id="pagesContainer">
+
+      <!-- Home Page -->
+      <div class="page active" id="page-home">
+        <div class="home-hero">
+          <div class="greeting" id="greeting"></div>
+          <div class="greeting-sub">CTO Mastery Program</div>
+        </div>
+
+        <div class="daily-progress">
+          <div class="progress-ring-container">
+            <svg class="progress-ring" width="110" height="110" viewBox="0 0 120 120">
+              <circle class="progress-ring-bg" cx="60" cy="60" r="52"/>
+              <circle class="progress-ring-fill" cx="60" cy="60" r="52" id="mainRing"/>
+            </svg>
+            <div class="progress-ring-text">
+              <span class="progress-percent" id="mainPercent">0%</span>
+              <span class="progress-label">התקדמות</span>
+            </div>
+          </div>
+          <div class="progress-details">
+            <div class="progress-item"><span class="progress-item-label">ימים שהושלמו</span><span class="progress-item-value" id="homeDaysCompleted">0/30</span></div>
+            <div class="progress-item"><span class="progress-item-label">שבוע נוכחי</span><span class="progress-item-value" id="homeCurrentWeek">1</span></div>
+            <div class="progress-item"><span class="progress-item-label">ציון ממוצע</span><span class="progress-item-value" id="homeAvgScore">--</span></div>
+          </div>
+        </div>
+
+        <div class="home-sections">
+          <h2 class="section-title">פעולות מהירות</h2>
+          <div class="quick-actions">
+            <button class="action-card" id="continueBtn">
+              <div class="action-icon" style="background:linear-gradient(135deg,#e8453c,#ff6b6b)">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+              <div class="action-text">
+                <div class="action-title" id="continueTitle">המשך ליום 1</div>
+                <div class="action-sub" id="continueSub"></div>
+              </div>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button class="action-card" data-goto="program">
+              <div class="action-icon" style="background:linear-gradient(135deg,#3b82f6,#64d2ff)">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+              </div>
+              <div class="action-text">
+                <div class="action-title">צפה בכל התוכנית</div>
+                <div class="action-sub">30 ימים, 4 שבועות</div>
+              </div>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button class="action-card" data-goto="stats">
+              <div class="action-icon" style="background:linear-gradient(135deg,#a855f7,#bf5af2)">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+              </div>
+              <div class="action-text">
+                <div class="action-title">סטטיסטיקות</div>
+                <div class="action-sub">צפה בהתקדמות שלך</div>
+              </div>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+          </div>
+
+          <h2 class="section-title">סקירת שבועות</h2>
+          <div class="week-overview" id="weekOverview"></div>
+        </div>
+      </div>
+
+      <!-- Program Page -->
+      <div class="page" id="page-program">
+        <h2 class="page-title">תוכנית 30 הימים</h2>
+        <div class="filter-bar" id="filterBar">
+          <button class="filter-btn active" data-filter="all">הכל</button>
+        </div>
+        <div class="days-grid" id="daysGrid"></div>
+      </div>
+
+      <!-- Stats Page -->
+      <div class="page" id="page-stats">
+        <h2 class="page-title">סטטיסטיקות</h2>
+
+        <div class="stats-card">
+          <div class="stats-card-header">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e8453c" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            <span>התקדמות כללית</span>
+          </div>
+          <div class="stats-big-number" id="statsOverallPercent">0%</div>
+          <div class="stats-bar"><div class="stats-bar-fill" id="statsOverallBar"></div></div>
+          <div class="stats-row">
+            <span>ימים שהושלמו</span>
+            <span id="statsCompletedDays">0 / 30</span>
+          </div>
+        </div>
+
+        <div class="stats-card">
+          <div class="stats-card-header">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            <span>התקדמות לפי שבוע</span>
+          </div>
+          <div id="statsWeekBreakdown"></div>
+        </div>
+
+        <div class="stats-card">
+          <div class="stats-card-header">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#30d158" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <span>ציוני מבחנים</span>
+          </div>
+          <div id="statsQuizScores"></div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Day Detail Overlay -->
+    <div class="day-overlay" id="dayOverlay">
+      <div class="day-overlay-header">
+        <button class="back-btn" id="dayBackBtn">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          <span>חזרה</span>
+        </button>
+        <div class="day-overlay-title" id="dayOverlayTitle"></div>
+      </div>
+      <div class="day-overlay-meta" id="dayOverlayMeta"></div>
+
+      <div class="day-tabs">
+        <button class="day-tab active" data-tab="videos">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          סרטונים
+        </button>
+        <button class="day-tab" data-tab="practice">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          תרגול
+        </button>
+        <button class="day-tab" data-tab="quiz">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          מבחן
+        </button>
+      </div>
+
+      <div class="day-content" id="dayContent"></div>
+
+      <div class="day-footer">
+        <button class="complete-btn" id="completeBtn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          <span id="completeBtnText">סמן כהושלם</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- YouTube Player Modal -->
+    <div class="yt-modal" id="ytModal">
+      <div class="yt-modal-bg" id="ytModalBg"></div>
+      <div class="yt-modal-content">
+        <button class="yt-close" id="ytClose">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+        <div class="yt-player" id="ytPlayer"></div>
+      </div>
+    </div>
+
+    <!-- Bottom Tabs -->
+    <nav class="bottom-tabs">
+      <button class="tab-btn active" data-page="home">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span>דף הבית</span>
+      </button>
+      <button class="tab-btn" data-page="program">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        <span>תוכנית</span>
+      </button>
+      <button class="tab-btn" data-page="stats">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        <span>סטטיסטיקות</span>
+      </button>
+    </nav>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
